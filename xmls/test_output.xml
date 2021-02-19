@@ -1,0 +1,4525 @@
+<?xml version="1.0"?>
+<textProper>
+ <section>
+  <keyword spelling="begin" line="1" col="1" />
+  <textItem>
+   <reservation>
+    <keyword spelling="reserve" line="3" col="2" />
+    <reservationSegment>
+     <reservedIdentifiers>
+      <reservedIdentifier spelling="x" line="3" col="10" />
+      <keyword spelling="," line="3" col="11" />
+      <reservedIdentifier spelling="y" line="3" col="12" />
+      <keyword spelling="," line="3" col="13" />
+      <reservedIdentifier spelling="z" line="3" col="14" />
+      <keyword spelling="," line="3" col="15" />
+      <reservedIdentifier spelling="u" line="3" col="16" />
+     </reservedIdentifiers>
+     <keyword spelling="for" line="3" col="18" />
+     <typeExpression>
+      <adjectiveCluster />
+      <radixTypeExpression>
+       <radixType>
+        <modeSymbol spelling="__M_object" line="3" col="22" />
+       </radixType>
+      </radixTypeExpression>
+     </typeExpression>
+    </reservationSegment>
+    <keyword spelling=";" line="3" col="28" />
+   </reservation>
+  </textItem>
+  <textItem>
+   <reservation>
+    <keyword spelling="reserve" line="4" col="2" />
+    <reservationSegment>
+     <reservedIdentifiers>
+      <reservedIdentifier spelling="N" line="4" col="10" />
+      <keyword spelling="," line="4" col="11" />
+      <reservedIdentifier spelling="M" line="4" col="12" />
+      <keyword spelling="," line="4" col="13" />
+      <reservedIdentifier spelling="X" line="4" col="14" />
+      <keyword spelling="," line="4" col="15" />
+      <reservedIdentifier spelling="Y" line="4" col="16" />
+      <keyword spelling="," line="4" col="17" />
+      <reservedIdentifier spelling="Z" line="4" col="18" />
+     </reservedIdentifiers>
+     <keyword spelling="for" line="4" col="20" />
+     <typeExpression>
+      <adjectiveCluster />
+      <radixTypeExpression>
+       <radixType>
+        <modeSymbol>
+         <keyword spelling="set" line="4" col="24" />
+        </modeSymbol>
+       </radixType>
+      </radixTypeExpression>
+     </typeExpression>
+    </reservationSegment>
+    <keyword spelling=";" line="4" col="27" />
+   </reservation>
+  </textItem>
+  <textItem>
+   <theorem>
+    <keyword spelling="theorem" line="6" col="1" />
+    <compactStatement>
+     <proposition>
+      <sentence>
+       <formulaExpression>
+        <quantifiedFormulaExpression>
+         <keyword spelling="for" line="7" col="3" />
+         <qualifiedVariables>
+          <explicitlyQualifiedVariables>
+           <qualifiedSegment>
+            <variables>
+             <variableIdentifier spelling="x" line="7" col="7" />
+            </variables>
+            <qualification>
+             <keyword spelling="being" line="7" col="9" />
+             <typeExpression>
+              <adjectiveCluster />
+              <radixTypeExpression>
+               <radixType>
+                <modeSymbol spelling="__M_object" line="7" col="15" />
+               </radixType>
+              </radixTypeExpression>
+             </typeExpression>
+            </qualification>
+           </qualifiedSegment>
+          </explicitlyQualifiedVariables>
+         </qualifiedVariables>
+         <keyword spelling="holds" line="7" col="22" />
+         <formulaExpression>
+          <atomicFormulaExpression>
+           <termExpression>
+            <unitaryTerm>
+             <variableIdentifier spelling="x" line="7" col="28" />
+            </unitaryTerm>
+           </termExpression>
+           <keyword spelling="is" line="7" col="30" />
+           <typeExpression>
+            <adjectiveCluster />
+            <radixTypeExpression>
+             <radixType>
+              <modeSymbol>
+               <keyword spelling="set" line="7" col="33" />
+              </modeSymbol>
+             </radixType>
+            </radixTypeExpression>
+           </typeExpression>
+          </atomicFormulaExpression>
+         </formulaExpression>
+        </quantifiedFormulaExpression>
+       </formulaExpression>
+      </sentence>
+     </proposition>
+     <justification>
+      <simpleJustification>
+       <straightforwardJustification>
+        <keyword spelling="by" line="7" col="37" />
+        <references>
+         <reference>
+          <libraryReference>
+           <articleName spelling="TARSKI_0" line="7" col="40" />
+           <keyword spelling=":" line="7" col="48" />
+           <theoremNumber spelling="1" line="7" col="49" />
+          </libraryReference>
+         </reference>
+        </references>
+       </straightforwardJustification>
+      </simpleJustification>
+     </justification>
+     <keyword spelling=";" line="7" col="50" />
+    </compactStatement>
+   </theorem>
+  </textItem>
+  <textItem>
+   <theorem>
+    <keyword spelling="theorem" line="9" col="1" />
+    <compactStatement>
+     <proposition>
+      <sentence>
+       <formulaExpression>
+        <formulaExpression>
+         <keyword spelling="(" line="10" col="3" />
+         <formulaExpression>
+          <quantifiedFormulaExpression>
+           <keyword spelling="for" line="10" col="4" />
+           <qualifiedVariables>
+            <explicitlyQualifiedVariables>
+             <qualifiedSegment>
+              <variables>
+               <variableIdentifier spelling="x" line="10" col="8" />
+              </variables>
+              <qualification>
+               <keyword spelling="being" line="10" col="10" />
+               <typeExpression>
+                <adjectiveCluster />
+                <radixTypeExpression>
+                 <radixType>
+                  <modeSymbol spelling="__M_object" line="10" col="16" />
+                 </radixType>
+                </radixTypeExpression>
+               </typeExpression>
+              </qualification>
+             </qualifiedSegment>
+            </explicitlyQualifiedVariables>
+           </qualifiedVariables>
+           <keyword spelling="holds" line="10" col="23" />
+           <formulaExpression>
+            <formulaExpression>
+             <atomicFormulaExpression>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="10" col="29" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <predicateSymbol spelling="__R_in" line="10" col="31" />
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="X" line="10" col="34" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+             </atomicFormulaExpression>
+            </formulaExpression>
+            <keyword spelling="iff" line="10" col="36" />
+            <formulaExpression>
+             <atomicFormulaExpression>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="10" col="40" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <predicateSymbol spelling="__R_in" line="10" col="42" />
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="Y" line="10" col="45" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+             </atomicFormulaExpression>
+            </formulaExpression>
+           </formulaExpression>
+          </quantifiedFormulaExpression>
+         </formulaExpression>
+         <keyword spelling=")" line="10" col="46" />
+        </formulaExpression>
+        <keyword spelling="implies" line="10" col="48" />
+        <formulaExpression>
+         <atomicFormulaExpression>
+          <termExpressionList>
+           <termExpression>
+            <unitaryTerm>
+             <variableIdentifier spelling="X" line="10" col="56" />
+            </unitaryTerm>
+           </termExpression>
+          </termExpressionList>
+          <predicateSymbol>
+           <keyword spelling="=" line="10" col="58" />
+          </predicateSymbol>
+          <termExpressionList>
+           <termExpression>
+            <unitaryTerm>
+             <variableIdentifier spelling="Y" line="10" col="60" />
+            </unitaryTerm>
+           </termExpression>
+          </termExpressionList>
+         </atomicFormulaExpression>
+        </formulaExpression>
+       </formulaExpression>
+      </sentence>
+     </proposition>
+     <justification>
+      <simpleJustification>
+       <straightforwardJustification>
+        <keyword spelling="by" line="10" col="62" />
+        <references>
+         <reference>
+          <libraryReference>
+           <articleName spelling="TARSKI_0" line="10" col="65" />
+           <keyword spelling=":" line="10" col="73" />
+           <theoremNumber spelling="2" line="10" col="74" />
+          </libraryReference>
+         </reference>
+        </references>
+       </straightforwardJustification>
+      </simpleJustification>
+     </justification>
+     <keyword spelling=";" line="10" col="75" />
+    </compactStatement>
+   </theorem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="12" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="12" col="12" />
+       <qualifiedVariables>
+        <explicitlyQualifiedVariables>
+         <qualifiedSegment>
+          <variables>
+           <variableIdentifier spelling="y" line="12" col="16" />
+          </variables>
+          <qualification>
+           <keyword spelling="be" line="12" col="18" />
+           <typeExpression>
+            <adjectiveCluster />
+            <radixTypeExpression>
+             <radixType>
+              <modeSymbol spelling="__M_object" line="12" col="21" />
+             </radixType>
+            </radixTypeExpression>
+           </typeExpression>
+          </qualification>
+         </qualifiedSegment>
+        </explicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="12" col="27" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <functorDefinition>
+       <keyword spelling="func" line="13" col="3" />
+       <functorPattern>
+        <leftFunctorBracket>
+         <keyword spelling="{" line="13" col="8" />
+        </leftFunctorBracket>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="y" line="13" col="10" />
+         </locus>
+        </loci>
+        <rightFunctorBracket>
+         <keyword spelling="}" line="13" col="12" />
+        </rightFunctorBracket>
+       </functorPattern>
+       <specification>
+        <keyword spelling="-&gt;" line="13" col="14" />
+        <typeExpression>
+         <adjectiveCluster />
+         <radixTypeExpression>
+          <radixType>
+           <modeSymbol>
+            <keyword spelling="set" line="13" col="17" />
+           </modeSymbol>
+          </radixType>
+         </radixTypeExpression>
+        </typeExpression>
+       </specification>
+       <keyword spelling="means" line="13" col="21" />
+       <definiens>
+        <simpleDefiniens>
+         <sentence>
+          <formulaExpression>
+           <quantifiedFormulaExpression>
+            <keyword spelling="for" line="14" col="5" />
+            <qualifiedVariables>
+             <explicitlyQualifiedVariables>
+              <qualifiedSegment>
+               <variables>
+                <variableIdentifier spelling="x" line="14" col="9" />
+               </variables>
+               <qualification>
+                <keyword spelling="being" line="14" col="11" />
+                <typeExpression>
+                 <adjectiveCluster />
+                 <radixTypeExpression>
+                  <radixType>
+                   <modeSymbol spelling="__M_object" line="14" col="17" />
+                  </radixType>
+                 </radixTypeExpression>
+                </typeExpression>
+               </qualification>
+              </qualifiedSegment>
+             </explicitlyQualifiedVariables>
+            </qualifiedVariables>
+            <keyword spelling="holds" line="14" col="24" />
+            <formulaExpression>
+             <formulaExpression>
+              <atomicFormulaExpression>
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="x" line="14" col="30" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+               <predicateSymbol spelling="__R_in" line="14" col="32" />
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <keyword spelling="it" line="14" col="35" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+              </atomicFormulaExpression>
+             </formulaExpression>
+             <keyword spelling="iff" line="14" col="38" />
+             <formulaExpression>
+              <atomicFormulaExpression>
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="x" line="14" col="42" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+               <predicateSymbol>
+                <keyword spelling="=" line="14" col="44" />
+               </predicateSymbol>
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="y" line="14" col="46" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+              </atomicFormulaExpression>
+             </formulaExpression>
+            </formulaExpression>
+           </quantifiedFormulaExpression>
+          </formulaExpression>
+         </sentence>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="14" col="47" />
+       <correctnessConditions>
+        <correctnessCondition>
+         <keyword spelling="existence" line="15" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="16" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <linkableStatement>
+                <choiceStatement>
+                 <keyword spelling="consider" line="17" col="5" />
+                 <qualifiedVariables>
+                  <explicitlyQualifiedVariables>
+                   <qualifiedSegment>
+                    <variables>
+                     <variableIdentifier spelling="X" line="17" col="14" />
+                    </variables>
+                    <qualification>
+                     <keyword spelling="being" line="17" col="16" />
+                     <typeExpression>
+                      <adjectiveCluster />
+                      <radixTypeExpression>
+                       <radixType>
+                        <modeSymbol>
+                         <keyword spelling="set" line="17" col="22" />
+                        </modeSymbol>
+                       </radixType>
+                      </radixTypeExpression>
+                     </typeExpression>
+                    </qualification>
+                   </qualifiedSegment>
+                  </explicitlyQualifiedVariables>
+                 </qualifiedVariables>
+                 <keyword spelling="such" line="17" col="26" />
+                 <conditions>
+                  <keyword spelling="that" line="17" col="31" />
+                  <proposition>
+                   <labelIdentifier spelling="A1" line="18" col="1" />
+                   <keyword spelling=":" line="18" col="3" />
+                   <sentence>
+                    <formulaExpression>
+                     <quantifiedFormulaExpression>
+                      <keyword spelling="for" line="18" col="5" />
+                      <qualifiedVariables>
+                       <explicitlyQualifiedVariables>
+                        <qualifiedSegment>
+                         <variables>
+                          <variableIdentifier spelling="x" line="18" col="9" />
+                         </variables>
+                         <qualification>
+                          <keyword spelling="being" line="18" col="11" />
+                          <typeExpression>
+                           <adjectiveCluster />
+                           <radixTypeExpression>
+                            <radixType>
+                             <modeSymbol spelling="__M_object" line="18" col="17" />
+                            </radixType>
+                           </radixTypeExpression>
+                          </typeExpression>
+                         </qualification>
+                        </qualifiedSegment>
+                       </explicitlyQualifiedVariables>
+                      </qualifiedVariables>
+                      <keyword spelling="holds" line="18" col="24" />
+                      <formulaExpression>
+                       <formulaExpression>
+                        <atomicFormulaExpression>
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="x" line="19" col="7" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                         <predicateSymbol spelling="__R_in" line="19" col="9" />
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="X" line="19" col="12" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                        </atomicFormulaExpression>
+                       </formulaExpression>
+                       <keyword spelling="iff" line="19" col="14" />
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="19" col="18" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol>
+                           <keyword spelling="=" line="19" col="20" />
+                          </predicateSymbol>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="y" line="19" col="22" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="or" line="19" col="24" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="19" col="27" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol>
+                           <keyword spelling="=" line="19" col="29" />
+                          </predicateSymbol>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="y" line="19" col="31" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </formulaExpression>
+                     </quantifiedFormulaExpression>
+                    </formulaExpression>
+                   </sentence>
+                  </proposition>
+                 </conditions>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="19" col="33" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="19" col="36" />
+                      <keyword spelling=":" line="19" col="44" />
+                      <theoremNumber spelling="3" line="19" col="45" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                 <keyword spelling=";" line="19" col="46" />
+                </choiceStatement>
+               </linkableStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <exemplification>
+               <keyword spelling="take" line="20" col="5" />
+               <example>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="X" line="20" col="10" />
+                 </unitaryTerm>
+                </termExpression>
+               </example>
+               <keyword spelling=";" line="20" col="11" />
+              </exemplification>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="thus" line="21" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="21" col="10" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="21" col="17" />
+                   <references>
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="A1" line="21" col="20" />
+                     </localReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="21" col="22" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="22" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="22" col="6" />
+        </correctnessCondition>
+        <correctnessCondition>
+         <keyword spelling="uniqueness" line="23" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="24" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <skeletonItem>
+              <generalization>
+               <keyword spelling="let" line="25" col="5" />
+               <qualifiedVariables>
+                <explicitlyQualifiedVariables>
+                 <qualifiedSegment>
+                  <variables>
+                   <variableIdentifier spelling="X1" line="25" col="9" />
+                   <keyword spelling="," line="25" col="11" />
+                   <variableIdentifier spelling="X2" line="25" col="13" />
+                  </variables>
+                  <qualification>
+                   <keyword spelling="be" line="25" col="16" />
+                   <typeExpression>
+                    <adjectiveCluster />
+                    <radixTypeExpression>
+                     <radixType>
+                      <modeSymbol>
+                       <keyword spelling="set" line="25" col="19" />
+                      </modeSymbol>
+                     </radixType>
+                    </radixTypeExpression>
+                   </typeExpression>
+                  </qualification>
+                 </qualifiedSegment>
+                </explicitlyQualifiedVariables>
+               </qualifiedVariables>
+               <keyword spelling="such" line="25" col="23" />
+               <conditions>
+                <keyword spelling="that" line="25" col="28" />
+                <proposition>
+                 <labelIdentifier spelling="A1" line="26" col="1" />
+                 <keyword spelling=":" line="26" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="26" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="z" line="26" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="26" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="26" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="26" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="z" line="26" col="30" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="26" col="32" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X1" line="26" col="35" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="26" col="38" />
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="z" line="26" col="42" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol>
+                        <keyword spelling="=" line="26" col="44" />
+                       </predicateSymbol>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="y" line="26" col="46" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <keyword spelling="and" line="26" col="48" />
+                <proposition>
+                 <labelIdentifier spelling="A2" line="27" col="1" />
+                 <keyword spelling=":" line="27" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="27" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="z" line="27" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="27" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="27" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="27" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="z" line="27" col="30" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="27" col="32" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X2" line="27" col="35" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="27" col="38" />
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="z" line="27" col="42" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol>
+                        <keyword spelling="=" line="27" col="44" />
+                       </predicateSymbol>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="y" line="27" col="46" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+               </conditions>
+               <keyword spelling=";" line="27" col="47" />
+              </generalization>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <diffuseStatement>
+                <keyword spelling="now" line="28" col="5" />
+                <reasoning>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <generalization>
+                    <keyword spelling="let" line="29" col="7" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="z" line="29" col="11" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="be" line="29" col="13" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="29" col="16" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling=";" line="29" col="22" />
+                   </generalization>
+                  </skeletonItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <auxiliaryItem>
+                   <statement>
+                    <linkableStatement>
+                     <compactStatement>
+                      <proposition>
+                       <sentence>
+                        <formulaExpression>
+                         <formulaExpression>
+                          <atomicFormulaExpression>
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="z" line="30" col="7" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                           <predicateSymbol spelling="__R_in" line="30" col="9" />
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="X1" line="30" col="12" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                          </atomicFormulaExpression>
+                         </formulaExpression>
+                         <keyword spelling="iff" line="30" col="15" />
+                         <formulaExpression>
+                          <atomicFormulaExpression>
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="z" line="30" col="19" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                           <predicateSymbol>
+                            <keyword spelling="=" line="30" col="21" />
+                           </predicateSymbol>
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="y" line="30" col="23" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                          </atomicFormulaExpression>
+                         </formulaExpression>
+                        </formulaExpression>
+                       </sentence>
+                      </proposition>
+                      <justification>
+                       <simpleJustification>
+                        <straightforwardJustification>
+                         <keyword spelling="by" line="30" col="25" />
+                         <references>
+                          <reference>
+                           <localReference>
+                            <labelIdentifier spelling="A1" line="30" col="28" />
+                           </localReference>
+                          </reference>
+                         </references>
+                        </straightforwardJustification>
+                       </simpleJustification>
+                      </justification>
+                      <keyword spelling=";" line="30" col="30" />
+                     </compactStatement>
+                    </linkableStatement>
+                   </statement>
+                  </auxiliaryItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <conclusion>
+                    <keyword spelling="hence" line="31" col="7" />
+                    <compactStatement>
+                     <proposition>
+                      <sentence>
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="z" line="31" col="13" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="31" col="15" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X1" line="31" col="18" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="iff" line="31" col="21" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="z" line="31" col="25" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="31" col="27" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X2" line="31" col="30" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </sentence>
+                     </proposition>
+                     <justification>
+                      <simpleJustification>
+                       <straightforwardJustification>
+                        <keyword spelling="by" line="31" col="33" />
+                        <references>
+                         <reference>
+                          <localReference>
+                           <labelIdentifier spelling="A2" line="31" col="36" />
+                          </localReference>
+                         </reference>
+                        </references>
+                       </straightforwardJustification>
+                      </simpleJustification>
+                     </justification>
+                     <keyword spelling=";" line="31" col="38" />
+                    </compactStatement>
+                   </conclusion>
+                  </skeletonItem>
+                 </reasoningItem>
+                </reasoning>
+                <keyword spelling="end" line="32" col="5" />
+                <keyword spelling=";" line="32" col="8" />
+               </diffuseStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="hence" line="33" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="33" col="11" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="33" col="18" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="33" col="21" />
+                      <keyword spelling=":" line="33" col="29" />
+                      <theoremNumber spelling="2" line="33" col="30" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="33" col="31" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="34" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="34" col="6" />
+        </correctnessCondition>
+       </correctnessConditions>
+      </functorDefinition>
+     </definition>
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="35" col="3" />
+       <qualifiedVariables>
+        <explicitlyQualifiedVariables>
+         <qualifiedSegment>
+          <variables>
+           <variableIdentifier spelling="z" line="35" col="7" />
+          </variables>
+          <qualification>
+           <keyword spelling="be" line="35" col="9" />
+           <typeExpression>
+            <adjectiveCluster />
+            <radixTypeExpression>
+             <radixType>
+              <modeSymbol spelling="__M_object" line="35" col="12" />
+             </radixType>
+            </radixTypeExpression>
+           </typeExpression>
+          </qualification>
+         </qualifiedSegment>
+        </explicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="35" col="18" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <functorDefinition>
+       <keyword spelling="func" line="36" col="3" />
+       <functorPattern>
+        <leftFunctorBracket>
+         <keyword spelling="{" line="36" col="8" />
+        </leftFunctorBracket>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="y" line="36" col="10" />
+         </locus>
+         <keyword spelling="," line="36" col="11" />
+         <locus>
+          <variableIdentifier spelling="z" line="36" col="13" />
+         </locus>
+        </loci>
+        <rightFunctorBracket>
+         <keyword spelling="}" line="36" col="15" />
+        </rightFunctorBracket>
+       </functorPattern>
+       <specification>
+        <keyword spelling="-&gt;" line="36" col="17" />
+        <typeExpression>
+         <adjectiveCluster />
+         <radixTypeExpression>
+          <radixType>
+           <modeSymbol>
+            <keyword spelling="set" line="36" col="20" />
+           </modeSymbol>
+          </radixType>
+         </radixTypeExpression>
+        </typeExpression>
+       </specification>
+       <keyword spelling="means" line="36" col="24" />
+       <definiens>
+        <simpleDefiniens>
+         <keyword spelling=":" line="36" col="30" />
+         <labelIdentifier spelling="Def2" line="36" col="31" />
+         <keyword spelling=":" line="36" col="35" />
+         <sentence>
+          <formulaExpression>
+           <formulaExpression>
+            <atomicFormulaExpression>
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="x" line="37" col="5" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+             <predicateSymbol spelling="__R_in" line="37" col="7" />
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <keyword spelling="it" line="37" col="10" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+            </atomicFormulaExpression>
+           </formulaExpression>
+           <keyword spelling="iff" line="37" col="13" />
+           <formulaExpression>
+            <formulaExpression>
+             <atomicFormulaExpression>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="37" col="17" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <predicateSymbol>
+               <keyword spelling="=" line="37" col="19" />
+              </predicateSymbol>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="y" line="37" col="21" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+             </atomicFormulaExpression>
+            </formulaExpression>
+            <keyword spelling="or" line="37" col="23" />
+            <formulaExpression>
+             <atomicFormulaExpression>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="37" col="26" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <predicateSymbol>
+               <keyword spelling="=" line="37" col="28" />
+              </predicateSymbol>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="z" line="37" col="30" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+             </atomicFormulaExpression>
+            </formulaExpression>
+           </formulaExpression>
+          </formulaExpression>
+         </sentence>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="37" col="31" />
+       <correctnessConditions>
+        <correctnessCondition>
+         <keyword spelling="existence" line="38" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="39" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <linkableStatement>
+                <choiceStatement>
+                 <keyword spelling="consider" line="40" col="5" />
+                 <qualifiedVariables>
+                  <explicitlyQualifiedVariables>
+                   <qualifiedSegment>
+                    <variables>
+                     <variableIdentifier spelling="X" line="40" col="14" />
+                    </variables>
+                    <qualification>
+                     <keyword spelling="being" line="40" col="16" />
+                     <typeExpression>
+                      <adjectiveCluster />
+                      <radixTypeExpression>
+                       <radixType>
+                        <modeSymbol>
+                         <keyword spelling="set" line="40" col="22" />
+                        </modeSymbol>
+                       </radixType>
+                      </radixTypeExpression>
+                     </typeExpression>
+                    </qualification>
+                   </qualifiedSegment>
+                  </explicitlyQualifiedVariables>
+                 </qualifiedVariables>
+                 <keyword spelling="such" line="40" col="26" />
+                 <conditions>
+                  <keyword spelling="that" line="40" col="31" />
+                  <proposition>
+                   <labelIdentifier spelling="A1" line="41" col="1" />
+                   <keyword spelling=":" line="41" col="3" />
+                   <sentence>
+                    <formulaExpression>
+                     <quantifiedFormulaExpression>
+                      <keyword spelling="for" line="41" col="5" />
+                      <qualifiedVariables>
+                       <explicitlyQualifiedVariables>
+                        <qualifiedSegment>
+                         <variables>
+                          <variableIdentifier spelling="x" line="41" col="9" />
+                         </variables>
+                         <qualification>
+                          <keyword spelling="being" line="41" col="11" />
+                          <typeExpression>
+                           <adjectiveCluster />
+                           <radixTypeExpression>
+                            <radixType>
+                             <modeSymbol spelling="__M_object" line="41" col="17" />
+                            </radixType>
+                           </radixTypeExpression>
+                          </typeExpression>
+                         </qualification>
+                        </qualifiedSegment>
+                       </explicitlyQualifiedVariables>
+                      </qualifiedVariables>
+                      <keyword spelling="holds" line="41" col="24" />
+                      <formulaExpression>
+                       <formulaExpression>
+                        <atomicFormulaExpression>
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="x" line="42" col="7" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                         <predicateSymbol spelling="__R_in" line="42" col="9" />
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="X" line="42" col="12" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                        </atomicFormulaExpression>
+                       </formulaExpression>
+                       <keyword spelling="iff" line="42" col="14" />
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="42" col="18" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol>
+                           <keyword spelling="=" line="42" col="20" />
+                          </predicateSymbol>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="y" line="42" col="22" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="or" line="42" col="24" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="42" col="27" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol>
+                           <keyword spelling="=" line="42" col="29" />
+                          </predicateSymbol>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="z" line="42" col="31" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </formulaExpression>
+                     </quantifiedFormulaExpression>
+                    </formulaExpression>
+                   </sentence>
+                  </proposition>
+                 </conditions>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="42" col="33" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="42" col="36" />
+                      <keyword spelling=":" line="42" col="44" />
+                      <theoremNumber spelling="3" line="42" col="45" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                 <keyword spelling=";" line="42" col="46" />
+                </choiceStatement>
+               </linkableStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <exemplification>
+               <keyword spelling="take" line="43" col="5" />
+               <example>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="X" line="43" col="10" />
+                 </unitaryTerm>
+                </termExpression>
+               </example>
+               <keyword spelling=";" line="43" col="11" />
+              </exemplification>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="thus" line="44" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="44" col="10" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="44" col="17" />
+                   <references>
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="A1" line="44" col="20" />
+                     </localReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="44" col="22" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="45" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="45" col="6" />
+        </correctnessCondition>
+        <correctnessCondition>
+         <keyword spelling="uniqueness" line="46" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="47" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <skeletonItem>
+              <generalization>
+               <keyword spelling="let" line="48" col="5" />
+               <qualifiedVariables>
+                <explicitlyQualifiedVariables>
+                 <qualifiedSegment>
+                  <variables>
+                   <variableIdentifier spelling="X1" line="48" col="9" />
+                   <keyword spelling="," line="48" col="11" />
+                   <variableIdentifier spelling="X2" line="48" col="13" />
+                  </variables>
+                  <qualification>
+                   <keyword spelling="be" line="48" col="16" />
+                   <typeExpression>
+                    <adjectiveCluster />
+                    <radixTypeExpression>
+                     <radixType>
+                      <modeSymbol>
+                       <keyword spelling="set" line="48" col="19" />
+                      </modeSymbol>
+                     </radixType>
+                    </radixTypeExpression>
+                   </typeExpression>
+                  </qualification>
+                 </qualifiedSegment>
+                </explicitlyQualifiedVariables>
+               </qualifiedVariables>
+               <keyword spelling="such" line="48" col="23" />
+               <conditions>
+                <keyword spelling="that" line="48" col="28" />
+                <proposition>
+                 <labelIdentifier spelling="A1" line="49" col="1" />
+                 <keyword spelling=":" line="49" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="49" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="49" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="49" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="49" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="49" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="x" line="49" col="30" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="49" col="32" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X1" line="49" col="35" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="49" col="38" />
+                     <formulaExpression>
+                      <formulaExpression>
+                       <atomicFormulaExpression>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="49" col="42" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <predicateSymbol>
+                         <keyword spelling="=" line="49" col="44" />
+                        </predicateSymbol>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="y" line="49" col="46" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                       </atomicFormulaExpression>
+                      </formulaExpression>
+                      <keyword spelling="or" line="49" col="48" />
+                      <formulaExpression>
+                       <atomicFormulaExpression>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="49" col="51" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <predicateSymbol>
+                         <keyword spelling="=" line="49" col="53" />
+                        </predicateSymbol>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="z" line="49" col="55" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                       </atomicFormulaExpression>
+                      </formulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <keyword spelling="and" line="49" col="57" />
+                <proposition>
+                 <labelIdentifier spelling="A2" line="50" col="1" />
+                 <keyword spelling=":" line="50" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="50" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="50" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="50" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="50" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="50" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="x" line="50" col="30" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="50" col="32" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X2" line="50" col="35" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="50" col="38" />
+                     <formulaExpression>
+                      <formulaExpression>
+                       <atomicFormulaExpression>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="50" col="42" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <predicateSymbol>
+                         <keyword spelling="=" line="50" col="44" />
+                        </predicateSymbol>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="y" line="50" col="46" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                       </atomicFormulaExpression>
+                      </formulaExpression>
+                      <keyword spelling="or" line="50" col="48" />
+                      <formulaExpression>
+                       <atomicFormulaExpression>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="50" col="51" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <predicateSymbol>
+                         <keyword spelling="=" line="50" col="53" />
+                        </predicateSymbol>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="z" line="50" col="55" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                       </atomicFormulaExpression>
+                      </formulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+               </conditions>
+               <keyword spelling=";" line="50" col="56" />
+              </generalization>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <diffuseStatement>
+                <keyword spelling="now" line="51" col="5" />
+                <reasoning>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <generalization>
+                    <keyword spelling="let" line="52" col="7" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="52" col="11" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="be" line="52" col="13" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="52" col="16" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling=";" line="52" col="22" />
+                   </generalization>
+                  </skeletonItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <auxiliaryItem>
+                   <statement>
+                    <linkableStatement>
+                     <compactStatement>
+                      <proposition>
+                       <sentence>
+                        <formulaExpression>
+                         <formulaExpression>
+                          <atomicFormulaExpression>
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="x" line="53" col="7" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                           <predicateSymbol spelling="__R_in" line="53" col="9" />
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="X1" line="53" col="12" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                          </atomicFormulaExpression>
+                         </formulaExpression>
+                         <keyword spelling="iff" line="53" col="15" />
+                         <formulaExpression>
+                          <formulaExpression>
+                           <atomicFormulaExpression>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="x" line="53" col="19" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                            <predicateSymbol>
+                             <keyword spelling="=" line="53" col="21" />
+                            </predicateSymbol>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="y" line="53" col="23" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                           </atomicFormulaExpression>
+                          </formulaExpression>
+                          <keyword spelling="or" line="53" col="25" />
+                          <formulaExpression>
+                           <atomicFormulaExpression>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="x" line="53" col="28" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                            <predicateSymbol>
+                             <keyword spelling="=" line="53" col="30" />
+                            </predicateSymbol>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="z" line="53" col="32" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                           </atomicFormulaExpression>
+                          </formulaExpression>
+                         </formulaExpression>
+                        </formulaExpression>
+                       </sentence>
+                      </proposition>
+                      <justification>
+                       <simpleJustification>
+                        <straightforwardJustification>
+                         <keyword spelling="by" line="53" col="34" />
+                         <references>
+                          <reference>
+                           <localReference>
+                            <labelIdentifier spelling="A1" line="53" col="37" />
+                           </localReference>
+                          </reference>
+                         </references>
+                        </straightforwardJustification>
+                       </simpleJustification>
+                      </justification>
+                      <keyword spelling=";" line="53" col="39" />
+                     </compactStatement>
+                    </linkableStatement>
+                   </statement>
+                  </auxiliaryItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <conclusion>
+                    <keyword spelling="hence" line="54" col="7" />
+                    <compactStatement>
+                     <proposition>
+                      <sentence>
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="54" col="13" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="54" col="15" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X1" line="54" col="18" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="iff" line="54" col="21" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="54" col="25" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="54" col="27" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X2" line="54" col="30" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </sentence>
+                     </proposition>
+                     <justification>
+                      <simpleJustification>
+                       <straightforwardJustification>
+                        <keyword spelling="by" line="54" col="33" />
+                        <references>
+                         <reference>
+                          <localReference>
+                           <labelIdentifier spelling="A2" line="54" col="36" />
+                          </localReference>
+                         </reference>
+                        </references>
+                       </straightforwardJustification>
+                      </simpleJustification>
+                     </justification>
+                     <keyword spelling=";" line="54" col="38" />
+                    </compactStatement>
+                   </conclusion>
+                  </skeletonItem>
+                 </reasoningItem>
+                </reasoning>
+                <keyword spelling="end" line="55" col="5" />
+                <keyword spelling=";" line="55" col="8" />
+               </diffuseStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="hence" line="56" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="56" col="11" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="56" col="18" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="56" col="21" />
+                      <keyword spelling=":" line="56" col="29" />
+                      <theoremNumber spelling="2" line="56" col="30" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="56" col="31" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="57" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="57" col="6" />
+        </correctnessCondition>
+       </correctnessConditions>
+       <functorProperty>
+        <keyword spelling="commutativity" line="58" col="3" />
+        <justification>
+         <simpleJustification>
+          <straightforwardJustification />
+         </simpleJustification>
+        </justification>
+        <keyword spelling=";" line="58" col="16" />
+       </functorProperty>
+      </functorDefinition>
+     </definition>
+     <keyword spelling="end" line="59" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="59" col="4" />
+   </definitionalItem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="61" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="61" col="12" />
+       <qualifiedVariables>
+        <implicitlyQualifiedVariables>
+         <variables>
+          <variableIdentifier spelling="X" line="61" col="16" />
+          <keyword spelling="," line="61" col="17" />
+          <variableIdentifier spelling="Y" line="61" col="18" />
+         </variables>
+        </implicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="61" col="19" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <predicateDefinition>
+       <keyword spelling="pred" line="62" col="3" />
+       <predicatePattern>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="X" line="62" col="8" />
+         </locus>
+        </loci>
+        <predicateSymbol spelling="__R_c=" line="62" col="10" />
+        <loci>
+         <locus>
+          <variableIdentifier spelling="Y" line="62" col="13" />
+         </locus>
+        </loci>
+       </predicatePattern>
+       <keyword spelling="means" line="62" col="15" />
+       <definiens>
+        <simpleDefiniens>
+         <sentence>
+          <formulaExpression>
+           <quantifiedFormulaExpression>
+            <keyword spelling="for" line="63" col="4" />
+            <qualifiedVariables>
+             <explicitlyQualifiedVariables>
+              <qualifiedSegment>
+               <variables>
+                <variableIdentifier spelling="x" line="63" col="8" />
+               </variables>
+               <qualification>
+                <keyword spelling="being" line="63" col="10" />
+                <typeExpression>
+                 <adjectiveCluster />
+                 <radixTypeExpression>
+                  <radixType>
+                   <modeSymbol spelling="__M_object" line="63" col="16" />
+                  </radixType>
+                 </radixTypeExpression>
+                </typeExpression>
+               </qualification>
+              </qualifiedSegment>
+             </explicitlyQualifiedVariables>
+            </qualifiedVariables>
+            <keyword spelling="holds" line="63" col="23" />
+            <formulaExpression>
+             <formulaExpression>
+              <atomicFormulaExpression>
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="x" line="63" col="29" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+               <predicateSymbol spelling="__R_in" line="63" col="31" />
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="X" line="63" col="34" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+              </atomicFormulaExpression>
+             </formulaExpression>
+             <keyword spelling="implies" line="63" col="36" />
+             <formulaExpression>
+              <atomicFormulaExpression>
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="x" line="63" col="44" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+               <predicateSymbol spelling="__R_in" line="63" col="46" />
+               <termExpressionList>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="Y" line="63" col="49" />
+                 </unitaryTerm>
+                </termExpression>
+               </termExpressionList>
+              </atomicFormulaExpression>
+             </formulaExpression>
+            </formulaExpression>
+           </quantifiedFormulaExpression>
+          </formulaExpression>
+         </sentence>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="63" col="50" />
+       <correctnessConditions />
+       <predicateProperty>
+        <keyword spelling="reflexivity" line="64" col="3" />
+        <justification>
+         <simpleJustification>
+          <straightforwardJustification />
+         </simpleJustification>
+        </justification>
+        <keyword spelling=";" line="64" col="14" />
+       </predicateProperty>
+      </predicateDefinition>
+     </definition>
+     <keyword spelling="end" line="65" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="65" col="4" />
+   </definitionalItem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="67" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="67" col="12" />
+       <qualifiedVariables>
+        <implicitlyQualifiedVariables>
+         <variables>
+          <variableIdentifier spelling="X" line="67" col="16" />
+         </variables>
+        </implicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="67" col="17" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <functorDefinition>
+       <keyword spelling="func" line="68" col="3" />
+       <functorPattern>
+        <functorSymbol spelling="__O128_union" line="68" col="8" />
+        <functorLoci>
+         <locus>
+          <variableIdentifier spelling="X" line="68" col="14" />
+         </locus>
+        </functorLoci>
+       </functorPattern>
+       <specification>
+        <keyword spelling="-&gt;" line="68" col="16" />
+        <typeExpression>
+         <adjectiveCluster />
+         <radixTypeExpression>
+          <radixType>
+           <modeSymbol>
+            <keyword spelling="set" line="68" col="19" />
+           </modeSymbol>
+          </radixType>
+         </radixTypeExpression>
+        </typeExpression>
+       </specification>
+       <keyword spelling="means" line="68" col="23" />
+       <definiens>
+        <simpleDefiniens>
+         <sentence>
+          <formulaExpression>
+           <formulaExpression>
+            <atomicFormulaExpression>
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="x" line="69" col="5" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+             <predicateSymbol spelling="__R_in" line="69" col="7" />
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <keyword spelling="it" line="69" col="10" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+            </atomicFormulaExpression>
+           </formulaExpression>
+           <keyword spelling="iff" line="69" col="13" />
+           <formulaExpression>
+            <quantifiedFormulaExpression>
+             <keyword spelling="ex" line="69" col="17" />
+             <qualifiedVariables>
+              <implicitlyQualifiedVariables>
+               <variables>
+                <variableIdentifier spelling="Y" line="69" col="20" />
+               </variables>
+              </implicitlyQualifiedVariables>
+             </qualifiedVariables>
+             <keyword spelling="st" line="69" col="22" />
+             <formulaExpression>
+              <formulaExpression>
+               <atomicFormulaExpression>
+                <termExpressionList>
+                 <termExpression>
+                  <unitaryTerm>
+                   <variableIdentifier spelling="x" line="69" col="25" />
+                  </unitaryTerm>
+                 </termExpression>
+                </termExpressionList>
+                <predicateSymbol spelling="__R_in" line="69" col="27" />
+                <termExpressionList>
+                 <termExpression>
+                  <unitaryTerm>
+                   <variableIdentifier spelling="Y" line="69" col="30" />
+                  </unitaryTerm>
+                 </termExpression>
+                </termExpressionList>
+               </atomicFormulaExpression>
+              </formulaExpression>
+              <keyword spelling="&amp;" line="69" col="32" />
+              <formulaExpression>
+               <atomicFormulaExpression>
+                <termExpressionList>
+                 <termExpression>
+                  <unitaryTerm>
+                   <variableIdentifier spelling="Y" line="69" col="34" />
+                  </unitaryTerm>
+                 </termExpression>
+                </termExpressionList>
+                <predicateSymbol spelling="__R_in" line="69" col="36" />
+                <termExpressionList>
+                 <termExpression>
+                  <unitaryTerm>
+                   <variableIdentifier spelling="X" line="69" col="39" />
+                  </unitaryTerm>
+                 </termExpression>
+                </termExpressionList>
+               </atomicFormulaExpression>
+              </formulaExpression>
+             </formulaExpression>
+            </quantifiedFormulaExpression>
+           </formulaExpression>
+          </formulaExpression>
+         </sentence>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="69" col="40" />
+       <correctnessConditions>
+        <correctnessCondition>
+         <keyword spelling="existence" line="70" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="71" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <linkableStatement>
+                <choiceStatement>
+                 <keyword spelling="consider" line="72" col="5" />
+                 <qualifiedVariables>
+                  <explicitlyQualifiedVariables>
+                   <qualifiedSegment>
+                    <variables>
+                     <variableIdentifier spelling="Z" line="72" col="14" />
+                    </variables>
+                    <qualification>
+                     <keyword spelling="being" line="72" col="16" />
+                     <typeExpression>
+                      <adjectiveCluster />
+                      <radixTypeExpression>
+                       <radixType>
+                        <modeSymbol>
+                         <keyword spelling="set" line="72" col="22" />
+                        </modeSymbol>
+                       </radixType>
+                      </radixTypeExpression>
+                     </typeExpression>
+                    </qualification>
+                   </qualifiedSegment>
+                  </explicitlyQualifiedVariables>
+                 </qualifiedVariables>
+                 <keyword spelling="such" line="72" col="26" />
+                 <conditions>
+                  <keyword spelling="that" line="72" col="31" />
+                  <proposition>
+                   <labelIdentifier spelling="A1" line="73" col="1" />
+                   <keyword spelling=":" line="73" col="3" />
+                   <sentence>
+                    <formulaExpression>
+                     <quantifiedFormulaExpression>
+                      <keyword spelling="for" line="73" col="5" />
+                      <qualifiedVariables>
+                       <explicitlyQualifiedVariables>
+                        <qualifiedSegment>
+                         <variables>
+                          <variableIdentifier spelling="x" line="73" col="9" />
+                         </variables>
+                         <qualification>
+                          <keyword spelling="being" line="73" col="11" />
+                          <typeExpression>
+                           <adjectiveCluster />
+                           <radixTypeExpression>
+                            <radixType>
+                             <modeSymbol spelling="__M_object" line="73" col="17" />
+                            </radixType>
+                           </radixTypeExpression>
+                          </typeExpression>
+                         </qualification>
+                        </qualifiedSegment>
+                       </explicitlyQualifiedVariables>
+                      </qualifiedVariables>
+                      <keyword spelling="holds" line="73" col="24" />
+                      <formulaExpression>
+                       <formulaExpression>
+                        <atomicFormulaExpression>
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="x" line="74" col="7" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                         <predicateSymbol spelling="__R_in" line="74" col="9" />
+                         <termExpressionList>
+                          <termExpression>
+                           <unitaryTerm>
+                            <variableIdentifier spelling="Z" line="74" col="12" />
+                           </unitaryTerm>
+                          </termExpression>
+                         </termExpressionList>
+                        </atomicFormulaExpression>
+                       </formulaExpression>
+                       <keyword spelling="iff" line="74" col="14" />
+                       <formulaExpression>
+                        <quantifiedFormulaExpression>
+                         <keyword spelling="ex" line="74" col="18" />
+                         <qualifiedVariables>
+                          <explicitlyQualifiedVariables>
+                           <qualifiedSegment>
+                            <variables>
+                             <variableIdentifier spelling="Y" line="74" col="21" />
+                            </variables>
+                            <qualification>
+                             <keyword spelling="being" line="74" col="23" />
+                             <typeExpression>
+                              <adjectiveCluster />
+                              <radixTypeExpression>
+                               <radixType>
+                                <modeSymbol>
+                                 <keyword spelling="set" line="74" col="29" />
+                                </modeSymbol>
+                               </radixType>
+                              </radixTypeExpression>
+                             </typeExpression>
+                            </qualification>
+                           </qualifiedSegment>
+                          </explicitlyQualifiedVariables>
+                         </qualifiedVariables>
+                         <keyword spelling="st" line="74" col="33" />
+                         <formulaExpression>
+                          <formulaExpression>
+                           <atomicFormulaExpression>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="x" line="74" col="36" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                            <predicateSymbol spelling="__R_in" line="74" col="38" />
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="Y" line="74" col="41" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                           </atomicFormulaExpression>
+                          </formulaExpression>
+                          <keyword spelling="&amp;" line="74" col="43" />
+                          <formulaExpression>
+                           <atomicFormulaExpression>
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="Y" line="74" col="45" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                            <predicateSymbol spelling="__R_in" line="74" col="47" />
+                            <termExpressionList>
+                             <termExpression>
+                              <unitaryTerm>
+                               <variableIdentifier spelling="X" line="74" col="50" />
+                              </unitaryTerm>
+                             </termExpression>
+                            </termExpressionList>
+                           </atomicFormulaExpression>
+                          </formulaExpression>
+                         </formulaExpression>
+                        </quantifiedFormulaExpression>
+                       </formulaExpression>
+                      </formulaExpression>
+                     </quantifiedFormulaExpression>
+                    </formulaExpression>
+                   </sentence>
+                  </proposition>
+                 </conditions>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="74" col="52" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="74" col="55" />
+                      <keyword spelling=":" line="74" col="63" />
+                      <theoremNumber spelling="4" line="74" col="64" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                 <keyword spelling=";" line="74" col="65" />
+                </choiceStatement>
+               </linkableStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <exemplification>
+               <keyword spelling="take" line="75" col="5" />
+               <example>
+                <termExpression>
+                 <unitaryTerm>
+                  <variableIdentifier spelling="Z" line="75" col="10" />
+                 </unitaryTerm>
+                </termExpression>
+               </example>
+               <keyword spelling=";" line="75" col="11" />
+              </exemplification>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="thus" line="76" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="76" col="10" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="76" col="17" />
+                   <references>
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="A1" line="76" col="20" />
+                     </localReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="76" col="22" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="77" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="77" col="6" />
+        </correctnessCondition>
+        <correctnessCondition>
+         <keyword spelling="uniqueness" line="78" col="3" />
+         <justification>
+          <proof>
+           <keyword spelling="proof" line="79" col="3" />
+           <reasoning>
+            <reasoningItem>
+             <skeletonItem>
+              <generalization>
+               <keyword spelling="let" line="80" col="5" />
+               <qualifiedVariables>
+                <explicitlyQualifiedVariables>
+                 <qualifiedSegment>
+                  <variables>
+                   <variableIdentifier spelling="X1" line="80" col="9" />
+                   <keyword spelling="," line="80" col="11" />
+                   <variableIdentifier spelling="X2" line="80" col="13" />
+                  </variables>
+                  <qualification>
+                   <keyword spelling="be" line="80" col="16" />
+                   <typeExpression>
+                    <adjectiveCluster />
+                    <radixTypeExpression>
+                     <radixType>
+                      <modeSymbol>
+                       <keyword spelling="set" line="80" col="19" />
+                      </modeSymbol>
+                     </radixType>
+                    </radixTypeExpression>
+                   </typeExpression>
+                  </qualification>
+                 </qualifiedSegment>
+                </explicitlyQualifiedVariables>
+               </qualifiedVariables>
+               <keyword spelling="such" line="80" col="23" />
+               <conditions>
+                <keyword spelling="that" line="80" col="28" />
+                <proposition>
+                 <labelIdentifier spelling="A1" line="81" col="1" />
+                 <keyword spelling=":" line="81" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="81" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="81" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="81" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="81" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="81" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="x" line="82" col="7" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="82" col="9" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X1" line="82" col="12" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="82" col="15" />
+                     <formulaExpression>
+                      <quantifiedFormulaExpression>
+                       <keyword spelling="ex" line="82" col="19" />
+                       <qualifiedVariables>
+                        <explicitlyQualifiedVariables>
+                         <qualifiedSegment>
+                          <variables>
+                           <variableIdentifier spelling="Y" line="82" col="22" />
+                          </variables>
+                          <qualification>
+                           <keyword spelling="being" line="82" col="24" />
+                           <typeExpression>
+                            <adjectiveCluster />
+                            <radixTypeExpression>
+                             <radixType>
+                              <modeSymbol>
+                               <keyword spelling="set" line="82" col="30" />
+                              </modeSymbol>
+                             </radixType>
+                            </radixTypeExpression>
+                           </typeExpression>
+                          </qualification>
+                         </qualifiedSegment>
+                        </explicitlyQualifiedVariables>
+                       </qualifiedVariables>
+                       <keyword spelling="st" line="82" col="34" />
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="82" col="37" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="82" col="39" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="Y" line="82" col="42" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="&amp;" line="82" col="44" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="Y" line="82" col="46" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="82" col="48" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X" line="82" col="51" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </quantifiedFormulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <keyword spelling="and" line="82" col="53" />
+                <proposition>
+                 <labelIdentifier spelling="A2" line="83" col="1" />
+                 <keyword spelling=":" line="83" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <quantifiedFormulaExpression>
+                    <keyword spelling="for" line="83" col="5" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="83" col="9" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="being" line="83" col="11" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="83" col="17" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling="holds" line="83" col="24" />
+                    <formulaExpression>
+                     <formulaExpression>
+                      <atomicFormulaExpression>
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="x" line="84" col="7" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                       <predicateSymbol spelling="__R_in" line="84" col="9" />
+                       <termExpressionList>
+                        <termExpression>
+                         <unitaryTerm>
+                          <variableIdentifier spelling="X2" line="84" col="12" />
+                         </unitaryTerm>
+                        </termExpression>
+                       </termExpressionList>
+                      </atomicFormulaExpression>
+                     </formulaExpression>
+                     <keyword spelling="iff" line="84" col="15" />
+                     <formulaExpression>
+                      <quantifiedFormulaExpression>
+                       <keyword spelling="ex" line="84" col="19" />
+                       <qualifiedVariables>
+                        <explicitlyQualifiedVariables>
+                         <qualifiedSegment>
+                          <variables>
+                           <variableIdentifier spelling="Y" line="84" col="22" />
+                          </variables>
+                          <qualification>
+                           <keyword spelling="being" line="84" col="24" />
+                           <typeExpression>
+                            <adjectiveCluster />
+                            <radixTypeExpression>
+                             <radixType>
+                              <modeSymbol>
+                               <keyword spelling="set" line="84" col="30" />
+                              </modeSymbol>
+                             </radixType>
+                            </radixTypeExpression>
+                           </typeExpression>
+                          </qualification>
+                         </qualifiedSegment>
+                        </explicitlyQualifiedVariables>
+                       </qualifiedVariables>
+                       <keyword spelling="st" line="84" col="34" />
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="84" col="37" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="84" col="39" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="Y" line="84" col="42" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="&amp;" line="84" col="44" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="Y" line="84" col="46" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="84" col="48" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X" line="84" col="51" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </quantifiedFormulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </quantifiedFormulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+               </conditions>
+               <keyword spelling=";" line="84" col="52" />
+              </generalization>
+             </skeletonItem>
+            </reasoningItem>
+            <reasoningItem>
+             <auxiliaryItem>
+              <statement>
+               <diffuseStatement>
+                <keyword spelling="now" line="85" col="5" />
+                <reasoning>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <generalization>
+                    <keyword spelling="let" line="86" col="7" />
+                    <qualifiedVariables>
+                     <explicitlyQualifiedVariables>
+                      <qualifiedSegment>
+                       <variables>
+                        <variableIdentifier spelling="x" line="86" col="11" />
+                       </variables>
+                       <qualification>
+                        <keyword spelling="be" line="86" col="13" />
+                        <typeExpression>
+                         <adjectiveCluster />
+                         <radixTypeExpression>
+                          <radixType>
+                           <modeSymbol spelling="__M_object" line="86" col="16" />
+                          </radixType>
+                         </radixTypeExpression>
+                        </typeExpression>
+                       </qualification>
+                      </qualifiedSegment>
+                     </explicitlyQualifiedVariables>
+                    </qualifiedVariables>
+                    <keyword spelling=";" line="86" col="22" />
+                   </generalization>
+                  </skeletonItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <auxiliaryItem>
+                   <statement>
+                    <linkableStatement>
+                     <compactStatement>
+                      <proposition>
+                       <sentence>
+                        <formulaExpression>
+                         <formulaExpression>
+                          <atomicFormulaExpression>
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="x" line="87" col="7" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                           <predicateSymbol spelling="__R_in" line="87" col="9" />
+                           <termExpressionList>
+                            <termExpression>
+                             <unitaryTerm>
+                              <variableIdentifier spelling="X1" line="87" col="12" />
+                             </unitaryTerm>
+                            </termExpression>
+                           </termExpressionList>
+                          </atomicFormulaExpression>
+                         </formulaExpression>
+                         <keyword spelling="iff" line="87" col="15" />
+                         <formulaExpression>
+                          <quantifiedFormulaExpression>
+                           <keyword spelling="ex" line="87" col="19" />
+                           <qualifiedVariables>
+                            <explicitlyQualifiedVariables>
+                             <qualifiedSegment>
+                              <variables>
+                               <variableIdentifier spelling="Y" line="87" col="22" />
+                              </variables>
+                              <qualification>
+                               <keyword spelling="being" line="87" col="24" />
+                               <typeExpression>
+                                <adjectiveCluster />
+                                <radixTypeExpression>
+                                 <radixType>
+                                  <modeSymbol>
+                                   <keyword spelling="set" line="87" col="30" />
+                                  </modeSymbol>
+                                 </radixType>
+                                </radixTypeExpression>
+                               </typeExpression>
+                              </qualification>
+                             </qualifiedSegment>
+                            </explicitlyQualifiedVariables>
+                           </qualifiedVariables>
+                           <keyword spelling="st" line="87" col="34" />
+                           <formulaExpression>
+                            <formulaExpression>
+                             <atomicFormulaExpression>
+                              <termExpressionList>
+                               <termExpression>
+                                <unitaryTerm>
+                                 <variableIdentifier spelling="x" line="87" col="37" />
+                                </unitaryTerm>
+                               </termExpression>
+                              </termExpressionList>
+                              <predicateSymbol spelling="__R_in" line="87" col="39" />
+                              <termExpressionList>
+                               <termExpression>
+                                <unitaryTerm>
+                                 <variableIdentifier spelling="Y" line="87" col="42" />
+                                </unitaryTerm>
+                               </termExpression>
+                              </termExpressionList>
+                             </atomicFormulaExpression>
+                            </formulaExpression>
+                            <keyword spelling="&amp;" line="87" col="44" />
+                            <formulaExpression>
+                             <atomicFormulaExpression>
+                              <termExpressionList>
+                               <termExpression>
+                                <unitaryTerm>
+                                 <variableIdentifier spelling="Y" line="87" col="46" />
+                                </unitaryTerm>
+                               </termExpression>
+                              </termExpressionList>
+                              <predicateSymbol spelling="__R_in" line="87" col="48" />
+                              <termExpressionList>
+                               <termExpression>
+                                <unitaryTerm>
+                                 <variableIdentifier spelling="X" line="87" col="51" />
+                                </unitaryTerm>
+                               </termExpression>
+                              </termExpressionList>
+                             </atomicFormulaExpression>
+                            </formulaExpression>
+                           </formulaExpression>
+                          </quantifiedFormulaExpression>
+                         </formulaExpression>
+                        </formulaExpression>
+                       </sentence>
+                      </proposition>
+                      <justification>
+                       <simpleJustification>
+                        <straightforwardJustification>
+                         <keyword spelling="by" line="87" col="53" />
+                         <references>
+                          <reference>
+                           <localReference>
+                            <labelIdentifier spelling="A1" line="87" col="56" />
+                           </localReference>
+                          </reference>
+                         </references>
+                        </straightforwardJustification>
+                       </simpleJustification>
+                      </justification>
+                      <keyword spelling=";" line="87" col="58" />
+                     </compactStatement>
+                    </linkableStatement>
+                   </statement>
+                  </auxiliaryItem>
+                 </reasoningItem>
+                 <reasoningItem>
+                  <skeletonItem>
+                   <conclusion>
+                    <keyword spelling="hence" line="88" col="7" />
+                    <compactStatement>
+                     <proposition>
+                      <sentence>
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="88" col="13" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="88" col="15" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X1" line="88" col="18" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="iff" line="88" col="21" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="88" col="25" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="88" col="27" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X2" line="88" col="30" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </sentence>
+                     </proposition>
+                     <justification>
+                      <simpleJustification>
+                       <straightforwardJustification>
+                        <keyword spelling="by" line="88" col="33" />
+                        <references>
+                         <reference>
+                          <localReference>
+                           <labelIdentifier spelling="A2" line="88" col="36" />
+                          </localReference>
+                         </reference>
+                        </references>
+                       </straightforwardJustification>
+                      </simpleJustification>
+                     </justification>
+                     <keyword spelling=";" line="88" col="38" />
+                    </compactStatement>
+                   </conclusion>
+                  </skeletonItem>
+                 </reasoningItem>
+                </reasoning>
+                <keyword spelling="end" line="89" col="5" />
+                <keyword spelling=";" line="89" col="8" />
+               </diffuseStatement>
+              </statement>
+             </auxiliaryItem>
+            </reasoningItem>
+            <reasoningItem>
+             <skeletonItem>
+              <conclusion>
+               <keyword spelling="hence" line="90" col="5" />
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <keyword spelling="thesis" line="90" col="11" />
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="90" col="18" />
+                   <references>
+                    <reference>
+                     <libraryReference>
+                      <articleName spelling="TARSKI_0" line="90" col="21" />
+                      <keyword spelling=":" line="90" col="29" />
+                      <theoremNumber spelling="2" line="90" col="30" />
+                     </libraryReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="90" col="31" />
+               </compactStatement>
+              </conclusion>
+             </skeletonItem>
+            </reasoningItem>
+           </reasoning>
+           <keyword spelling="end" line="91" col="3" />
+          </proof>
+         </justification>
+         <keyword spelling=";" line="91" col="6" />
+        </correctnessCondition>
+       </correctnessConditions>
+      </functorDefinition>
+     </definition>
+     <keyword spelling="end" line="92" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="92" col="4" />
+   </definitionalItem>
+  </textItem>
+  <textItem>
+   <theorem>
+    <keyword spelling="theorem" line="94" col="1" />
+    <compactStatement>
+     <proposition>
+      <sentence>
+       <formulaExpression>
+        <formulaExpression>
+         <atomicFormulaExpression>
+          <termExpressionList>
+           <termExpression>
+            <unitaryTerm>
+             <variableIdentifier spelling="x" line="95" col="3" />
+            </unitaryTerm>
+           </termExpression>
+          </termExpressionList>
+          <predicateSymbol spelling="__R_in" line="95" col="5" />
+          <termExpressionList>
+           <termExpression>
+            <unitaryTerm>
+             <variableIdentifier spelling="X" line="95" col="8" />
+            </unitaryTerm>
+           </termExpression>
+          </termExpressionList>
+         </atomicFormulaExpression>
+        </formulaExpression>
+        <keyword spelling="implies" line="95" col="10" />
+        <formulaExpression>
+         <quantifiedFormulaExpression>
+          <keyword spelling="ex" line="96" col="4" />
+          <qualifiedVariables>
+           <implicitlyQualifiedVariables>
+            <variables>
+             <variableIdentifier spelling="Y" line="96" col="7" />
+            </variables>
+           </implicitlyQualifiedVariables>
+          </qualifiedVariables>
+          <keyword spelling="st" line="96" col="9" />
+          <formulaExpression>
+           <formulaExpression>
+            <atomicFormulaExpression>
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="Y" line="96" col="12" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+             <predicateSymbol spelling="__R_in" line="96" col="14" />
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="X" line="96" col="17" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+            </atomicFormulaExpression>
+           </formulaExpression>
+           <keyword spelling="&amp;" line="96" col="19" />
+           <formulaExpression>
+            <keyword spelling="not" line="96" col="21" />
+            <formulaExpression>
+             <quantifiedFormulaExpression>
+              <keyword spelling="ex" line="96" col="25" />
+              <qualifiedVariables>
+               <implicitlyQualifiedVariables>
+                <variables>
+                 <variableIdentifier spelling="x" line="96" col="28" />
+                </variables>
+               </implicitlyQualifiedVariables>
+              </qualifiedVariables>
+              <keyword spelling="st" line="96" col="30" />
+              <formulaExpression>
+               <formulaExpression>
+                <atomicFormulaExpression>
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="x" line="96" col="33" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                 <predicateSymbol spelling="__R_in" line="96" col="35" />
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="X" line="96" col="38" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                </atomicFormulaExpression>
+               </formulaExpression>
+               <keyword spelling="&amp;" line="96" col="40" />
+               <formulaExpression>
+                <atomicFormulaExpression>
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="x" line="96" col="42" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                 <predicateSymbol spelling="__R_in" line="96" col="44" />
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="Y" line="96" col="47" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                </atomicFormulaExpression>
+               </formulaExpression>
+              </formulaExpression>
+             </quantifiedFormulaExpression>
+            </formulaExpression>
+           </formulaExpression>
+          </formulaExpression>
+         </quantifiedFormulaExpression>
+        </formulaExpression>
+       </formulaExpression>
+      </sentence>
+     </proposition>
+     <justification>
+      <simpleJustification>
+       <straightforwardJustification>
+        <keyword spelling="by" line="96" col="49" />
+        <references>
+         <reference>
+          <libraryReference>
+           <articleName spelling="TARSKI_0" line="96" col="52" />
+           <keyword spelling=":" line="96" col="60" />
+           <theoremNumber spelling="5" line="96" col="61" />
+          </libraryReference>
+         </reference>
+        </references>
+       </straightforwardJustification>
+      </simpleJustification>
+     </justification>
+     <keyword spelling=";" line="96" col="62" />
+    </compactStatement>
+   </theorem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="98" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="98" col="12" />
+       <qualifiedVariables>
+        <explicitlyQualifiedVariables>
+         <qualifiedSegment>
+          <variables>
+           <variableIdentifier spelling="x" line="98" col="16" />
+           <keyword spelling="," line="98" col="17" />
+           <variableIdentifier spelling="X" line="98" col="19" />
+          </variables>
+          <qualification>
+           <keyword spelling="be" line="98" col="21" />
+           <typeExpression>
+            <adjectiveCluster />
+            <radixTypeExpression>
+             <radixType>
+              <modeSymbol>
+               <keyword spelling="set" line="98" col="24" />
+              </modeSymbol>
+             </radixType>
+            </radixTypeExpression>
+           </typeExpression>
+          </qualification>
+         </qualifiedSegment>
+        </explicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="98" col="27" />
+      </lociDeclaration>
+     </definitionItem>
+     <redefinition>
+      <keyword spelling="redefine" line="99" col="3" />
+      <predicateDefinition>
+       <keyword spelling="pred" line="99" col="12" />
+       <predicatePattern>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="x" line="99" col="17" />
+         </locus>
+        </loci>
+        <predicateSymbol spelling="__R_in" line="99" col="19" />
+        <loci>
+         <locus>
+          <variableIdentifier spelling="X" line="99" col="22" />
+         </locus>
+        </loci>
+       </predicatePattern>
+       <keyword spelling=";" line="99" col="23" />
+       <correctnessConditions />
+       <predicateProperty>
+        <keyword spelling="asymmetry" line="100" col="3" />
+        <justification>
+         <proof>
+          <keyword spelling="proof" line="101" col="3" />
+          <reasoning>
+           <reasoningItem>
+            <skeletonItem>
+             <generalization>
+              <keyword spelling="let" line="102" col="5" />
+              <qualifiedVariables>
+               <explicitlyQualifiedVariables>
+                <qualifiedSegment>
+                 <variables>
+                  <variableIdentifier spelling="a" line="102" col="9" />
+                  <keyword spelling="," line="102" col="10" />
+                  <variableIdentifier spelling="b" line="102" col="11" />
+                 </variables>
+                 <qualification>
+                  <keyword spelling="be" line="102" col="13" />
+                  <typeExpression>
+                   <adjectiveCluster />
+                   <radixTypeExpression>
+                    <radixType>
+                     <modeSymbol>
+                      <keyword spelling="set" line="102" col="16" />
+                     </modeSymbol>
+                    </radixType>
+                   </radixTypeExpression>
+                  </typeExpression>
+                 </qualification>
+                </qualifiedSegment>
+               </explicitlyQualifiedVariables>
+              </qualifiedVariables>
+              <keyword spelling=";" line="102" col="19" />
+             </generalization>
+            </skeletonItem>
+           </reasoningItem>
+           <reasoningItem>
+            <skeletonItem>
+             <assumption>
+              <singleAssumption>
+               <keyword spelling="assume" line="103" col="5" />
+               <proposition>
+                <labelIdentifier spelling="A1" line="104" col="1" />
+                <keyword spelling=":" line="104" col="3" />
+                <sentence>
+                 <formulaExpression>
+                  <formulaExpression>
+                   <atomicFormulaExpression>
+                    <termExpressionList>
+                     <termExpression>
+                      <unitaryTerm>
+                       <variableIdentifier spelling="a" line="104" col="5" />
+                      </unitaryTerm>
+                     </termExpression>
+                    </termExpressionList>
+                    <predicateSymbol spelling="__R_in" line="104" col="7" />
+                    <termExpressionList>
+                     <termExpression>
+                      <unitaryTerm>
+                       <variableIdentifier spelling="b" line="104" col="10" />
+                      </unitaryTerm>
+                     </termExpression>
+                    </termExpressionList>
+                   </atomicFormulaExpression>
+                  </formulaExpression>
+                  <keyword spelling="&amp;" line="104" col="12" />
+                  <formulaExpression>
+                   <atomicFormulaExpression>
+                    <termExpressionList>
+                     <termExpression>
+                      <unitaryTerm>
+                       <variableIdentifier spelling="b" line="104" col="14" />
+                      </unitaryTerm>
+                     </termExpression>
+                    </termExpressionList>
+                    <predicateSymbol spelling="__R_in" line="104" col="16" />
+                    <termExpressionList>
+                     <termExpression>
+                      <unitaryTerm>
+                       <variableIdentifier spelling="a" line="104" col="19" />
+                      </unitaryTerm>
+                     </termExpression>
+                    </termExpressionList>
+                   </atomicFormulaExpression>
+                  </formulaExpression>
+                 </formulaExpression>
+                </sentence>
+               </proposition>
+               <keyword spelling=";" line="104" col="20" />
+              </singleAssumption>
+             </assumption>
+            </skeletonItem>
+           </reasoningItem>
+           <reasoningItem>
+            <auxiliaryItem>
+             <privateDefinition>
+              <constantDefinition>
+               <keyword spelling="set" line="105" col="5" />
+               <equatingList>
+                <equating>
+                 <variableIdentifier spelling="X" line="105" col="9" />
+                 <keyword spelling="=" line="105" col="11" />
+                 <termExpression>
+                  <unitaryTerm>
+                   <leftFunctorBracket>
+                    <keyword spelling="{" line="105" col="13" />
+                   </leftFunctorBracket>
+                   <termExpressionList>
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="a" line="105" col="14" />
+                     </unitaryTerm>
+                    </termExpression>
+                    <keyword spelling="," line="105" col="15" />
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="b" line="105" col="16" />
+                     </unitaryTerm>
+                    </termExpression>
+                   </termExpressionList>
+                   <rightFunctorBracket>
+                    <keyword spelling="}" line="105" col="17" />
+                   </rightFunctorBracket>
+                  </unitaryTerm>
+                 </termExpression>
+                </equating>
+               </equatingList>
+               <keyword spelling=";" line="105" col="18" />
+              </constantDefinition>
+             </privateDefinition>
+            </auxiliaryItem>
+           </reasoningItem>
+           <reasoningItem>
+            <auxiliaryItem>
+             <statement>
+              <linkableStatement>
+               <compactStatement>
+                <proposition>
+                 <labelIdentifier spelling="A3" line="106" col="1" />
+                 <keyword spelling=":" line="106" col="3" />
+                 <sentence>
+                  <formulaExpression>
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="a" line="106" col="5" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="106" col="7" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="X" line="106" col="10" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                   <keyword spelling="&amp;" line="106" col="12" />
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="b" line="106" col="14" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="106" col="16" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="X" line="106" col="19" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="106" col="21" />
+                   <references>
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="Def2" line="106" col="24" />
+                     </localReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="106" col="28" />
+               </compactStatement>
+              </linkableStatement>
+             </statement>
+            </auxiliaryItem>
+           </reasoningItem>
+           <reasoningItem>
+            <auxiliaryItem>
+             <statement>
+              <linkableStatement>
+               <choiceStatement>
+                <keyword spelling="consider" line="107" col="5" />
+                <qualifiedVariables>
+                 <explicitlyQualifiedVariables>
+                  <qualifiedSegment>
+                   <variables>
+                    <variableIdentifier spelling="Y" line="107" col="14" />
+                   </variables>
+                   <qualification>
+                    <keyword spelling="being" line="107" col="16" />
+                    <typeExpression>
+                     <adjectiveCluster />
+                     <radixTypeExpression>
+                      <radixType>
+                       <modeSymbol>
+                        <keyword spelling="set" line="107" col="22" />
+                       </modeSymbol>
+                      </radixType>
+                     </radixTypeExpression>
+                    </typeExpression>
+                   </qualification>
+                  </qualifiedSegment>
+                 </explicitlyQualifiedVariables>
+                </qualifiedVariables>
+                <keyword spelling="such" line="107" col="26" />
+                <conditions>
+                 <keyword spelling="that" line="107" col="31" />
+                 <proposition>
+                  <labelIdentifier spelling="A4" line="108" col="1" />
+                  <keyword spelling=":" line="108" col="3" />
+                  <sentence>
+                   <formulaExpression>
+                    <formulaExpression>
+                     <atomicFormulaExpression>
+                      <termExpressionList>
+                       <termExpression>
+                        <unitaryTerm>
+                         <variableIdentifier spelling="Y" line="108" col="5" />
+                        </unitaryTerm>
+                       </termExpression>
+                      </termExpressionList>
+                      <predicateSymbol spelling="__R_in" line="108" col="7" />
+                      <termExpressionList>
+                       <termExpression>
+                        <unitaryTerm>
+                         <variableIdentifier spelling="X" line="108" col="10" />
+                        </unitaryTerm>
+                       </termExpression>
+                      </termExpressionList>
+                     </atomicFormulaExpression>
+                    </formulaExpression>
+                    <keyword spelling="&amp;" line="108" col="12" />
+                    <formulaExpression>
+                     <keyword spelling="not" line="108" col="14" />
+                     <formulaExpression>
+                      <quantifiedFormulaExpression>
+                       <keyword spelling="ex" line="108" col="18" />
+                       <qualifiedVariables>
+                        <explicitlyQualifiedVariables>
+                         <qualifiedSegment>
+                          <variables>
+                           <variableIdentifier spelling="x" line="108" col="21" />
+                          </variables>
+                          <qualification>
+                           <keyword spelling="being" line="108" col="23" />
+                           <typeExpression>
+                            <adjectiveCluster />
+                            <radixTypeExpression>
+                             <radixType>
+                              <modeSymbol spelling="__M_object" line="108" col="29" />
+                             </radixType>
+                            </radixTypeExpression>
+                           </typeExpression>
+                          </qualification>
+                         </qualifiedSegment>
+                        </explicitlyQualifiedVariables>
+                       </qualifiedVariables>
+                       <keyword spelling="st" line="108" col="36" />
+                       <formulaExpression>
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="108" col="39" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="108" col="41" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="X" line="108" col="44" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                        <keyword spelling="&amp;" line="108" col="46" />
+                        <formulaExpression>
+                         <atomicFormulaExpression>
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="x" line="108" col="48" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                          <predicateSymbol spelling="__R_in" line="108" col="50" />
+                          <termExpressionList>
+                           <termExpression>
+                            <unitaryTerm>
+                             <variableIdentifier spelling="Y" line="108" col="53" />
+                            </unitaryTerm>
+                           </termExpression>
+                          </termExpressionList>
+                         </atomicFormulaExpression>
+                        </formulaExpression>
+                       </formulaExpression>
+                      </quantifiedFormulaExpression>
+                     </formulaExpression>
+                    </formulaExpression>
+                   </formulaExpression>
+                  </sentence>
+                 </proposition>
+                </conditions>
+                <simpleJustification>
+                 <straightforwardJustification>
+                  <keyword spelling="by" line="108" col="55" />
+                  <references>
+                   <reference>
+                    <localReference>
+                     <labelIdentifier spelling="A3" line="108" col="58" />
+                    </localReference>
+                   </reference>
+                   <keyword spelling="," line="108" col="60" />
+                   <reference>
+                    <libraryReference>
+                     <articleName spelling="TARSKI_0" line="108" col="61" />
+                     <keyword spelling=":" line="108" col="69" />
+                     <theoremNumber spelling="5" line="108" col="70" />
+                    </libraryReference>
+                   </reference>
+                  </references>
+                 </straightforwardJustification>
+                </simpleJustification>
+                <keyword spelling=";" line="108" col="71" />
+               </choiceStatement>
+              </linkableStatement>
+             </statement>
+            </auxiliaryItem>
+           </reasoningItem>
+           <reasoningItem>
+            <auxiliaryItem>
+             <statement>
+              <linkableStatement>
+               <compactStatement>
+                <proposition>
+                 <sentence>
+                  <formulaExpression>
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="Y" line="109" col="5" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol>
+                      <keyword spelling="=" line="109" col="7" />
+                     </predicateSymbol>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="a" line="109" col="9" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                   <keyword spelling="or" line="109" col="11" />
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="Y" line="109" col="14" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol>
+                      <keyword spelling="=" line="109" col="16" />
+                     </predicateSymbol>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="b" line="109" col="18" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                  </formulaExpression>
+                 </sentence>
+                </proposition>
+                <justification>
+                 <simpleJustification>
+                  <straightforwardJustification>
+                   <keyword spelling="by" line="109" col="20" />
+                   <references>
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="A4" line="109" col="23" />
+                     </localReference>
+                    </reference>
+                    <keyword spelling="," line="109" col="25" />
+                    <reference>
+                     <localReference>
+                      <labelIdentifier spelling="Def2" line="109" col="26" />
+                     </localReference>
+                    </reference>
+                   </references>
+                  </straightforwardJustification>
+                 </simpleJustification>
+                </justification>
+                <keyword spelling=";" line="109" col="30" />
+               </compactStatement>
+              </linkableStatement>
+             </statement>
+            </auxiliaryItem>
+           </reasoningItem>
+           <reasoningItem>
+            <skeletonItem>
+             <conclusion>
+              <keyword spelling="hence" line="110" col="5" />
+              <compactStatement>
+               <proposition>
+                <sentence>
+                 <formulaExpression>
+                  <keyword spelling="thesis" line="110" col="11" />
+                 </formulaExpression>
+                </sentence>
+               </proposition>
+               <justification>
+                <simpleJustification>
+                 <straightforwardJustification>
+                  <keyword spelling="by" line="110" col="18" />
+                  <references>
+                   <reference>
+                    <localReference>
+                     <labelIdentifier spelling="A1" line="110" col="21" />
+                    </localReference>
+                   </reference>
+                   <keyword spelling="," line="110" col="23" />
+                   <reference>
+                    <localReference>
+                     <labelIdentifier spelling="A3" line="110" col="24" />
+                    </localReference>
+                   </reference>
+                   <keyword spelling="," line="110" col="26" />
+                   <reference>
+                    <localReference>
+                     <labelIdentifier spelling="A4" line="110" col="27" />
+                    </localReference>
+                   </reference>
+                  </references>
+                 </straightforwardJustification>
+                </simpleJustification>
+               </justification>
+               <keyword spelling=";" line="110" col="29" />
+              </compactStatement>
+             </conclusion>
+            </skeletonItem>
+           </reasoningItem>
+          </reasoning>
+          <keyword spelling="end" line="111" col="3" />
+         </proof>
+        </justification>
+        <keyword spelling=";" line="111" col="6" />
+       </predicateProperty>
+      </predicateDefinition>
+     </redefinition>
+     <keyword spelling="end" line="112" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="112" col="4" />
+   </definitionalItem>
+  </textItem>
+  <textItem>
+   <schemeItem>
+    <schemeBlock>
+     <keyword spelling="scheme" line="114" col="1" />
+     <schemeIdentifier spelling="Replacement" line="114" col="8" />
+     <keyword spelling="{" line="114" col="19" />
+     <schemeParameters>
+      <schemeSegment>
+       <functorSegment>
+        <functorIdentifier spelling="A" line="114" col="21" />
+        <keyword spelling="(" line="114" col="22" />
+        <keyword spelling=")" line="114" col="23" />
+        <specification>
+         <keyword spelling="-&gt;" line="114" col="25" />
+         <typeExpression>
+          <adjectiveCluster />
+          <radixTypeExpression>
+           <radixType>
+            <modeSymbol>
+             <keyword spelling="set" line="114" col="28" />
+            </modeSymbol>
+           </radixType>
+          </radixTypeExpression>
+         </typeExpression>
+        </specification>
+       </functorSegment>
+      </schemeSegment>
+      <keyword spelling="," line="114" col="31" />
+      <schemeSegment>
+       <predicateSegment>
+        <predicateIdentifier spelling="P" line="114" col="33" />
+        <keyword spelling="[" line="114" col="34" />
+        <typeExpressionList>
+         <typeExpression>
+          <adjectiveCluster />
+          <radixTypeExpression>
+           <radixType>
+            <modeSymbol spelling="__M_object" line="114" col="35" />
+           </radixType>
+          </radixTypeExpression>
+         </typeExpression>
+         <keyword spelling="," line="114" col="41" />
+         <typeExpression>
+          <adjectiveCluster />
+          <radixTypeExpression>
+           <radixType>
+            <modeSymbol spelling="__M_object" line="114" col="42" />
+           </radixType>
+          </radixTypeExpression>
+         </typeExpression>
+        </typeExpressionList>
+        <keyword spelling="]" line="114" col="48" />
+       </predicateSegment>
+      </schemeSegment>
+     </schemeParameters>
+     <keyword spelling="}" line="114" col="50" />
+     <keyword spelling=":" line="114" col="51" />
+     <schemeConclusion>
+      <sentence>
+       <formulaExpression>
+        <quantifiedFormulaExpression>
+         <keyword spelling="ex" line="115" col="3" />
+         <qualifiedVariables>
+          <implicitlyQualifiedVariables>
+           <variables>
+            <variableIdentifier spelling="X" line="115" col="6" />
+           </variables>
+          </implicitlyQualifiedVariables>
+         </qualifiedVariables>
+         <keyword spelling="st" line="115" col="8" />
+         <formulaExpression>
+          <quantifiedFormulaExpression>
+           <keyword spelling="for" line="115" col="11" />
+           <qualifiedVariables>
+            <explicitlyQualifiedVariables>
+             <qualifiedSegment>
+              <variables>
+               <variableIdentifier spelling="x" line="115" col="15" />
+              </variables>
+              <qualification>
+               <keyword spelling="being" line="115" col="17" />
+               <typeExpression>
+                <adjectiveCluster />
+                <radixTypeExpression>
+                 <radixType>
+                  <modeSymbol spelling="__M_object" line="115" col="23" />
+                 </radixType>
+                </radixTypeExpression>
+               </typeExpression>
+              </qualification>
+             </qualifiedSegment>
+            </explicitlyQualifiedVariables>
+           </qualifiedVariables>
+           <keyword spelling="holds" line="115" col="30" />
+           <formulaExpression>
+            <formulaExpression>
+             <atomicFormulaExpression>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="115" col="36" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <predicateSymbol spelling="__R_in" line="115" col="38" />
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="X" line="115" col="41" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+             </atomicFormulaExpression>
+            </formulaExpression>
+            <keyword spelling="iff" line="115" col="43" />
+            <formulaExpression>
+             <quantifiedFormulaExpression>
+              <keyword spelling="ex" line="116" col="5" />
+              <qualifiedVariables>
+               <explicitlyQualifiedVariables>
+                <qualifiedSegment>
+                 <variables>
+                  <variableIdentifier spelling="y" line="116" col="8" />
+                 </variables>
+                 <qualification>
+                  <keyword spelling="being" line="116" col="10" />
+                  <typeExpression>
+                   <adjectiveCluster />
+                   <radixTypeExpression>
+                    <radixType>
+                     <modeSymbol spelling="__M_object" line="116" col="16" />
+                    </radixType>
+                   </radixTypeExpression>
+                  </typeExpression>
+                 </qualification>
+                </qualifiedSegment>
+               </explicitlyQualifiedVariables>
+              </qualifiedVariables>
+              <keyword spelling="st" line="116" col="23" />
+              <formulaExpression>
+               <formulaExpression>
+                <atomicFormulaExpression>
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="y" line="116" col="26" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                 <predicateSymbol spelling="__R_in" line="116" col="28" />
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <functorIdentifier spelling="A" line="116" col="31" />
+                    <keyword spelling="(" line="116" col="32" />
+                    <keyword spelling=")" line="116" col="33" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                </atomicFormulaExpression>
+               </formulaExpression>
+               <keyword spelling="&amp;" line="116" col="35" />
+               <formulaExpression>
+                <atomicFormulaExpression>
+                 <predicateIdentifier spelling="P" line="116" col="37" />
+                 <keyword spelling="[" line="116" col="38" />
+                 <termExpressionList>
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="y" line="116" col="39" />
+                   </unitaryTerm>
+                  </termExpression>
+                  <keyword spelling="," line="116" col="40" />
+                  <termExpression>
+                   <unitaryTerm>
+                    <variableIdentifier spelling="x" line="116" col="41" />
+                   </unitaryTerm>
+                  </termExpression>
+                 </termExpressionList>
+                 <keyword spelling="]" line="116" col="42" />
+                </atomicFormulaExpression>
+               </formulaExpression>
+              </formulaExpression>
+             </quantifiedFormulaExpression>
+            </formulaExpression>
+           </formulaExpression>
+          </quantifiedFormulaExpression>
+         </formulaExpression>
+        </quantifiedFormulaExpression>
+       </formulaExpression>
+      </sentence>
+     </schemeConclusion>
+     <keyword spelling="provided" line="117" col="3" />
+     <schemePremise>
+      <proposition>
+       <labelIdentifier spelling="A1" line="118" col="1" />
+       <keyword spelling=":" line="118" col="3" />
+       <sentence>
+        <formulaExpression>
+         <quantifiedFormulaExpression>
+          <keyword spelling="for" line="118" col="5" />
+          <qualifiedVariables>
+           <explicitlyQualifiedVariables>
+            <qualifiedSegment>
+             <variables>
+              <variableIdentifier spelling="x" line="118" col="9" />
+              <keyword spelling="," line="118" col="10" />
+              <variableIdentifier spelling="y" line="118" col="11" />
+              <keyword spelling="," line="118" col="12" />
+              <variableIdentifier spelling="z" line="118" col="13" />
+             </variables>
+             <qualification>
+              <keyword spelling="being" line="118" col="15" />
+              <typeExpression>
+               <adjectiveCluster />
+               <radixTypeExpression>
+                <radixType>
+                 <modeSymbol spelling="__M_object" line="118" col="21" />
+                </radixType>
+               </radixTypeExpression>
+              </typeExpression>
+             </qualification>
+            </qualifiedSegment>
+           </explicitlyQualifiedVariables>
+          </qualifiedVariables>
+          <keyword spelling="st" line="118" col="28" />
+          <formulaExpression>
+           <formulaExpression>
+            <atomicFormulaExpression>
+             <predicateIdentifier spelling="P" line="118" col="31" />
+             <keyword spelling="[" line="118" col="32" />
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="x" line="118" col="33" />
+               </unitaryTerm>
+              </termExpression>
+              <keyword spelling="," line="118" col="34" />
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="y" line="118" col="35" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+             <keyword spelling="]" line="118" col="36" />
+            </atomicFormulaExpression>
+           </formulaExpression>
+           <keyword spelling="&amp;" line="118" col="38" />
+           <formulaExpression>
+            <atomicFormulaExpression>
+             <predicateIdentifier spelling="P" line="118" col="40" />
+             <keyword spelling="[" line="118" col="41" />
+             <termExpressionList>
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="x" line="118" col="42" />
+               </unitaryTerm>
+              </termExpression>
+              <keyword spelling="," line="118" col="43" />
+              <termExpression>
+               <unitaryTerm>
+                <variableIdentifier spelling="z" line="118" col="44" />
+               </unitaryTerm>
+              </termExpression>
+             </termExpressionList>
+             <keyword spelling="]" line="118" col="45" />
+            </atomicFormulaExpression>
+           </formulaExpression>
+          </formulaExpression>
+          <keyword spelling="holds" line="118" col="47" />
+          <formulaExpression>
+           <atomicFormulaExpression>
+            <termExpressionList>
+             <termExpression>
+              <unitaryTerm>
+               <variableIdentifier spelling="y" line="118" col="53" />
+              </unitaryTerm>
+             </termExpression>
+            </termExpressionList>
+            <predicateSymbol>
+             <keyword spelling="=" line="118" col="55" />
+            </predicateSymbol>
+            <termExpressionList>
+             <termExpression>
+              <unitaryTerm>
+               <variableIdentifier spelling="z" line="118" col="57" />
+              </unitaryTerm>
+             </termExpression>
+            </termExpressionList>
+           </atomicFormulaExpression>
+          </formulaExpression>
+         </quantifiedFormulaExpression>
+        </formulaExpression>
+       </sentence>
+      </proposition>
+     </schemePremise>
+     <keyword spelling="proof" line="119" col="3" />
+     <reasoning>
+      <reasoningItem>
+       <skeletonItem>
+        <conclusion>
+         <keyword spelling="thus" line="120" col="5" />
+         <compactStatement>
+          <proposition>
+           <sentence>
+            <formulaExpression>
+             <keyword spelling="thesis" line="120" col="10" />
+            </formulaExpression>
+           </sentence>
+          </proposition>
+          <justification>
+           <simpleJustification>
+            <schemeJustification>
+             <keyword spelling="from" line="120" col="17" />
+             <schemeReference>
+              <librarySchemeReference>
+               <articleName spelling="TARSKI_0" line="120" col="22" />
+               <keyword spelling=":" line="120" col="30" />
+               <keyword spelling="sch" line="120" col="31" />
+               <schemeNumber spelling="1" line="120" col="35" />
+              </librarySchemeReference>
+             </schemeReference>
+             <keyword spelling="(" line="120" col="36" />
+             <references>
+              <reference>
+               <localReference>
+                <labelIdentifier spelling="A1" line="120" col="37" />
+               </localReference>
+              </reference>
+             </references>
+             <keyword spelling=")" line="120" col="39" />
+            </schemeJustification>
+           </simpleJustification>
+          </justification>
+          <keyword spelling=";" line="120" col="40" />
+         </compactStatement>
+        </conclusion>
+       </skeletonItem>
+      </reasoningItem>
+     </reasoning>
+     <keyword spelling="end" line="121" col="3" />
+    </schemeBlock>
+    <keyword spelling=";" line="121" col="6" />
+   </schemeItem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="123" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="123" col="12" />
+       <qualifiedVariables>
+        <explicitlyQualifiedVariables>
+         <qualifiedSegment>
+          <variables>
+           <variableIdentifier spelling="x" line="123" col="16" />
+           <keyword spelling="," line="123" col="17" />
+           <variableIdentifier spelling="y" line="123" col="18" />
+          </variables>
+          <qualification>
+           <keyword spelling="be" line="123" col="20" />
+           <typeExpression>
+            <adjectiveCluster />
+            <radixTypeExpression>
+             <radixType>
+              <modeSymbol spelling="__M_object" line="123" col="23" />
+             </radixType>
+            </radixTypeExpression>
+           </typeExpression>
+          </qualification>
+         </qualifiedSegment>
+        </explicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="123" col="29" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <functorDefinition>
+       <keyword spelling="func" line="124" col="3" />
+       <functorPattern>
+        <leftFunctorBracket>
+         <keyword spelling="[" line="124" col="8" />
+        </leftFunctorBracket>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="x" line="124" col="9" />
+         </locus>
+         <keyword spelling="," line="124" col="10" />
+         <locus>
+          <variableIdentifier spelling="y" line="124" col="11" />
+         </locus>
+        </loci>
+        <rightFunctorBracket>
+         <keyword spelling="]" line="124" col="12" />
+        </rightFunctorBracket>
+       </functorPattern>
+       <specification>
+        <keyword spelling="-&gt;" line="124" col="14" />
+        <typeExpression>
+         <adjectiveCluster />
+         <radixTypeExpression>
+          <radixType>
+           <modeSymbol spelling="__M_object" line="124" col="17" />
+          </radixType>
+         </radixTypeExpression>
+        </typeExpression>
+       </specification>
+       <keyword spelling="equals" line="124" col="24" />
+       <definiens>
+        <simpleDefiniens>
+         <termExpression>
+          <unitaryTerm>
+           <leftFunctorBracket>
+            <keyword spelling="{" line="125" col="5" />
+           </leftFunctorBracket>
+           <termExpressionList>
+            <termExpression>
+             <unitaryTerm>
+              <leftFunctorBracket>
+               <keyword spelling="{" line="125" col="7" />
+              </leftFunctorBracket>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="125" col="9" />
+                </unitaryTerm>
+               </termExpression>
+               <keyword spelling="," line="125" col="10" />
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="y" line="125" col="11" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <rightFunctorBracket>
+               <keyword spelling="}" line="125" col="13" />
+              </rightFunctorBracket>
+             </unitaryTerm>
+            </termExpression>
+            <keyword spelling="," line="125" col="14" />
+            <termExpression>
+             <unitaryTerm>
+              <leftFunctorBracket>
+               <keyword spelling="{" line="125" col="16" />
+              </leftFunctorBracket>
+              <termExpressionList>
+               <termExpression>
+                <unitaryTerm>
+                 <variableIdentifier spelling="x" line="125" col="18" />
+                </unitaryTerm>
+               </termExpression>
+              </termExpressionList>
+              <rightFunctorBracket>
+               <keyword spelling="}" line="125" col="20" />
+              </rightFunctorBracket>
+             </unitaryTerm>
+            </termExpression>
+           </termExpressionList>
+           <rightFunctorBracket>
+            <keyword spelling="}" line="125" col="22" />
+           </rightFunctorBracket>
+          </unitaryTerm>
+         </termExpression>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="125" col="23" />
+       <correctnessConditions>
+        <correctnessCondition>
+         <keyword spelling="coherence" line="126" col="3" />
+         <justification>
+          <simpleJustification>
+           <straightforwardJustification />
+          </simpleJustification>
+         </justification>
+         <keyword spelling=";" line="126" col="12" />
+        </correctnessCondition>
+       </correctnessConditions>
+      </functorDefinition>
+     </definition>
+     <keyword spelling="end" line="127" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="127" col="4" />
+   </definitionalItem>
+  </textItem>
+  <textItem>
+   <definitionalItem>
+    <definitionalBlock>
+     <keyword spelling="definition" line="129" col="1" />
+     <definitionItem>
+      <lociDeclaration>
+       <keyword spelling="let" line="129" col="12" />
+       <qualifiedVariables>
+        <implicitlyQualifiedVariables>
+         <variables>
+          <variableIdentifier spelling="X" line="129" col="16" />
+          <keyword spelling="," line="129" col="17" />
+          <variableIdentifier spelling="Y" line="129" col="18" />
+         </variables>
+        </implicitlyQualifiedVariables>
+       </qualifiedVariables>
+       <keyword spelling=";" line="129" col="19" />
+      </lociDeclaration>
+     </definitionItem>
+     <definition>
+      <predicateDefinition>
+       <keyword spelling="pred" line="130" col="3" />
+       <predicatePattern>
+        <loci>
+         <locus>
+          <variableIdentifier spelling="X" line="130" col="8" />
+         </locus>
+         <keyword spelling="," line="130" col="9" />
+         <locus>
+          <variableIdentifier spelling="Y" line="130" col="10" />
+         </locus>
+        </loci>
+        <predicateSymbol spelling="__R_are_equipotent" line="130" col="12" />
+       </predicatePattern>
+       <keyword spelling="means" line="130" col="27" />
+       <definiens>
+        <simpleDefiniens>
+         <sentence>
+          <formulaExpression>
+           <quantifiedFormulaExpression>
+            <keyword spelling="ex" line="131" col="4" />
+            <qualifiedVariables>
+             <implicitlyQualifiedVariables>
+              <variables>
+               <variableIdentifier spelling="Z" line="131" col="7" />
+              </variables>
+             </implicitlyQualifiedVariables>
+            </qualifiedVariables>
+            <keyword spelling="st" line="131" col="9" />
+            <formulaExpression>
+             <formulaExpression>
+              <formulaExpression>
+               <keyword spelling="(" line="132" col="4" />
+               <formulaExpression>
+                <quantifiedFormulaExpression>
+                 <keyword spelling="for" line="132" col="5" />
+                 <qualifiedVariables>
+                  <implicitlyQualifiedVariables>
+                   <variables>
+                    <variableIdentifier spelling="x" line="132" col="9" />
+                   </variables>
+                  </implicitlyQualifiedVariables>
+                 </qualifiedVariables>
+                 <keyword spelling="st" line="132" col="11" />
+                 <formulaExpression>
+                  <atomicFormulaExpression>
+                   <termExpressionList>
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="x" line="132" col="14" />
+                     </unitaryTerm>
+                    </termExpression>
+                   </termExpressionList>
+                   <predicateSymbol spelling="__R_in" line="132" col="16" />
+                   <termExpressionList>
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="X" line="132" col="19" />
+                     </unitaryTerm>
+                    </termExpression>
+                   </termExpressionList>
+                  </atomicFormulaExpression>
+                 </formulaExpression>
+                 <quantifiedFormulaExpression>
+                  <keyword spelling="ex" line="132" col="21" />
+                  <qualifiedVariables>
+                   <implicitlyQualifiedVariables>
+                    <variables>
+                     <variableIdentifier spelling="y" line="132" col="24" />
+                    </variables>
+                   </implicitlyQualifiedVariables>
+                  </qualifiedVariables>
+                  <keyword spelling="st" line="132" col="26" />
+                  <formulaExpression>
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="y" line="132" col="29" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="132" col="31" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="Y" line="132" col="34" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                   <keyword spelling="&amp;" line="132" col="36" />
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <leftFunctorBracket>
+                         <keyword spelling="[" line="132" col="38" />
+                        </leftFunctorBracket>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="132" col="39" />
+                          </unitaryTerm>
+                         </termExpression>
+                         <keyword spelling="," line="132" col="40" />
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="y" line="132" col="41" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <rightFunctorBracket>
+                         <keyword spelling="]" line="132" col="42" />
+                        </rightFunctorBracket>
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="132" col="44" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="Z" line="132" col="47" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                  </formulaExpression>
+                 </quantifiedFormulaExpression>
+                </quantifiedFormulaExpression>
+               </formulaExpression>
+               <keyword spelling=")" line="132" col="48" />
+              </formulaExpression>
+              <keyword spelling="&amp;" line="132" col="50" />
+              <formulaExpression>
+               <keyword spelling="(" line="133" col="4" />
+               <formulaExpression>
+                <quantifiedFormulaExpression>
+                 <keyword spelling="for" line="133" col="5" />
+                 <qualifiedVariables>
+                  <implicitlyQualifiedVariables>
+                   <variables>
+                    <variableIdentifier spelling="y" line="133" col="9" />
+                   </variables>
+                  </implicitlyQualifiedVariables>
+                 </qualifiedVariables>
+                 <keyword spelling="st" line="133" col="11" />
+                 <formulaExpression>
+                  <atomicFormulaExpression>
+                   <termExpressionList>
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="y" line="133" col="14" />
+                     </unitaryTerm>
+                    </termExpression>
+                   </termExpressionList>
+                   <predicateSymbol spelling="__R_in" line="133" col="16" />
+                   <termExpressionList>
+                    <termExpression>
+                     <unitaryTerm>
+                      <variableIdentifier spelling="Y" line="133" col="19" />
+                     </unitaryTerm>
+                    </termExpression>
+                   </termExpressionList>
+                  </atomicFormulaExpression>
+                 </formulaExpression>
+                 <quantifiedFormulaExpression>
+                  <keyword spelling="ex" line="133" col="21" />
+                  <qualifiedVariables>
+                   <implicitlyQualifiedVariables>
+                    <variables>
+                     <variableIdentifier spelling="x" line="133" col="24" />
+                    </variables>
+                   </implicitlyQualifiedVariables>
+                  </qualifiedVariables>
+                  <keyword spelling="st" line="133" col="26" />
+                  <formulaExpression>
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="x" line="133" col="29" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="133" col="31" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="X" line="133" col="34" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                   <keyword spelling="&amp;" line="133" col="36" />
+                   <formulaExpression>
+                    <atomicFormulaExpression>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <leftFunctorBracket>
+                         <keyword spelling="[" line="133" col="38" />
+                        </leftFunctorBracket>
+                        <termExpressionList>
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="x" line="133" col="39" />
+                          </unitaryTerm>
+                         </termExpression>
+                         <keyword spelling="," line="133" col="40" />
+                         <termExpression>
+                          <unitaryTerm>
+                           <variableIdentifier spelling="y" line="133" col="41" />
+                          </unitaryTerm>
+                         </termExpression>
+                        </termExpressionList>
+                        <rightFunctorBracket>
+                         <keyword spelling="]" line="133" col="42" />
+                        </rightFunctorBracket>
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <predicateSymbol spelling="__R_in" line="133" col="44" />
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="Z" line="133" col="47" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                    </atomicFormulaExpression>
+                   </formulaExpression>
+                  </formulaExpression>
+                 </quantifiedFormulaExpression>
+                </quantifiedFormulaExpression>
+               </formulaExpression>
+               <keyword spelling=")" line="133" col="48" />
+              </formulaExpression>
+             </formulaExpression>
+             <keyword spelling="&amp;" line="133" col="50" />
+             <formulaExpression>
+              <quantifiedFormulaExpression>
+               <keyword spelling="for" line="134" col="4" />
+               <qualifiedVariables>
+                <implicitlyQualifiedVariables>
+                 <variables>
+                  <variableIdentifier spelling="x" line="134" col="8" />
+                  <keyword spelling="," line="134" col="9" />
+                  <variableIdentifier spelling="y" line="134" col="10" />
+                  <keyword spelling="," line="134" col="11" />
+                  <variableIdentifier spelling="z" line="134" col="12" />
+                  <keyword spelling="," line="134" col="13" />
+                  <variableIdentifier spelling="u" line="134" col="14" />
+                 </variables>
+                </implicitlyQualifiedVariables>
+               </qualifiedVariables>
+               <keyword spelling="st" line="134" col="16" />
+               <formulaExpression>
+                <formulaExpression>
+                 <atomicFormulaExpression>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <leftFunctorBracket>
+                      <keyword spelling="[" line="134" col="19" />
+                     </leftFunctorBracket>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="x" line="134" col="20" />
+                       </unitaryTerm>
+                      </termExpression>
+                      <keyword spelling="," line="134" col="21" />
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="y" line="134" col="22" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <rightFunctorBracket>
+                      <keyword spelling="]" line="134" col="23" />
+                     </rightFunctorBracket>
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                  <predicateSymbol spelling="__R_in" line="134" col="25" />
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="Z" line="134" col="28" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                 </atomicFormulaExpression>
+                </formulaExpression>
+                <keyword spelling="&amp;" line="134" col="30" />
+                <formulaExpression>
+                 <atomicFormulaExpression>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <leftFunctorBracket>
+                      <keyword spelling="[" line="134" col="32" />
+                     </leftFunctorBracket>
+                     <termExpressionList>
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="z" line="134" col="33" />
+                       </unitaryTerm>
+                      </termExpression>
+                      <keyword spelling="," line="134" col="34" />
+                      <termExpression>
+                       <unitaryTerm>
+                        <variableIdentifier spelling="u" line="134" col="35" />
+                       </unitaryTerm>
+                      </termExpression>
+                     </termExpressionList>
+                     <rightFunctorBracket>
+                      <keyword spelling="]" line="134" col="36" />
+                     </rightFunctorBracket>
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                  <predicateSymbol spelling="__R_in" line="134" col="38" />
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="Z" line="134" col="41" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                 </atomicFormulaExpression>
+                </formulaExpression>
+               </formulaExpression>
+               <keyword spelling="holds" line="134" col="43" />
+               <formulaExpression>
+                <formulaExpression>
+                 <atomicFormulaExpression>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="x" line="134" col="49" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                  <predicateSymbol>
+                   <keyword spelling="=" line="134" col="51" />
+                  </predicateSymbol>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="z" line="134" col="53" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                 </atomicFormulaExpression>
+                </formulaExpression>
+                <keyword spelling="iff" line="134" col="55" />
+                <formulaExpression>
+                 <atomicFormulaExpression>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="y" line="134" col="59" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                  <predicateSymbol>
+                   <keyword spelling="=" line="134" col="61" />
+                  </predicateSymbol>
+                  <termExpressionList>
+                   <termExpression>
+                    <unitaryTerm>
+                     <variableIdentifier spelling="u" line="134" col="63" />
+                    </unitaryTerm>
+                   </termExpression>
+                  </termExpressionList>
+                 </atomicFormulaExpression>
+                </formulaExpression>
+               </formulaExpression>
+              </quantifiedFormulaExpression>
+             </formulaExpression>
+            </formulaExpression>
+           </quantifiedFormulaExpression>
+          </formulaExpression>
+         </sentence>
+        </simpleDefiniens>
+       </definiens>
+       <keyword spelling=";" line="134" col="64" />
+       <correctnessConditions />
+      </predicateDefinition>
+     </definition>
+     <keyword spelling="end" line="135" col="1" />
+    </definitionalBlock>
+    <keyword spelling=";" line="135" col="4" />
+   </definitionalItem>
+  </textItem>
+ </section>
+</textProper>
