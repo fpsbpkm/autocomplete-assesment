@@ -8,8 +8,8 @@ import glob
 import codecs
 from completion import provide_items
 
-# 評価するn-gramの数を指定
-N = 3
+# 評価するn-gramの数を指定(2gramであれば，1にする)
+N = 1
 
 # def display_result(result):
 #     total = sum(result)
@@ -27,6 +27,7 @@ N = 3
 def assesment(token_list):
     items = []
     ranking = [0 for _ in range(31)]
+    
     for i in range(1, len(token_list)):
         # 予測候補と正解を取得
         items, answer = provide_items(token_list, i, N)

@@ -30,7 +30,9 @@ MML_VCT = os.path.join('.', DATA_DIR, 'mml.vct')
 MML_DIR = '/mnt/c/mizar/mml'
 data = {}
 
-N = 4
+N = 2
+# Trueのときに，変数を「___」に置き換える
+is_replaced_variable = False
 
 # 変数かどうかを判定する関数
 def is_variable(line,idx):
@@ -105,7 +107,7 @@ def count_ngram(tokens, n):
             # else:
             #     replaced_line.append(line[i])
 
-            if is_variable(line, i):
+            if is_variable(line, i) and is_replaced_variable:
                 replaced_line.append('___')
             else:
                 matched = re.match(r'__\w+_', line[i])
@@ -172,7 +174,7 @@ if __name__ == '__main__':
     result_list = [i[0] for i in result if i[1] >= 10]
     completions = {'completions': result_list}
 
-    with open('./output4_10.json', 'w') as f:
+    with open('./jsons/output2_10(replaced=False).json', 'w') as f:
         json.dump(completions, f)
 
     mml_lar.close()
