@@ -2,10 +2,10 @@ import json
 from learning import is_variable
 
 # N-gramの学習（カウント）ファイルを取得
-json_open2 = open("jsons/output2_10(replaced=False).json", 'r')
+json_open2 = open("jsons/output2.json", 'r')
 json_load2 = json.load(json_open2)
 
-json_open3 = open("jsons/output3_10.json", "r")
+json_open3 = open("jsons/output3.json", "r")
 json_load3 = json.load(json_open3)
 
 json_open4 = open("jsons/output4_10.json", "r")

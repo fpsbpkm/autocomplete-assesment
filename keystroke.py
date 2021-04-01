@@ -16,9 +16,9 @@ lexer = preprocess.Lexer()
 lexer.load_symbol_dict(MML_VCT)
 lexer.build_len2symbol()
 
-file_name = "/mnt/c/mizar/mml/lopban_9.miz"
+file_name = "/mnt/c/mizar/mml/diophan2.miz"
 
-N = 2
+N = 3
 
 def count_line_keystroke(token_list):
 
