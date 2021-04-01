@@ -3,6 +3,7 @@ import os
 import re
 import glob, json
 from pprint import pprint
+from get_voc import load_symbol_dict, parse_voc
 
 DATA_DIR = '/home/fpsbpkm/emparser/build/lib.linux-x86_64-3.7/emparser/data/'
 MML_VCT = os.path.join(DATA_DIR, 'mml.vct')
@@ -89,9 +90,12 @@ if __name__ == '__main__':
             for line in tokenized_lines:
                 tokens.append(line.split())
         
-        OUTPUT_DIR = "/home/fpsbpkm/emparser/build/lib.linux-x86_64-3.7/emparser/learning_data"
+        OUTPUT_DIR = "./learning_data"
         output_file = os.path.join(OUTPUT_DIR, filename)+'.json'
-        data = []
+        file_dict = {
+            "symbols":[],
+            "contents":[]
+        }
         # 「let x be Nat」の場合，
         # [(let, let), (x, variable), (Nat, M)]の形式にしたjsonファイルを作成
         for line in tokens:
@@ -101,8 +105,15 @@ if __name__ == '__main__':
                 token_type = check_token_type(line, i)
                 line_data.append([token, token_type])
             if line_data:
-                data.append(line_data)
+                file_dict["contents"].append(line_data)
         
+        filename = os.path.join(MML_DIR, filename+'.miz')
+        vocs = parse_voc(filename)
+        symbol_dict = load_symbol_dict(MML_VCT, vocs)
+
+        for key in symbol_dict:
+            file_dict["symbols"].append([key, '__'+symbol_dict[key]["type"]+'_'])
+
         with open(output_file, 'w') as f:
-            json.dump(data, f)
-        print(filename)
+            json.dump(file_dict, f)
+            print(filename)

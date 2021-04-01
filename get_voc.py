@@ -5,9 +5,10 @@ DATA_DIR = '/home/fpsbpkm/emparser/build/lib.linux-x86_64-3.7/emparser/data/'
 MML_VCT = os.path.join(DATA_DIR, 'mml.vct')
 MML_DIR = '/mnt/c/mizar/mml'
 
-symbol_dict = {}
+
 
 def load_symbol_dict(mml_vct, miz_files=None):
+    symbol_dict = {}
     if miz_files is not None:
         miz_files = set(miz_files)
         miz_files.add('HIDDEN')
@@ -33,10 +34,12 @@ def load_symbol_dict(mml_vct, miz_files=None):
             ignore_next_line = False
         elif len(line) > 0 and not ignore_this_file:
             # symbol is written in this line
-            load_symbol_in_line(line, filename)
+            load_symbol_in_line(line, filename, symbol_dict)
+        
+    return symbol_dict
 
 
-def load_symbol_in_line(line, filename):
+def load_symbol_in_line(line, filename, symbol_dict):
     """Read symbol written in a line of mml.vct file and add to symbol_dict.
     This function read one or two symbol written in a line of mml.vct file.
     The format example of mml.vct is shown at the comment of create_symbol_dict().
@@ -112,7 +115,7 @@ if __name__ == '__main__':
     filename = os.path.join(MML_DIR, "armstrng.miz")
     vocs = parse_voc(filename)
     # print(MML_VCT)
-    load_symbol_dict(MML_VCT, vocs)
+    symbol_dict = load_symbol_dict(MML_VCT, vocs)
     print(symbol_dict)
     for symbol in symbol_dict:
         if symbol_dict[symbol]["type"] == 'M':
