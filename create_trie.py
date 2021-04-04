@@ -15,11 +15,11 @@ class TrieNode:
         self.parent = {}
         self.keywords = set()
 
-    # def __repr__(self):
-    #     return self.name
+    def __repr__(self):
+        return self.name
 
     def __eq__(self, other):
-        print(other)
+        # otherは文字列
         return self.name == other.name
 
     def __hash__(self):
@@ -29,9 +29,12 @@ class TrieNode:
         self.children.add(node)
     
     def add_keyword(self, keyword):
-        if keyword in self.keywords:
-            keyword.increment()
-            pass
+        if keyword in self.get_keywords():
+            # 遅いため考え直すべき
+            for word in self.get_keywords():
+                if word == keyword:
+                    target = word
+            target.increment()
         else:
             self.keywords.add(keyword)
 
@@ -49,51 +52,63 @@ class Keyword:
     def __init__(self, type):
         self.type = type
         self.num = 1
+
+    def __repr__(self):
+        return self.type
+
+    def __eq__(self, other):
+        return self.type == other.type
+
+    def __hash__(self):
+        return hash(self.type)
     
     def increment(self):
         self.num += 1
+        print(f'type:{self.type}, num:{self.num}')
 
-
-
-prefix_tree = {}
 
 if __name__ == '__main__':
 
     with open(file_path) as f:
         json_loaded = json.load(f)
-        # print(json_loaded['symbols'])
         root = TrieNode('root')
         for line in json_loaded['contents']:
             length = len(line)
-            part_tree = prefix_tree
-
+            
+            # 短い階層は現状では考えない
             if length < N:
                 continue
+
             for idx in range(N-1, length):
                 token = line[idx][1]
+                parent_node = None
+                node = None
                 for j in range(idx-N+1, idx):
                     if j == idx-N+1:
                         parent_node = root
                     
-                    # 同名のノードが存在するか確認する必要がある
-                    # print(parent_node.get_children())
-                    if line[j][1] in parent_node.get_children():
-                        # print('exist!')
-                        continue
+                    # 同名のノードが存在すれば取得
+                    if TrieNode(line[j][1]) in parent_node.get_children():
+                        # 遅いため，あまりよろしくない
+                        for child in parent_node.get_children():
+                            if TrieNode(line[j][1]) == child:
+                                node = child
+                    # 同名のノードが存在しなければ生成
+                    else:
+                        node = TrieNode(line[j][1])
 
-                    node = TrieNode(line[j][1])
-                    # keyword = Keyword(line[j][1])
-                    # node.add_keyword(keyword)
+                    keyword = Keyword(token)
+                    parent_node.add_keyword(keyword)
+
                     parent_node.add_child(node)
                     parent_node = node
 
-                keyword = Keyword(token)
-                parent_node.add_keyword(keyword)
+                
 
     children = root.get_children()
     for child in children:
-        print(child.name)
-        # keywords = child.get_keywords()
-        # for k in keywords:
-        #     print(k.type, k.num, end='')
-        # print('')
+        print()
+        print(f'child:{child.name}')
+        keywords = child.get_keywords()
+        for word in keywords:
+            print(word.type, word.num)
