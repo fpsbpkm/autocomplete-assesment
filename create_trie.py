@@ -10,10 +10,11 @@ N = 4
 
 class TrieNode:
     def __init__(self, name):
-        self.name = name
-        self.children = set()
-        self.parent = {}
-        self.keywords = set()
+        # TODO:nameは辞書のキーに変更する
+        # self.name = name
+        self.children = dict()
+        self.parent = dict()
+        self.keywords = dict()
 
     def __repr__(self):
         return self.name
@@ -25,8 +26,9 @@ class TrieNode:
     def __hash__(self):
         return hash(self.name)
 
-    def add_child(self, node):
-        self.children.add(node)
+    def add_child(self, node_name, node):
+        self.children[node_name] = node
+        # self.children.add(node)
     
     def add_keyword(self, keyword):
         if keyword in self.get_keywords():
@@ -38,9 +40,6 @@ class TrieNode:
         else:
             self.keywords.add(keyword)
 
-    def get_name(self):
-        return self.name
-
     def get_children(self):
         return self.children
     
@@ -50,6 +49,7 @@ class TrieNode:
 
 class Keyword:
     def __init__(self, type):
+        # TODO:typeは辞書のキーに変更する
         self.type = type
         self.num = 1
 
@@ -66,6 +66,7 @@ class Keyword:
         self.num += 1
         # print(f'type:{self.type}, num:{self.num}')
 
+prefix_tree = {}
 
 if __name__ == '__main__':
     with open(file_path) as f:
@@ -99,7 +100,7 @@ if __name__ == '__main__':
                     keyword = Keyword(token)
                     node.add_keyword(keyword)
 
-                    parent_node.add_child(node)
+                    parent_node.add_child(, node)
                     parent_node = node    
 
     children = root.get_children()
