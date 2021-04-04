@@ -64,11 +64,10 @@ class Keyword:
     
     def increment(self):
         self.num += 1
-        print(f'type:{self.type}, num:{self.num}')
+        # print(f'type:{self.type}, num:{self.num}')
 
 
 if __name__ == '__main__':
-
     with open(file_path) as f:
         json_loaded = json.load(f)
         root = TrieNode('root')
@@ -83,13 +82,13 @@ if __name__ == '__main__':
                 token = line[idx][1]
                 parent_node = None
                 node = None
-                for j in range(idx-N+1, idx):
-                    if j == idx-N+1:
+                for j in reversed(range(idx-N+1, idx)):
+                    if j == idx-1:
                         parent_node = root
                     
                     # 同名のノードが存在すれば取得
                     if TrieNode(line[j][1]) in parent_node.get_children():
-                        # 遅いため，あまりよろしくない
+                        # 遅いため，よろしくない
                         for child in parent_node.get_children():
                             if TrieNode(line[j][1]) == child:
                                 node = child
@@ -98,17 +97,24 @@ if __name__ == '__main__':
                         node = TrieNode(line[j][1])
 
                     keyword = Keyword(token)
-                    parent_node.add_keyword(keyword)
+                    node.add_keyword(keyword)
 
                     parent_node.add_child(node)
-                    parent_node = node
-
-                
+                    parent_node = node    
 
     children = root.get_children()
+    cnt = 0
     for child in children:
+        cnt += 1
         print()
         print(f'child:{child.name}')
-        keywords = child.get_keywords()
-        for word in keywords:
-            print(word.type, word.num)
+        print(f'children:{vars(child)["children"]}')
+        # keywords = child.get_keywords()
+        # for word in keywords:
+        #     print(word.type, word.num)
+        # g_children = child.get_children()
+        # for g_child in g_children:
+        #     print(f'g_child:{g_child}')
+        # break
+
+print(cnt)
