@@ -75,11 +75,6 @@ if __name__ == '__main__':
         root = TrieNode('root')
         for line in json_loaded['contents']:
             length = len(line)
-            
-            # 短い階層は現状では考えない
-            # if length < N:
-            #     continue
-
             for idx in range(1, length):
                 token = line[idx][1]
                 parent_node = None
@@ -137,11 +132,12 @@ def predict(text):
             tree = tree.children[token]
         else:
             print("nothing")
-            break
+            return
     print(tree.keywords)
     
 
 predict(["let", "x", "be"])
-predict(["the", "carrier", "of"])
 predict(["redefine", "attr", "x"])
 predict(["let", "x"])
+predict(["let"])
+predict(["assume"])
