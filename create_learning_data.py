@@ -34,7 +34,7 @@ NUMBERS = set(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"])
 
 
 def is_reserved_word(word):
-    if word in RESERVED_WORDS or token in SPECIAL_SYMBOLS:
+    if word in RESERVED_WORDS or word in SPECIAL_SYMBOLS:
         return True
     else:
         return False

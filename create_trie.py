@@ -1,6 +1,7 @@
 import os
 import json
 from pprint import pprint
+from create_learning_data import check_token_type
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -11,7 +12,7 @@ N = 4
 class TrieNode:
     def __init__(self, name):
         # TODO:nameは辞書のキーに変更する
-        # self.name = name
+        self.name = name
         self.children = dict()
         self.parent = dict()
         self.keywords = dict()
@@ -76,40 +77,47 @@ if __name__ == '__main__':
             length = len(line)
             
             # 短い階層は現状では考えない
-            if length < N:
-                continue
+            # if length < N:
+            #     continue
 
-            for idx in range(N-1, length):
+            for idx in range(1, length):
                 token = line[idx][1]
                 parent_node = None
                 node = None
-                for j in reversed(range(idx-N+1, idx)):
+                diff = 0
+                if idx-N+1 < 0:
+                    diff = abs(idx-N+1)
+
+                for j in reversed(range(idx-N+1+diff, idx)):
                     if j == idx-1:
                         parent_node = root
-                    
+                    node_name = line[j][1]
                     # 同名のノードが存在すれば取得
-                    if TrieNode(line[j][1]) in parent_node.get_children():
-                        # 遅いため，よろしくない
-                        for child in parent_node.get_children():
-                            if TrieNode(line[j][1]) == child:
-                                node = child
+                    if node_name in parent_node.children:
+                        node = parent_node.children[node_name]
                     # 同名のノードが存在しなければ生成
                     else:
-                        node = TrieNode(line[j][1])
+                        node = TrieNode(node_name)
 
-                    keyword = Keyword(token)
-                    node.add_keyword(keyword)
+                    if token in node.keywords:
+                        node.keywords[token] += 1
+                    else:
+                        node.keywords[token] = 1
 
-                    parent_node.add_child(, node)
+                    parent_node.add_child(node_name, node)
+                    node.parent[parent_node.name] = parent_node
                     parent_node = node    
 
-    children = root.get_children()
+    nodes = root.get_children()
     cnt = 0
-    for child in children:
+    for node_key in nodes:
         cnt += 1
-        print()
-        print(f'child:{child.name}')
-        print(f'children:{vars(child)["children"]}')
+        # print()
+        # print(f'parent:{nodes[node_key].parent}')
+
+        # print(f'children:{vars(nodes[node_key])["children"]}')
+        # print(f'node:{nodes[node_key].name}')
+        # print(f'keywords:{nodes[node_key].keywords}')
         # keywords = child.get_keywords()
         # for word in keywords:
         #     print(word.type, word.num)
@@ -118,4 +126,22 @@ if __name__ == '__main__':
         #     print(f'g_child:{g_child}')
         # break
 
-print(cnt)
+def predict(text):
+    tree = root
+    n = len(text)+1
+    token_list = text[::-1]
+
+    for i in range(n-1):
+        token = check_token_type(token_list, i)
+        if token in tree.children:
+            tree = tree.children[token]
+        else:
+            print("nothing")
+            break
+    print(tree.keywords)
+    
+
+predict(["let", "x", "be"])
+predict(["the", "carrier", "of"])
+predict(["redefine", "attr", "x"])
+predict(["let", "x"])
