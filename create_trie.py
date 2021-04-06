@@ -115,11 +115,12 @@ def assess_keystroke(file_name):
 
     
 if __name__ == '__main__':
+    # create()
     with open ('trie_root', 'rb') as f:
         tree = pickle.load(f)
     predict(["let", "x", "be"], tree)
     # predict(["redefine", "attr", "a"], tree)
     # predict(["let", "x"], tree)
-    # predict(["suppose"], tree)
+    predict(["the"], tree)
     predict(["assume", "x"], tree)
     # predict(["__label_"], tree)
