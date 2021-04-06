@@ -41,7 +41,6 @@ def is_reserved_word(word):
 
 def check_token_type(line,idx):
     token = line[idx]
-    # \wにアンダーバーが含まれるため，不具合が怒っている
     matched = re.match(r'__\w_', token)
     # NOTE:ラベル以降の判定が正しくない
     if matched:

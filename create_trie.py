@@ -3,11 +3,12 @@ import json
 import pickle
 from pprint import pprint
 from create_learning_data import check_token_type
-
+from get_voc import parse_voc, load_symbol_dict
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
 MML_DIR = '/mnt/c/mizar/mml'
+MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
 N = 4
@@ -101,10 +102,16 @@ def predict(text, tree):
         else:
             print("nothing")
             return
+    sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
     print(f'input:{text}')
-    print(f'output:{tree.keywords}')
+    print(f'output:{sorted_keywords}')
     print()
 
+    for keyword in sorted_keywords:
+        if keyword == '__M_':
+            pass
+        else:
+            pass
 
 def assess_acuracy(file_name):
     pass
@@ -113,14 +120,31 @@ def assess_keystroke(file_name):
     pass
 
 
+def create_type_to_symbols(symbol_dict):
+    type_to_symbols = {}
+    for key in symbol_dict:
+        symbol_type = symbol_dict[key]['type']
+        
+        if not symbol_type in type_to_symbols:
+            type_to_symbols[symbol_type] = [key]
+        else:
+            type_to_symbols[symbol_type].append(key)
+    
+    return type_to_symbols
+
     
 if __name__ == '__main__':
     # create()
+    file_name = os.path.join(MML_DIR, "armstrng.miz")
+    vocs = parse_voc(file_name)
+    symbol_dict = load_symbol_dict(MML_VCT, vocs)
+    type_to_symbols = create_type_to_symbols(symbol_dict)
+    pprint(type_to_symbols)
     with open ('trie_root', 'rb') as f:
         tree = pickle.load(f)
-    predict(["let", "x", "be"], tree)
+    # predict(["let", "x", "be"], tree)
     # predict(["redefine", "attr", "a"], tree)
     # predict(["let", "x"], tree)
-    predict(["the"], tree)
-    predict(["assume", "x"], tree)
+    # predict(["ex", "x"], tree)
+    # predict(["assume", "x"], tree)
     # predict(["__label_"], tree)
