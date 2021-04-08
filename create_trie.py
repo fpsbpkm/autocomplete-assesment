@@ -4,6 +4,7 @@ import pickle
 from pprint import pprint
 from create_learning_data import check_token_type
 from get_voc import parse_voc, load_symbol_dict
+import preprocess
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -15,7 +16,6 @@ N = 4
 
 class TrieNode:
     def __init__(self, name):
-        # TODO:nameは辞書のキーに変更する
         self.name = name
         self.children = dict()
         self.parent = dict()
@@ -42,7 +42,7 @@ class TrieCompleteManager:
     def __init__(self):
         self.root = None
         self.file_name = None
-        self.symbols = None
+        self.type_to_symbols = None
     
     def setup(self):
         try:
@@ -50,27 +50,28 @@ class TrieCompleteManager:
                 self.root = pickle.load(f)
         except:
             self.create()
-
-    def create(self):
+    
+    # mmlをスキャンし，引数のメソッドを順に実行する
+    def scan_files(self, start, end, execute_method):
+        self.root = TrieNode('root')
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
             mml.append(os.path.join('./learning_data', i.replace('\n', '.json')))
         mml_lar.close()
-
-        # mml = [os.path.join('./learning_data', 'abcmiz_0.json')]
-        self.root = TrieNode('root')
-        for file_path in mml[:1100]:
+        for file_path in mml[start:end]:
             print(file_path)
             self.file_name = file_path
             try:
-                self.create_one_file_trie()
+                execute_method()
             except Exception as e:
                 print(e)
                 continue
-
-            with open('./trie_root', 'wb') as f:
-                pickle.dump(self.root, f)
+    
+    def create(self):
+        self.scan_files(0, 1100, self.create_one_file_trie)
+        with open('./trie_root', 'wb') as f:
+            pickle.dump(self.root, f)
 
     def create_one_file_trie(self):
         json_loaded = None
@@ -103,42 +104,44 @@ class TrieCompleteManager:
                     node.set_parent(parent_node)
                     parent_node = node
 
-    # 「__M_」などを具体的に，優先度をつけて提案できるように
-    def predict(self, text):
-        n = len(text)+1
-        tree = self.root
 
-        if n > N:
-            n = N
+    def create_type_to_symbols(self):
+        lexer = preprocess.Lexer()
+        lexer.load_symbol_dict(MML_VCT)
+        lexer.build_len2symbol()
 
-        token_list = text[::-1]
+        with open(self.file_name, 'r') as f:
+            try:
+                lines = f.readlines()
+                assert len(lines) > 0
+            except:
+                print("Error!")
+        
+        env_lines, text_proper_lines = lexer.separate_env_and_text_proper(lines)
+        env_lines = lexer.remove_comment(env_lines)
+        env_tokenized_lines, position_map = lexer.lex(env_lines)
+        
+        env_tokens = []
+        for line in env_tokenized_lines:
+            if line == '':
+                continue
+            # print(line)
+            env_tokens.append(line.split())
 
-        for i in range(n-1):
-            token = check_token_type(token_list, i)
-            if token in tree.children:
-                tree = tree.children[token]
-            else:
-                print("nothing")
-                return
-        sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
-        print(f'input:{text}')
-        print(f'output:{sorted_keywords}')
-        print()
+        # print(env_tokens)
+        voc_flag = False
+        vocs = []
+        for line in env_tokens:
+            for token in line:
+                if token == 'vocabularies':
+                    voc_flag = True
+                if voc_flag and token == ';':
+                    voc_flag = False
+                if voc_flag and not token == ',' and not token == 'vocabularies':
+                    vocs.append(token)
+        symbol_dict = load_symbol_dict(MML_VCT, vocs)
 
-        for keyword in sorted_keywords:
-            if keyword == '__M_':
-                pass
-            else:
-                pass
-
-    def assess_acuracy(self, file_name):
-        pass
-
-    def assess_keystroke(self, file_name):
-        pass
-
-
-    def create_type_to_symbols(self, symbol_dict):
+        # symbol_dictからtype_to_symbolsを生成
         type_to_symbols = {}
         for key in symbol_dict:
             symbol_type = symbol_dict[key]['type']
@@ -147,8 +150,55 @@ class TrieCompleteManager:
                 type_to_symbols[symbol_type] = [key]
             else:
                 type_to_symbols[symbol_type].append(key)
+        self.type_to_symbols = type_to_symbols
+        print(self.type_to_symbols)
+
+    # 「__M_」などを具体的に，優先度をつけて提案できるように
+    def predict(self, user_input):
+        n = len(user_input)
+        tree = self.root
         
-        return type_to_symbols
+        if n > N:
+            n = N
+
+        token_list = user_input[::-1]
+
+        for i in range(n):
+            token = check_token_type(token_list, i)
+            if token in tree.children:
+                tree = tree.children[token]
+            else:
+                print("nothing")
+                return []
+        sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
+        print(f'input:{user_input}')
+        print(f'output:{sorted_keywords}')
+        print()
+
+        suggest_keywords = []
+
+        for keyword in sorted_keywords:
+            if keyword == '__M_':
+                suggest_keywords.extend(self.type_to_symbols['M'])
+            else:
+                pass
+
+    def assess_acuracy(self):
+        self.scan_files(1100, 1355, self.assess_one_file_acuracy)
+
+    def assess_one_file_acuracy(self):
+        self.create_type_to_symbols()
+        items = []
+        ranking = [0 for _ in range(31)]
+
+        pass
+
+    def assess_keystroke(self):
+        self.scan_files(1100, 1355, self.assess_one_file_keystroke)
+
+    def assess_one_file_keystroke(self):
+        self.create_type_to_symbols()
+        pass
 
     
 if __name__ == '__main__':
@@ -160,5 +210,3 @@ if __name__ == '__main__':
     # symbol_dict = load_symbol_dict(MML_VCT, vocs)
     # type_to_symbols = create_type_to_symbols(symbol_dict)
     # pprint(type_to_symbols)
-
-
