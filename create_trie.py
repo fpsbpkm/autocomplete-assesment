@@ -5,6 +5,7 @@ from pprint import pprint
 from create_learning_data import check_token_type
 from get_voc import parse_voc, load_symbol_dict
 import preprocess
+import re
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -125,10 +126,8 @@ class TrieCompleteManager:
         for line in env_tokenized_lines:
             if line == '':
                 continue
-            # print(line)
             env_tokens.append(line.split())
 
-        # print(env_tokens)
         voc_flag = False
         vocs = []
         for line in env_tokens:
@@ -151,10 +150,11 @@ class TrieCompleteManager:
             else:
                 type_to_symbols[symbol_type].append(key)
         self.type_to_symbols = type_to_symbols
-        print(self.type_to_symbols)
 
     # 「__M_」などを具体的に，優先度をつけて提案できるように
     def predict(self, user_input):
+        variables = []
+        labels = []
         n = len(user_input)
         tree = self.root
         
@@ -162,44 +162,100 @@ class TrieCompleteManager:
             n = N
 
         token_list = user_input[::-1]
-
+        # print(f"user_input:{user_input}")
         for i in range(n):
             token = check_token_type(token_list, i)
+            # ユーザが利用している変数を保存しておく
+            if token == '__variable_':
+                variables.append(token_list[i])
+            elif token == '__label_':
+                labels.append(token_list[i])
+
             if token in tree.children:
                 tree = tree.children[token]
             else:
-                print("nothing")
-                return []
+                # print("nothing")
+                return {}
         sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
-        print(f'input:{user_input}')
-        print(f'output:{sorted_keywords}')
-        print()
 
-        suggest_keywords = []
-
+        # {キーワード:優先度}の形式で保存する
+        # 例：{"be":1, "being":2}
+        suggest_keywords = {}
+        cnt = 1
         for keyword in sorted_keywords:
-            if keyword == '__M_':
-                suggest_keywords.extend(self.type_to_symbols['M'])
+            # 「_\w__」の条件で，正規表現を使う
+            matched = re.match(r'__(\w)_', keyword[0])
+            if matched:
+                symbol_type = matched.groups()[0]
+                # print(f"symbol_type:{symbol_type}")
+                if symbol_type is None:
+                    return {}
+                for word in self.type_to_symbols[symbol_type[0]]:
+                    suggest_keywords[word] = cnt
+                    cnt += 1
+                # FIXME:下は一時的なコード
+                # suggest_keywords[keyword[0]] = cnt
+                # cnt += 1
+            elif keyword[0] == '__variable_':
+                # 最も最近出てきた変数を提案する
+                for v in variables[::-1]:
+                    suggest_keywords[v] = cnt
+                    cnt += 1
+            elif keyword[0] == '__label_':
+                # 最も最近出てきたラベルを提案する
+                for l in labels[::-1]:
+                    suggest_keywords[l] = cnt
+                    cnt += 1
             else:
-                pass
+                suggest_keywords[keyword[0]] = cnt
+                cnt += 1
+        # print(suggest_keywords)
+        return suggest_keywords
 
     def assess_acuracy(self):
         self.scan_files(1100, 1355, self.assess_one_file_acuracy)
 
     def assess_one_file_acuracy(self):
-        self.create_type_to_symbols()
+        # jsonファイルからsymbolsを読みだすだけで良い
+        # self.create_type_to_symbols()
         json_loaded = None
+        right_answer_nums = [0 for _ in range(30)]
+
         with open(self.file_name, 'r') as f:
             json_loaded = json.load(f)
-
+        self.type_to_symbols = json_loaded['symbols']
+        prediction_cnt = 0
+        tmp_cnt = 0
         for line in json_loaded['contents']:
-            for i in range(1, len(line)):
+            line_tokens= []
+            for token in line:
+                # tokenは["x", "__variable_"]のようになっている
+                # 予測プログラムには生のトークンを入力する
+                line_tokens.append(token[0])
+
+            for i in range(1, len(line_tokens)):
+                # 最大でN-1トークンを切り出す
                 if i > N:
-                    user_input = line[i-N:i]
+                    user_input = line_tokens[i-N+1:i]
                 else:
-                    user_input = line[:i]
-                answer = line[i][1]
-    
+                    user_input = line_tokens[:i]
+                
+                answer = line[i][0]
+                suggest_keywords = self.predict(user_input)
+                prediction_cnt += 1
+
+                # pprint(f'answer:{answer}, suggests:{suggest_keywords}')
+                
+                if answer in suggest_keywords:
+                    tmp_cnt += 1
+
+                # 30候補以内であればインクリメント
+                if answer in suggest_keywords and suggest_keywords[answer] <= 30:
+                    rank = suggest_keywords[answer]
+                    right_answer_nums[rank-1] += 1
+        print(tmp_cnt)
+        print(prediction_cnt)
+        return right_answer_nums
 
     def assess_keystroke(self):
         self.scan_files(1100, 1355, self.assess_one_file_keystroke)
@@ -212,9 +268,10 @@ class TrieCompleteManager:
 if __name__ == '__main__':
     complete_manager = TrieCompleteManager()
     complete_manager.setup()
-    complete_manager.predict(["let", "x", "be"])
-    # file_name = os.path.join(MML_DIR, "armstrng.miz")
-    # vocs = parse_voc(file_name)
-    # symbol_dict = load_symbol_dict(MML_VCT, vocs)
-    # type_to_symbols = create_type_to_symbols(symbol_dict)
-    # pprint(type_to_symbols)
+    
+    
+    complete_manager.file_name = "./learning_data/abcmiz_1.json"
+    result = complete_manager.assess_one_file_acuracy()
+    print(result)
+
+    # complete_manager.predict(["let", "x", "be"])

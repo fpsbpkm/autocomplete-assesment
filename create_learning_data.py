@@ -93,7 +93,7 @@ if __name__ == '__main__':
         OUTPUT_DIR = "./learning_data"
         output_file = os.path.join(OUTPUT_DIR, filename)+'.json'
         file_dict = {
-            "symbols":[],
+            "symbols":{},
             "contents":[]
         }
         # 「let x be Nat」の場合，
@@ -111,8 +111,17 @@ if __name__ == '__main__':
         vocs = parse_voc(filename)
         symbol_dict = load_symbol_dict(MML_VCT, vocs)
 
+        type_to_symbols = {}
         for key in symbol_dict:
-            file_dict["symbols"].append([key, '__'+symbol_dict[key]["type"]+'_'])
+            symbol_type = symbol_dict[key]['type']
+            
+            if not symbol_type in type_to_symbols:
+                type_to_symbols[symbol_type] = [key]
+            else:
+                type_to_symbols[symbol_type].append(key)
+        
+        for symbol_type in type_to_symbols:
+            file_dict['symbols'][symbol_type] = type_to_symbols[symbol_type]
 
         with open(output_file, 'w') as f:
             json.dump(file_dict, f)
