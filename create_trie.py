@@ -188,10 +188,18 @@ class TrieCompleteManager:
 
     def assess_one_file_acuracy(self):
         self.create_type_to_symbols()
-        items = []
-        ranking = [0 for _ in range(31)]
+        json_loaded = None
+        with open(self.file_name, 'r') as f:
+            json_loaded = json.load(f)
 
-        pass
+        for line in json_loaded['contents']:
+            for i in range(1, len(line)):
+                if i > N:
+                    user_input = line[i-N:i]
+                else:
+                    user_input = line[:i]
+                answer = line[i][1]
+    
 
     def assess_keystroke(self):
         self.scan_files(1100, 1355, self.assess_one_file_keystroke)
