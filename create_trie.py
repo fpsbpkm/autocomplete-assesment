@@ -13,7 +13,7 @@ MML_DIR = '/mnt/c/mizar/mml'
 MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
-N = 4
+N = 3
 
 class TrieNode:
     def __init__(self, name):
@@ -248,11 +248,14 @@ class TrieCompleteManager:
                 
                 if answer in suggest_keywords:
                     tmp_cnt += 1
+                    rank = suggest_keywords[answer]
+                    print(answer, rank)
 
                 # 30候補以内であればインクリメント
                 if answer in suggest_keywords and suggest_keywords[answer] <= 30:
                     rank = suggest_keywords[answer]
                     right_answer_nums[rank-1] += 1
+                    
         print(tmp_cnt)
         print(prediction_cnt)
         return right_answer_nums
@@ -270,7 +273,7 @@ if __name__ == '__main__':
     complete_manager.setup()
     
     
-    complete_manager.file_name = "./learning_data/abcmiz_1.json"
+    complete_manager.file_name = "./learning_data/yellow19.json"
     result = complete_manager.assess_one_file_acuracy()
     print(result)
 
