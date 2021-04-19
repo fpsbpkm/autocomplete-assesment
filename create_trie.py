@@ -158,16 +158,19 @@ class TrieCompleteManager:
         n = len(user_input)
         tree = self.root
         
+        # カーソル直前のトークン数
         if n > N:
             n = N
 
         token_list = user_input[::-1]
+        # print(token_list)
         # print(f"user_input:{user_input}")
         for i in range(n):
             token = check_token_type(token_list, i)
             # ユーザが利用している変数を保存しておく
             if token == '__variable_':
                 variables.append(token_list[i])
+                print(f'variables:{variables}')
             elif token == '__label_':
                 labels.append(token_list[i])
 
@@ -183,29 +186,34 @@ class TrieCompleteManager:
         suggest_keywords = {}
         cnt = 1
         for keyword in sorted_keywords:
-            # 「_\w__」の条件で，正規表現を使う
             matched = re.match(r'__(\w)_', keyword[0])
             if matched:
                 symbol_type = matched.groups()[0]
                 # print(f"symbol_type:{symbol_type}")
                 if symbol_type is None:
                     return {}
+
+                # importしていない種類が提案された場合は考えない
+                if not symbol_type in self.type_to_symbols:
+                    continue
+
                 for word in self.type_to_symbols[symbol_type[0]]:
                     suggest_keywords[word] = cnt
                     cnt += 1
-                # FIXME:下は一時的なコード
-                # suggest_keywords[keyword[0]] = cnt
-                # cnt += 1
             elif keyword[0] == '__variable_':
-                # 最も最近出てきた変数を提案する
-                for v in variables[::-1]:
-                    suggest_keywords[v] = cnt
-                    cnt += 1
+                # FIXME:変数の判別ができていない，1つしか提案できていない
+                # for v in variables[::-1]:
+                #     suggest_keywords[v] = cnt
+                #     cnt += 1
+                # suggest_keywords['x'] = cnt
+                # cnt += 1
+                pass
             elif keyword[0] == '__label_':
-                # 最も最近出てきたラベルを提案する
-                for l in labels[::-1]:
-                    suggest_keywords[l] = cnt
-                    cnt += 1
+                # FIXME:変数と同様
+                # for l in labels[::-1]:
+                #     suggest_keywords[l] = cnt
+                #     cnt += 1
+                pass
             else:
                 suggest_keywords[keyword[0]] = cnt
                 cnt += 1
@@ -216,7 +224,6 @@ class TrieCompleteManager:
         self.scan_files(1100, 1355, self.assess_one_file_acuracy)
 
     def assess_one_file_acuracy(self):
-        # jsonファイルからsymbolsを読みだすだけで良い
         # self.create_type_to_symbols()
         json_loaded = None
         right_answer_nums = [0 for _ in range(30)]
@@ -225,7 +232,7 @@ class TrieCompleteManager:
             json_loaded = json.load(f)
         self.type_to_symbols = json_loaded['symbols']
         prediction_cnt = 0
-        tmp_cnt = 0
+        in_suggest_cnt = 0
         for line in json_loaded['contents']:
             line_tokens= []
             for token in line:
@@ -234,31 +241,34 @@ class TrieCompleteManager:
                 line_tokens.append(token[0])
 
             for i in range(1, len(line_tokens)):
-                # 最大でN-1トークンを切り出す
-                if i > N:
+                # 最大でN-1トークンを切り出す，iのトークンを予測
+                if i >= N:
                     user_input = line_tokens[i-N+1:i]
                 else:
                     user_input = line_tokens[:i]
                 
                 answer = line[i][0]
+                
                 suggest_keywords = self.predict(user_input)
+                # print(f'user_input:{user_input}')
+                # print(f'answer:{answer}')
+                # print(f'suggests:{suggest_keywords}')
                 prediction_cnt += 1
 
                 # pprint(f'answer:{answer}, suggests:{suggest_keywords}')
                 
                 if answer in suggest_keywords:
-                    tmp_cnt += 1
+                    in_suggest_cnt += 1
                     rank = suggest_keywords[answer]
-                    print(answer, rank)
+                    # print(answer, rank)
 
                 # 30候補以内であればインクリメント
                 if answer in suggest_keywords and suggest_keywords[answer] <= 30:
                     rank = suggest_keywords[answer]
                     right_answer_nums[rank-1] += 1
-                    
-        print(tmp_cnt)
-        print(prediction_cnt)
-        return right_answer_nums
+                # print(f'input:{user_input}')
+                # print(f'suggest:{suggest_keywords}')
+        return right_answer_nums, in_suggest_cnt, prediction_cnt
 
     def assess_keystroke(self):
         self.scan_files(1100, 1355, self.assess_one_file_keystroke)
@@ -272,9 +282,8 @@ if __name__ == '__main__':
     complete_manager = TrieCompleteManager()
     complete_manager.setup()
     
-    
-    complete_manager.file_name = "./learning_data/yellow19.json"
-    result = complete_manager.assess_one_file_acuracy()
-    print(result)
-
-    # complete_manager.predict(["let", "x", "be"])
+    complete_manager.file_name = "./learning_data/abian.json"
+    ranking, in_suggest_cnt, total = complete_manager.assess_one_file_acuracy()
+    print(ranking, in_suggest_cnt, total)
+    print(f'sum:{sum(ranking)}')
+    # print(complete_manager.predict(["x", "be"]))
