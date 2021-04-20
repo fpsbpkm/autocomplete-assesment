@@ -7,6 +7,7 @@ from get_voc import parse_voc, load_symbol_dict
 import preprocess
 import re
 import numpy as np
+import matplotlib.pyplot as plt
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -56,7 +57,7 @@ class TrieCompleteManager:
     
     # mmlをスキャンし，引数のメソッドを順に実行する
     def apply_all_files(self, start, end, method_name):
-        self.root = TrieNode('root')
+        # self.root = TrieNode('root')
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
@@ -69,7 +70,6 @@ class TrieCompleteManager:
                 assess_file_manager = OneFileAssessManager(file_path)
                 if method_name == 'acuracy':
                     accuracy, tmp, prediction_times = assess_file_manager.assess_file_acuracy(self)
-                    print(accuracy)
                     self.accuracy += np.array(accuracy)
                     self.prediction_time +=  prediction_times
                 elif method_name == 'keystroke':
@@ -209,6 +209,30 @@ class TrieCompleteManager:
 
     def assess_mml_acuracy(self):
         self.apply_all_files(1100, 1355, 'acuracy')
+        # 測定後の精度を作成
+        self.draw()
+
+    # assess_mml_acuracyからの呼び出しのみを想定
+    def draw(self):
+        title = str(N)+'-gram(trie)'
+        plt.title(title)
+        plt.xlabel('Ranking')
+        plt.ylabel('Correct answer rate (cumulated) [%]')
+        plt.ylim(0, 100)
+        plt.grid(True)
+
+        # 精度測定後に自動で
+        result = self.accuracy
+        total = self.prediction_time
+
+        left = np.array([i+1 for i in range(len(result))])
+        height = np.array(result.cumsum()/total) * 100
+        plt.bar(left[:-2], height[:-2])
+        count = 0
+        for x, y in zip(left[:-2], height[:-2]):
+            plt.text(x, y, str(int(round(height[count], 0))), ha='center', va='bottom', fontsize=7)
+            count += 1
+        plt.savefig(f'graphs/{title}.jpg')
         
 
 
@@ -261,7 +285,7 @@ class OneFileAssessManager:
                     right_answer_nums[rank-1] += 1
                 # print(f'input:{user_input}')
                 # print(f'suggest:{suggest_keywords}')
-        print(right_answer_nums, in_suggest_cnt, prediction_cnt)
+        print(trie_manager.accuracy, trie_manager.prediction_time)
         return right_answer_nums, in_suggest_cnt, prediction_cnt
 
 
@@ -300,8 +324,9 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    trie_manager.assess_mml_acuracy()
-    print(trie_manager.accuracy, trie_manager.prediction_time)
+    # trie_manager.assess_mml_acuracy()
+    # print(trie_manager.accuracy, trie_manager.prediction_time)
+
 
     # file_manager = OneFileAssessManager('./learning_data/abcmiz_0.json')
     # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
