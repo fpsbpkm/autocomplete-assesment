@@ -6,6 +6,7 @@ from create_learning_data import check_token_type
 from get_voc import parse_voc, load_symbol_dict
 import preprocess
 import re
+import numpy as np
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -42,18 +43,19 @@ class TrieCompleteManager:
 
     def __init__(self):
         self.root = None
-        self.file_name = None
-        self.type_to_symbols = None
+        self.accuracy = np.array([0 for _ in range(30)])
+        self.prediction_time = 0
+        self.setup()
     
     def setup(self):
         try:
-            with open ('trie_root', 'rb') as f:
+            with open('trie_root', 'rb') as f:
                 self.root = pickle.load(f)
         except:
             self.create()
     
     # mmlをスキャンし，引数のメソッドを順に実行する
-    def scan_files(self, start, end, execute_method):
+    def apply_all_files(self, start, end, method_name):
         self.root = TrieNode('root')
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
@@ -62,49 +64,30 @@ class TrieCompleteManager:
         mml_lar.close()
         for file_path in mml[start:end]:
             print(file_path)
-            self.file_name = file_path
+            # ファイルが存在しない可能性がある，存在しない場合はスキップ
             try:
-                execute_method()
+                assess_file_manager = OneFileAssessManager(file_path)
+                if method_name == 'acuracy':
+                    accuracy, tmp, prediction_times = assess_file_manager.assess_file_acuracy(self)
+                    print(accuracy)
+                    self.accuracy += np.array(accuracy)
+                    self.prediction_time +=  prediction_times
+                elif method_name == 'keystroke':
+                    assess_file_manager.assess_file_keystroke(self)
+                elif method_name == 'create':
+                    assess_file_manager.create_one_file_trie(self)
+                    
+                # 拡張する場合は以下に処理を記述
+                else:
+                    pass
             except Exception as e:
                 print(e)
                 continue
     
     def create(self):
-        self.scan_files(0, 1100, self.create_one_file_trie)
+        self.apply_all_files(0, 1100, 'create')
         with open('./trie_root', 'wb') as f:
             pickle.dump(self.root, f)
-
-    def create_one_file_trie(self):
-        json_loaded = None
-        with open(self.file_name) as f:
-            json_loaded = json.load(f)
-        for line in json_loaded['contents']:
-            length = len(line)
-            for idx in range(1, length):
-                token = line[idx][1]
-                parent_node = None
-                node = None
-                diff = 0
-                if idx-N+1 < 0:
-                    diff = abs(idx-N+1)
-                for j in reversed(range(idx-N+1+diff, idx)):
-                    if j == idx-1:
-                        parent_node = self.root
-                    node_name = line[j][1]
-                    # 既に同名のノードが存在すれば取得
-                    if node_name in parent_node.children:
-                        node = parent_node.children[node_name]
-                    # 同名のノードが存在しなければ生成
-                    else:
-                        node = TrieNode(node_name)
-                    if token in node.keywords:
-                        node.keywords[token] += 1
-                    else:
-                        node.keywords[token] = 1
-                    parent_node.add_child(node)
-                    node.set_parent(parent_node)
-                    parent_node = node
-
 
     def create_type_to_symbols(self):
         lexer = preprocess.Lexer()
@@ -152,7 +135,7 @@ class TrieCompleteManager:
         self.type_to_symbols = type_to_symbols
 
     # 「__M_」などを具体的に，優先度をつけて提案できるように
-    def predict(self, user_input):
+    def predict(self, user_input, type_to_symbols):
         variables = []
         labels = []
         n = len(user_input)
@@ -163,22 +146,22 @@ class TrieCompleteManager:
             n = N
 
         token_list = user_input[::-1]
-        # print(token_list)
-        # print(f"user_input:{user_input}")
         for i in range(n):
+            # FIXME:シンボルに接頭辞がついていないため，意図通りに動作しない
             token = check_token_type(token_list, i)
             # ユーザが利用している変数を保存しておく
             if token == '__variable_':
                 variables.append(token_list[i])
-                print(f'variables:{variables}')
             elif token == '__label_':
                 labels.append(token_list[i])
 
             if token in tree.children:
                 tree = tree.children[token]
             else:
-                # print("nothing")
                 return {}
+
+        # [[トークン, 出現回数]]の形式
+        # 例：[['__variable', 100], ['be', 60] ... ]
         sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
 
         # {キーワード:優先度}の形式で保存する
@@ -189,15 +172,14 @@ class TrieCompleteManager:
             matched = re.match(r'__(\w)_', keyword[0])
             if matched:
                 symbol_type = matched.groups()[0]
-                # print(f"symbol_type:{symbol_type}")
                 if symbol_type is None:
                     return {}
 
                 # importしていない種類が提案された場合は考えない
-                if not symbol_type in self.type_to_symbols:
+                if not symbol_type in type_to_symbols:
                     continue
 
-                for word in self.type_to_symbols[symbol_type[0]]:
+                for word in type_to_symbols[symbol_type[0]]:
                     suggest_keywords[word] = cnt
                     cnt += 1
             elif keyword[0] == '__variable_':
@@ -205,35 +187,52 @@ class TrieCompleteManager:
                 # for v in variables[::-1]:
                 #     suggest_keywords[v] = cnt
                 #     cnt += 1
-                # suggest_keywords['x'] = cnt
-                # cnt += 1
+
+                for v in ['x', 'y']:
+                    suggest_keywords[v] = cnt
+                    cnt += 1
                 pass
             elif keyword[0] == '__label_':
-                # FIXME:変数と同様
+                # FIXME:変数の場合と同様
                 # for l in labels[::-1]:
                 #     suggest_keywords[l] = cnt
                 #     cnt += 1
+
+                for l in ['A1', 'A2']:
+                    suggest_keywords[l] = cnt
+                    cnt += 1
                 pass
             else:
                 suggest_keywords[keyword[0]] = cnt
                 cnt += 1
-        # print(suggest_keywords)
         return suggest_keywords
 
-    def assess_acuracy(self):
-        self.scan_files(1100, 1355, self.assess_one_file_acuracy)
+    def assess_mml_acuracy(self):
+        self.apply_all_files(1100, 1355, 'acuracy')
+        
 
-    def assess_one_file_acuracy(self):
-        # self.create_type_to_symbols()
-        json_loaded = None
-        right_answer_nums = [0 for _ in range(30)]
+
+class OneFileAssessManager:
+
+    def __init__(self, file_name):
+        self.file_name = file_name
+        self.variables = []
+        self.labels = []
+        self.article = None
+        self.type_to_symbols = None
 
         with open(self.file_name, 'r') as f:
             json_loaded = json.load(f)
         self.type_to_symbols = json_loaded['symbols']
+        self.article = json_loaded['contents']
+
+    
+    def assess_file_acuracy(self, trie_manager):
+        right_answer_nums = [0 for _ in range(30)]
         prediction_cnt = 0
         in_suggest_cnt = 0
-        for line in json_loaded['contents']:
+
+        for line in self.article:
             line_tokens= []
             for token in line:
                 # tokenは["x", "__variable_"]のようになっている
@@ -249,18 +248,12 @@ class TrieCompleteManager:
                 
                 answer = line[i][0]
                 
-                suggest_keywords = self.predict(user_input)
-                # print(f'user_input:{user_input}')
-                # print(f'answer:{answer}')
-                # print(f'suggests:{suggest_keywords}')
+                suggest_keywords = trie_manager.predict(user_input, self.type_to_symbols)
                 prediction_cnt += 1
-
-                # pprint(f'answer:{answer}, suggests:{suggest_keywords}')
                 
                 if answer in suggest_keywords:
                     in_suggest_cnt += 1
                     rank = suggest_keywords[answer]
-                    # print(answer, rank)
 
                 # 30候補以内であればインクリメント
                 if answer in suggest_keywords and suggest_keywords[answer] <= 30:
@@ -268,22 +261,51 @@ class TrieCompleteManager:
                     right_answer_nums[rank-1] += 1
                 # print(f'input:{user_input}')
                 # print(f'suggest:{suggest_keywords}')
+        print(right_answer_nums, in_suggest_cnt, prediction_cnt)
         return right_answer_nums, in_suggest_cnt, prediction_cnt
 
-    def assess_keystroke(self):
-        self.scan_files(1100, 1355, self.assess_one_file_keystroke)
 
-    def assess_one_file_keystroke(self):
-        self.create_type_to_symbols()
+    def assess_file_keystroke(self, trie_manager):
         pass
 
+    def create_one_file_trie(self, trie_manager):
+        for line in self.article:
+            length = len(line)
+            for idx in range(1, length):
+                token = line[idx][1]
+                parent_node = None
+                node = None
+                diff = 0
+                if idx-N+1 < 0:
+                    diff = abs(idx-N+1)
+                for j in reversed(range(idx-N+1+diff, idx)):
+                    if j == idx-1:
+                        parent_node = trie_manager.root
+                    node_name = line[j][1]
+                    # 既に同名のノードが存在すれば取得
+                    if node_name in parent_node.children:
+                        node = parent_node.children[node_name]
+                    # 同名のノードが存在しなければ生成
+                    else:
+                        node = TrieNode(node_name)
+                    if token in node.keywords:
+                        node.keywords[token] += 1
+                    else:
+                        node.keywords[token] = 1
+                    parent_node.add_child(node)
+                    node.set_parent(parent_node)
+                    parent_node = node
     
 if __name__ == '__main__':
-    complete_manager = TrieCompleteManager()
-    complete_manager.setup()
-    
-    complete_manager.file_name = "./learning_data/abian.json"
-    ranking, in_suggest_cnt, total = complete_manager.assess_one_file_acuracy()
-    print(ranking, in_suggest_cnt, total)
-    print(f'sum:{sum(ranking)}')
+    trie_manager = TrieCompleteManager()
+    trie_manager.setup()
+
+    trie_manager.assess_mml_acuracy()
+    print(trie_manager.accuracy, trie_manager.prediction_time)
+
+    # file_manager = OneFileAssessManager('./learning_data/abcmiz_0.json')
+    # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
+    # print(ranking, in_suggest_cnt, total)
+
+    # print(f'sum:{sum(ranking)}')
     # print(complete_manager.predict(["x", "be"]))
