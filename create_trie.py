@@ -324,8 +324,8 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    # trie_manager.assess_mml_acuracy()
-    # print(trie_manager.accuracy, trie_manager.prediction_time)
+    trie_manager.assess_mml_acuracy()
+    print(trie_manager.accuracy, trie_manager.prediction_time)
 
 
     # file_manager = OneFileAssessManager('./learning_data/abcmiz_0.json')
