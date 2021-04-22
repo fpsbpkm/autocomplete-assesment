@@ -101,7 +101,7 @@ if __name__ == '__main__':
         for line in tokens:
             line_data = []
             for i in range(len(line)):
-                token = re.sub(r'__\w_', '', line[i])
+                token = re.sub(r'__\w+_', '', line[i])
                 token_type = check_token_type(line, i)
                 line_data.append([token, token_type])
             if line_data:

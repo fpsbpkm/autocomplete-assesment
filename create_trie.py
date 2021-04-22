@@ -8,6 +8,8 @@ import preprocess
 import re
 import numpy as np
 import matplotlib.pyplot as plt
+from collections import deque
+import copy
 
 file_name = 'abcmiz_0.json'
 file_path = os.path.join('./learning_data', file_name)
@@ -16,6 +18,7 @@ MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
 N = 3
+Ranking_Number = 20000
 
 class TrieNode:
     def __init__(self, name):
@@ -44,7 +47,8 @@ class TrieCompleteManager:
 
     def __init__(self):
         self.root = None
-        self.accuracy = np.array([0 for _ in range(30)])
+        self.accuracy = np.array([0 for _ in range(Ranking_Number)])
+        self.right_answer_nums = 0
         self.prediction_time = 0
         self.setup()
     
@@ -69,8 +73,9 @@ class TrieCompleteManager:
             try:
                 assess_file_manager = OneFileAssessManager(file_path)
                 if method_name == 'acuracy':
-                    accuracy, tmp, prediction_times = assess_file_manager.assess_file_acuracy(self)
+                    accuracy, right_answer_nums, prediction_times = assess_file_manager.assess_file_acuracy(self)
                     self.accuracy += np.array(accuracy)
+                    self.right_answer_nums += right_answer_nums
                     self.prediction_time +=  prediction_times
                 elif method_name == 'keystroke':
                     assess_file_manager.assess_file_keystroke(self)
@@ -135,9 +140,7 @@ class TrieCompleteManager:
         self.type_to_symbols = type_to_symbols
 
     # 「__M_」などを具体的に，優先度をつけて提案できるように
-    def predict(self, user_input, type_to_symbols):
-        variables = []
-        labels = []
+    def predict(self, user_input, parsed_input, type_to_symbols, variables, labels):
         n = len(user_input)
         tree = self.root
         
@@ -145,22 +148,31 @@ class TrieCompleteManager:
         if n > N:
             n = N
 
-        token_list = user_input[::-1]
-        for i in range(n):
-            # FIXME:シンボルに接頭辞がついていないため，意図通りに動作しない
-            token = check_token_type(token_list, i)
-            # ユーザが利用している変数を保存しておく
-            if token == '__variable_':
-                variables.append(token_list[i])
-            elif token == '__label_':
-                labels.append(token_list[i])
+        parsed_input_reversed = parsed_input[::-1]
 
+        # ユーザ入力から，トライ木を検索
+        for i in range(len(parsed_input_reversed)):
+            # FIXME:シンボルに接頭辞がついていないため，意図通りに動作しない
+            # object -> 変数と判定されてしまう
+            # 「let x be object;」
+            # token = check_token_type(token_list, i)
+            token = parsed_input_reversed[i]
+
+            # ユーザが利用している変数を保存
+            if token == '__variable_':
+                variables.append(user_input[i])
+                pass
+            # ユーザが利用しているラベルを保存
+            elif token == '__label_':
+                labels.append(user_input[i])
+                pass
+            # トライ木の検索
             if token in tree.children:
                 tree = tree.children[token]
             else:
                 return {}
 
-        # [[トークン, 出現回数]]の形式
+        # sorted_keywordsは[[トークン, 出現回数]]の形式
         # 例：[['__variable', 100], ['be', 60] ... ]
         sorted_keywords = sorted(tree.keywords.items(), key=lambda x:x[1], reverse=True)
 
@@ -168,6 +180,8 @@ class TrieCompleteManager:
         # 例：{"be":1, "being":2}
         suggest_keywords = {}
         cnt = 1
+
+        # 「__variable_」「__M_」などを展開する処理
         for keyword in sorted_keywords:
             matched = re.match(r'__(\w)_', keyword[0])
             if matched:
@@ -182,26 +196,16 @@ class TrieCompleteManager:
                 for word in type_to_symbols[symbol_type[0]]:
                     suggest_keywords[word] = cnt
                     cnt += 1
+            # ユーザが利用した変数を提案
             elif keyword[0] == '__variable_':
-                # FIXME:変数の判別ができていない，1つしか提案できていない
-                # for v in variables[::-1]:
-                #     suggest_keywords[v] = cnt
-                #     cnt += 1
-
-                for v in ['x', 'y']:
+                for v in list(variables)[::-1]:
                     suggest_keywords[v] = cnt
                     cnt += 1
-                pass
+            
             elif keyword[0] == '__label_':
-                # FIXME:変数の場合と同様
-                # for l in labels[::-1]:
-                #     suggest_keywords[l] = cnt
-                #     cnt += 1
-
-                for l in ['A1', 'A2']:
+                for l in list(labels)[::-1]:
                     suggest_keywords[l] = cnt
                     cnt += 1
-                pass
             else:
                 suggest_keywords[keyword[0]] = cnt
                 cnt += 1
@@ -230,7 +234,8 @@ class TrieCompleteManager:
         plt.bar(left[:-2], height[:-2])
         count = 0
         for x, y in zip(left[:-2], height[:-2]):
-            plt.text(x, y, str(int(round(height[count], 0))), ha='center', va='bottom', fontsize=7)
+            # plt.text(x, y, str(int(round(height[count], 0))), ha='center', va='bottom', fontsize=7)
+            plt.text(x, y, '', ha='center', va='bottom', fontsize=7)
             count += 1
         plt.savefig(f'graphs/{title}.jpg')
         
@@ -240,8 +245,8 @@ class OneFileAssessManager:
 
     def __init__(self, file_name):
         self.file_name = file_name
-        self.variables = []
-        self.labels = []
+        self.variables = deque([])
+        self.labels = deque([])
         self.article = None
         self.type_to_symbols = None
 
@@ -249,48 +254,118 @@ class OneFileAssessManager:
             json_loaded = json.load(f)
         self.type_to_symbols = json_loaded['symbols']
         self.article = json_loaded['contents']
-
+    
+    def get_user_input(self, i, line_tokens, parsed_tokens):
+        if i >= N:
+            user_input = line_tokens[i-N+1:i]
+            parsed_input = parsed_tokens[i-N+1:i]
+        else:
+            user_input = parsed_tokens[:i]
+            parsed_input = parsed_tokens[:i]
+        
+        return user_input, parsed_input
     
     def assess_file_acuracy(self, trie_manager):
-        right_answer_nums = [0 for _ in range(30)]
+        right_answer_nums = [0 for _ in range(Ranking_Number)]
         prediction_cnt = 0
         in_suggest_cnt = 0
 
         for line in self.article:
             line_tokens= []
+            parsed_tokens = []
+            
             for token in line:
                 # tokenは["x", "__variable_"]のようになっている
                 # 予測プログラムには生のトークンを入力する
                 line_tokens.append(token[0])
+                parsed_tokens.append(token[1])
 
             for i in range(1, len(line_tokens)):
-                # 最大でN-1トークンを切り出す，iのトークンを予測
-                if i >= N:
-                    user_input = line_tokens[i-N+1:i]
-                else:
-                    user_input = line_tokens[:i]
-                
                 answer = line[i][0]
-                
-                suggest_keywords = trie_manager.predict(user_input, self.type_to_symbols)
+                user_input, parsed_input = self.get_user_input(i, line_tokens, parsed_tokens)
+                # suggest_keywords{'キーワード':優先順位}の辞書
+                # 例：{'be':1, 'being':2}
+                suggest_keywords = trie_manager.predict(user_input, parsed_input, self.type_to_symbols, self.variables, self.labels)
                 prediction_cnt += 1
                 
+                # 答えが提案候補に入っている数をカウント
                 if answer in suggest_keywords:
                     in_suggest_cnt += 1
                     rank = suggest_keywords[answer]
 
-                # 30候補以内であればインクリメント
-                if answer in suggest_keywords and suggest_keywords[answer] <= 30:
+                # Ranking_Number候補以内であればインクリメント
+                if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
                     rank = suggest_keywords[answer]
                     right_answer_nums[rank-1] += 1
                 # print(f'input:{user_input}')
                 # print(f'suggest:{suggest_keywords}')
-        print(trie_manager.accuracy, trie_manager.prediction_time)
+        # print(trie_manager.accuracy, trie_manager.prediction_time)
         return right_answer_nums, in_suggest_cnt, prediction_cnt
 
-
     def assess_file_keystroke(self, trie_manager):
-        pass
+        original_cost = 0
+        cost = 0
+        
+        saving_cost = 0
+        # lineは[[let, let], [x, __variable_], [be, be], [object, __M_]]のような形式
+
+        for line in self.article:
+            line_tokens= []
+            parsed_tokens = []
+            print(f'original_cost:{original_cost}, cost:{cost}')
+            
+            for token in line:
+                # tokenは["x", "__variable_"]のようになっている
+                line_tokens.append(token[0])
+                parsed_tokens.append(token[1])
+
+            for i in range(1, len(line_tokens)):
+                answer = line[i][0]
+
+            length = len(line)
+            for idx in range(1, length):
+                answer = line[idx][0]
+                token_cost = len(answer)
+                original_cost += token_cost
+
+                user_input, parsed_input = self.get_user_input(i, line_tokens, parsed_tokens)
+                items = trie_manager.predict(user_input, parsed_input, self.type_to_symbols, self.variables, self.labels)
+
+                if token_cost <= 1:
+                    cost += token_cost
+                elif answer in items:
+                    input_idx = 0
+                    while token_cost >= 2:
+                        select_cost = items[answer]
+                        if select_cost < token_cost:
+                            print(f'answer:{answer}, items[answer]:{items[answer]}, 文字入力数:{input_idx}')
+                            print(f'select_cost:{select_cost}, token_cost:{token_cost}')
+                            print(f'節約コスト：{token_cost - select_cost}')
+                            saving_cost += (token_cost - select_cost)
+                            print()
+                            cost += select_cost
+                            break
+                        # 1文字入力
+                        else:
+                            input_idx += 1
+                            cost += 1
+                            token_cost -= 1
+                            # 残りのコストが2未満の場合は，節約にならないため，残りのコストを加えて終了
+                            if token_cost < 2:
+                                cost += token_cost
+                                break
+
+                            # 提案キーワード群の更新
+                            tmp = []
+                            for keyword in items:
+                                if keyword.startswith(answer[:input_idx]):
+                                    tmp.append(keyword)
+                            items = {}
+                            cnt = 1
+                            for item in tmp:
+                                items[item] = cnt
+                                cnt += 1
+        return original_cost, cost, saving_cost
 
     def create_one_file_trie(self, trie_manager):
         for line in self.article:
@@ -324,11 +399,13 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    trie_manager.assess_mml_acuracy()
-    print(trie_manager.accuracy, trie_manager.prediction_time)
+    # trie_manager.assess_mml_acuracy()
+    # print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
 
 
-    # file_manager = OneFileAssessManager('./learning_data/abcmiz_0.json')
+    file_manager = OneFileAssessManager('./learning_data/pascal.json')
+    original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
+    print(original_cost, cost, saving_cost)
     # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
     # print(ranking, in_suggest_cnt, total)
 
