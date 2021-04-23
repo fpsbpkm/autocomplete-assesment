@@ -17,7 +17,7 @@ MML_DIR = '/mnt/c/mizar/mml'
 MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
-N = 3
+N = 2
 Ranking_Number = 20000
 
 class TrieNode:
@@ -57,11 +57,12 @@ class TrieCompleteManager:
             with open('trie_root', 'rb') as f:
                 self.root = pickle.load(f)
         except:
+            self.root = TrieNode('root')
             self.create()
     
     # mmlをスキャンし，引数のメソッドを順に実行する
     def apply_all_files(self, start, end, method_name):
-        # self.root = TrieNode('root')
+        
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
@@ -212,7 +213,7 @@ class TrieCompleteManager:
         return suggest_keywords
 
     def assess_mml_acuracy(self):
-        self.apply_all_files(1100, 1355, 'acuracy')
+        self.apply_all_files(1100, 1105, 'acuracy')
         # 測定後の精度を作成
         self.draw()
 
@@ -365,6 +366,9 @@ class OneFileAssessManager:
                             for item in tmp:
                                 items[item] = cnt
                                 cnt += 1
+                else:
+                    cost += token_cost
+    
         return original_cost, cost, saving_cost
 
     def create_one_file_trie(self, trie_manager):
@@ -399,13 +403,13 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    # trie_manager.assess_mml_acuracy()
-    # print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
+    trie_manager.assess_mml_acuracy()
+    print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
 
 
-    file_manager = OneFileAssessManager('./learning_data/pascal.json')
-    original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
-    print(original_cost, cost, saving_cost)
+    # file_manager = OneFileAssessManager('./learning_data/pascal.json')
+    # original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
+    # print(original_cost, cost, saving_cost)
     # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
     # print(ranking, in_suggest_cnt, total)
 
