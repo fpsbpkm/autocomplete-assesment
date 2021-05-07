@@ -41,14 +41,16 @@ def is_reserved_word(word):
 
 def check_token_type(line,idx):
     token = line[idx]
-    matched = re.match(r'__\w_', token)
+    matched = re.match(r'__\w\d*_', token)
+
     # NOTE:ラベル以降の判定が正しくない
     if matched:
         return matched[0]
     elif is_reserved_word(token):
         return token
-    elif token in NUMBERS:
-        return "__number_"
+    # NOTE:__number_は不要かも？
+    # elif re.fullmatch(r'^[0-9]+$', token):
+    #     return "__number_"
     elif idx+1 <= len(line)-1 and line[idx+1] == ':':
         return "__label_"
     elif 'by' in set(line[:idx]):
@@ -57,6 +59,45 @@ def check_token_type(line,idx):
         return "__label_"
     else:
         return "__variable_"
+
+# byと;の間の識別子をラベルに修正する関数
+def post_processing():
+    is_between_by_and_semicolon = False
+    JSONS_DIR = "./learning_data"
+    JSONS_FILES = "./learning_data/*.json"
+    json_files = glob.glob(JSONS_FILES)
+
+    for file_name in json_files:
+        replace_json = {}
+        with open(file_name, 'r') as f:
+            json_loaded = json.load(f)
+        json_contents = json_loaded['contents']
+
+        replace_json['symbols'] = json_loaded['symbols']
+
+        for line in json_contents:
+            # lineは[[let, let], [x, __variable_], [be, be], ...]のような形式
+            for idx in range(len(line)):
+                # line[idx][0]で生のトークンが取得できる
+                # 「let」「x」「be」など
+                token = line[idx][0]
+                if token == 'by':
+                    is_between_by_and_semicolon = True
+                elif is_between_by_and_semicolon and token == ';':
+                    is_between_by_and_semicolon = False
+                
+                if is_between_by_and_semicolon and line[idx][1] == '__variable_':
+                    line[idx][1] = '__label_'
+
+        replace_json['contents'] = json_contents
+
+
+        with open(file_name, 'w') as f:
+            json.dump(replace_json, f)
+            print(file_name)
+    
+
+
 
 
 if __name__ == '__main__':
@@ -101,7 +142,7 @@ if __name__ == '__main__':
         for line in tokens:
             line_data = []
             for i in range(len(line)):
-                token = re.sub(r'__\w+_', '', line[i])
+                token = re.sub(r'__\w\d*_', '', line[i])
                 token_type = check_token_type(line, i)
                 line_data.append([token, token_type])
             if line_data:
@@ -126,3 +167,6 @@ if __name__ == '__main__':
         with open(output_file, 'w') as f:
             json.dump(file_dict, f)
             print(filename)
+
+    # 「by ~ ;」間で改行された場合にも対応するための後処理
+    post_processing()

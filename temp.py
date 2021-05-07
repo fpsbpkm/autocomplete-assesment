@@ -1,7 +1,9 @@
-import os
+l = [[[1,2,3], [5,6,7]]]
 
-MML_DIR = '/mnt/c/mizar/mml'
-f = os.path.join(MML_DIR, "henmodel")+'.miz'
-with open(f, 'r') as f:
-    # ファイルによっては変数名のエラーが出るため注意
-    lines = f.readlines()
+# iは[[1,2,3], [5,6,7]]になる
+for i in l:
+    for j in i:
+        j[0] = 0
+
+print(l)
+
