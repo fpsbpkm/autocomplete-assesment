@@ -17,7 +17,7 @@ MML_DIR = '/mnt/c/mizar/mml'
 MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
-N = 2
+N = 3
 Ranking_Number = 20000
 
 class TrieNode:
@@ -213,7 +213,7 @@ class TrieCompleteManager:
         return suggest_keywords
 
     def assess_mml_acuracy(self):
-        self.apply_all_files(1100, 1105, 'acuracy')
+        self.apply_all_files(1105, 1110, 'acuracy')
         # 測定後の精度を作成
         self.draw()
 
@@ -375,12 +375,16 @@ class OneFileAssessManager:
         for line in self.article:
             length = len(line)
             for idx in range(1, length):
+                # 予測対象のトークン
                 token = line[idx][1]
                 parent_node = None
                 node = None
                 diff = 0
+                # 直前トークン数がN未満の場合
                 if idx-N+1 < 0:
                     diff = abs(idx-N+1)
+                # HACK:このあたりが怪しい
+                # reversed(range(1, 4)) -> 3, 2, 1となる
                 for j in reversed(range(idx-N+1+diff, idx)):
                     if j == idx-1:
                         parent_node = trie_manager.root
@@ -391,10 +395,13 @@ class OneFileAssessManager:
                     # 同名のノードが存在しなければ生成
                     else:
                         node = TrieNode(node_name)
+                    # 各ノードに予測対象のキーワードを保存
+                    # {予測対象のワード:登場回数}
                     if token in node.keywords:
                         node.keywords[token] += 1
                     else:
                         node.keywords[token] = 1
+                    # FIXME:ノードの追加は新しく生成したときでは？
                     parent_node.add_child(node)
                     node.set_parent(parent_node)
                     parent_node = node

@@ -63,7 +63,6 @@ def check_token_type(line,idx):
 # byと;の間の識別子をラベルに修正する関数
 def post_processing():
     is_between_by_and_semicolon = False
-    JSONS_DIR = "./learning_data"
     JSONS_FILES = "./learning_data/*.json"
     json_files = glob.glob(JSONS_FILES)
 
