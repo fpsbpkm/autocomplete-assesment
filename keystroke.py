@@ -16,7 +16,7 @@ lexer = preprocess.Lexer()
 lexer.load_symbol_dict(MML_VCT)
 lexer.build_len2symbol()
 
-file_name = "/mnt/c/mizar/mml/diophan2.miz"
+file_name = "/mnt/c/mizar/mml/nomin_6.miz"
 
 N = 3
 
@@ -77,6 +77,7 @@ if __name__ == '__main__':
         autocomplete_cost = 0
         
         for line in tokenized_lines:
+            # 正規表現が完全ではないため，シンボルなどが置き換えられて文字数が少なくなっていたかも
             line = re.sub('__\w+_', '', line)
             token_list = line.split(" ")
             original_line_cost = 0
