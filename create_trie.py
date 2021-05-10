@@ -17,8 +17,8 @@ MML_DIR = '/mnt/c/mizar/mml'
 MML_VCT = './data/mml.vct'
 
 # トライの最大の深さ
-N = 5
-Ranking_Number = 20000
+N = 3
+Ranking_Number = 500
 
 class TrieNode:
     def __init__(self, name):
@@ -148,19 +148,13 @@ class TrieCompleteManager:
 
         # ユーザ入力から，トライ木を検索
         for i in range(len(parsed_input_reversed)):
-            # FIXME:シンボルに接頭辞がついていないため，意図通りに動作しない
-            # object -> 変数と判定されてしまう
-            # 「let x be object;」
-            # token = check_token_type(token_list, i)
+            # 型トークンを取得
             token = parsed_input_reversed[i]
-            # print(f'parsed_input:{parsed_input}')
-            # print(f'user_input:{user_input}')
-
-            # ユーザが利用している変数を保存
-            if token == '__variable_' and token not in set(variables):
+            # ユーザが利用していて，登録されていない変数を保存
+            if token == '__variable_' and user_input_reversed[i] not in set(variables):
                 variables.append(user_input_reversed[i])
-            # ユーザが利用しているラベルを保存
-            elif token == '__label_' and token not in set(labels):
+            # ユーザが利用していて，登録されていないラベルを保存
+            elif token == '__label_' and user_input_reversed[i] not in set(labels):
                 labels.append(user_input_reversed[i])
             # トライ木の検索
             if token in node.children:
@@ -175,8 +169,7 @@ class TrieCompleteManager:
         # {キーワード:優先度}の形式で保存する
         # 例：{"be":1, "being":2}
         suggest_keywords = {}
-        cnt = 1
-
+        rank = len(suggest_keywords) + 1
         # 「__variable_」「__M_」などを展開する処理
         for keyword in sorted_keywords:
             matched = re.match(r'__(\w\d*)_', keyword[0])
@@ -190,25 +183,39 @@ class TrieCompleteManager:
                     continue
 
                 for word in type_to_symbols[symbol_type[0]]:
-                    suggest_keywords[word] = cnt
-                    cnt += 1
+                    suggest_keywords[word] = rank
+                    rank = len(suggest_keywords)
+                    
             # ユーザが利用した変数を提案
             elif keyword[0] == '__variable_':
                 for v in list(variables)[::-1]:
-                    suggest_keywords[v] = cnt
-                    cnt += 1
+                    suggest_keywords[v] = rank
+                    rank = len(suggest_keywords)
             
             elif keyword[0] == '__label_':
                 for l in list(labels)[::-1]:
-                    suggest_keywords[l] = cnt
-                    cnt += 1
+                    suggest_keywords[l] = rank
+                    rank = len(suggest_keywords)
+            elif keyword[0] == '__number_':
+                pass
             else:
-                suggest_keywords[keyword[0]] = cnt
-                cnt += 1
+                suggest_keywords[keyword[0]] = rank
+                rank = len(suggest_keywords)
+
+            # 前処理段階で数字が「変数」「ラベル」両方に判断され重複し，辻褄が合わなくなっている
+            # if rank != len(suggest_keywords):
+            #     print('おかしい！！！')
+            #     print(f'variables:{variables}')
+            #     print(f'labels:{labels}')
+
+        # print(f'user_input:{user_input}')
+        # print()
+        # print(f'suggest_keywordsの長さ:{len(suggest_keywords)}')
+        # print(f'候補数：{cnt-1}')
         return suggest_keywords
 
     def assess_mml_acuracy(self):
-        self.apply_all_files(1100, 1105, 'acuracy')
+        self.apply_all_files(1100, 1355, 'acuracy')
         # 測定後の精度を作成
         self.draw()
 
@@ -227,9 +234,9 @@ class TrieCompleteManager:
 
         left = np.array([i+1 for i in range(len(result))])
         height = np.array(result.cumsum()/total) * 100
-        plt.bar(left[:-2], height[:-2])
+        plt.bar(left, height)
         count = 0
-        for x, y in zip(left[:-2], height[:-2]):
+        for x, y in zip(left, height):
             # plt.text(x, y, str(int(round(height[count], 0))), ha='center', va='bottom', fontsize=7)
             plt.text(x, y, '', ha='center', va='bottom', fontsize=7)
             count += 1
@@ -299,7 +306,12 @@ class OneFileAssessManager:
                 #         wrong_answers[answer] = 1
 
                 # Ranking_Number候補以内であればインクリメント
+                # FIXME:10000候補も存在しないはずだが，グラフではなぜか正答率が上昇している
                 if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
+                    # FIXME:デバッグ用
+                    if suggest_keywords[answer] > 500:
+                        print(suggest_keywords[answer])
+                        print(suggest_keywords)
                     rank = suggest_keywords[answer]
                     right_answer_nums[rank-1] += 1
                 # print(f'input:{user_input}')
@@ -311,6 +323,8 @@ class OneFileAssessManager:
         original_cost = 0
         cost = 0
         saving_cost = 0
+        # トークン平均文字数に利用するカウンタ
+        token_cnt = 0
 
         # lineは[[let, let], [x, __variable_], [be, be], [object, __M_]]のような形式
         for line in self.article:
@@ -326,14 +340,20 @@ class OneFileAssessManager:
             first_token_cost = len(line_tokens[0])
             original_cost += first_token_cost
             cost += first_token_cost
+            token_cnt += 1
             # print(line, first_token_cost)
             for idx in range(1, length):
+                token_cnt += 1
                 answer = line[idx][0]
                 remaining_cost = len(answer)
                 original_cost += remaining_cost
 
                 user_input, parsed_input = self.get_user_input(idx, line_tokens, parsed_tokens)
-                items = trie_manager.predict(user_input, parsed_input, self.type_to_symbols, self.variables, self.labels)
+                items = trie_manager.predict(
+                    user_input, 
+                    parsed_input, 
+                    self.type_to_symbols, 
+                    self.variables, self.labels)
 
                 if remaining_cost <= 1:
                     cost += remaining_cost
@@ -342,7 +362,7 @@ class OneFileAssessManager:
                     while remaining_cost >= 2:
                         select_cost = items[answer]
                         if select_cost < remaining_cost:
-                            print(f'正解:{answer}, 予測順位:{items[answer]}, 文字入力数:{input_idx}')
+                            print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{items[answer]}')
                             print(f'本来のコスト:{len(answer)}')
                             print(f'節約コスト：{remaining_cost - select_cost}')
                             saving_cost += (remaining_cost - select_cost)
@@ -374,7 +394,7 @@ class OneFileAssessManager:
                                 cnt += 1
                 else:
                     cost += remaining_cost
-    
+        print(f'トークン平均文字数：{original_cost/token_cnt}')
         return original_cost, cost, saving_cost
 
     def create_one_file_trie(self, trie_manager):
@@ -393,6 +413,7 @@ class OneFileAssessManager:
                 for j in reversed(range(idx-N+1+diff, idx)):
                     if j == idx-1:
                         parent_node = trie_manager.root
+
                     node_name = line[j][1]
                     # 既に同名のノードが存在すれば取得
                     if node_name in parent_node.children:
@@ -415,13 +436,12 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    # trie_manager.assess_mml_acuracy()
-    # print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
+    trie_manager.assess_mml_acuracy()
+    print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
 
-
-    file_manager = OneFileAssessManager('./learning_data/diophan2.json')
-    original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
-    print(original_cost, cost, saving_cost)
+    # file_manager = OneFileAssessManager('./learning_data/diophan2.json')
+    # original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
+    # print(original_cost, cost, saving_cost)
     # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
     # print(ranking, in_suggest_cnt, total)
 

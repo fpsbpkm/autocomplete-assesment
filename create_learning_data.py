@@ -48,11 +48,12 @@ def check_token_type(line,idx):
         return matched[0]
     elif is_reserved_word(token):
         return token
-    # NOTE:__number_は不要かも？
-    # elif re.fullmatch(r'^[0-9]+$', token):
-    #     return "__number_"
+    # NOTE:数字を「変数」と判断させないよう，以下の処理が必要
+    elif re.fullmatch(r'^[0-9]+$', token):
+        return "__number_"
     elif idx+1 <= len(line)-1 and line[idx+1] == ':':
         return "__label_"
+    # FIXME:byが手前にあるだけでは変数の可能性がある
     elif 'by' in set(line[:idx]):
         return "__label_"
     elif 'from' in set(line[:idx]):
