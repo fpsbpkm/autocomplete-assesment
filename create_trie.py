@@ -146,6 +146,10 @@ class TrieCompleteManager:
         parsed_input_reversed = parsed_input[::-1]
         user_input_reversed = user_input[::-1]
 
+        # type_to_symbols = self.type_to_symbols
+        # variables = self.variables
+        # labels = self.labels
+
         # ユーザ入力から，トライ木を検索
         for i in range(len(parsed_input_reversed)):
             # 型トークンを取得
@@ -436,12 +440,12 @@ if __name__ == '__main__':
     trie_manager = TrieCompleteManager()
     trie_manager.setup()
 
-    trie_manager.assess_mml_acuracy()
-    print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
+    # trie_manager.assess_mml_acuracy()
+    # print(trie_manager.accuracy, trie_manager.right_answer_nums, trie_manager.prediction_time)
 
-    # file_manager = OneFileAssessManager('./learning_data/diophan2.json')
-    # original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
-    # print(original_cost, cost, saving_cost)
+    file_manager = OneFileAssessManager('./learning_data/diophan2.json')
+    original_cost, cost, saving_cost = file_manager.assess_file_keystroke(trie_manager)
+    print(original_cost, cost, saving_cost, saving_cost/original_cost*100)
     # ranking, in_suggest_cnt, total = file_manager.assess_file_acuracy(trie_manager)
     # print(ranking, in_suggest_cnt, total)
 

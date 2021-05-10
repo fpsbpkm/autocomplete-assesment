@@ -1,5 +1,5 @@
 import json
-from learning import is_variable
+# from learning import is_variable
 
 # N-gramの学習（カウント）ファイルを取得
 json_open2 = open("jsons/output2.json", 'r')
@@ -30,18 +30,10 @@ def provide_items(token_list, i, N):
     else:
         input_text = token_list[:i]
         answer = token_list[i]
-
-    if is_variable(token_list, i) and is_replaced_variable:
-            answer = '___'
     
-    # ユーザが入力した変数を「___」と置き換える
     replaced_input_text = []
     for j in range(len(input_text)):
-        if is_variable(input_text, j) and is_replaced_variable:
-            replaced_input_text.append('___')
-        else:
-            replaced_input_text.append(input_text[j])
-
+        replaced_input_text.append(input_text[j])
 
     # 入力補完のロジック
     if len(input_text) == 1:
@@ -66,7 +58,7 @@ def provide_items(token_list, i, N):
 
         # print(f"answer:{answer}, recent_input:{recent_input}, kw:{kw}, items:{items}")
 
-        if count_items >= 30:
-            return items, answer
+        # if count_items >= 30:
+        #     return items, answer
 
     return items, answer

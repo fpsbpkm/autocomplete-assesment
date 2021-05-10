@@ -85,7 +85,7 @@ for file_name in mml:
         continue
 
     for line in tokenized_lines:
-        line = re.sub('__\w+_', '', line)
+        line = re.sub('__\w\d*_', '', line)
         token_list = line.split(" ")
         temp = assesment(token_list)
         result = [result[i]+temp[i] for i in range(len(result))]

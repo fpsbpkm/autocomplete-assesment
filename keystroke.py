@@ -7,6 +7,7 @@ import glob
 import codecs
 from completion import provide_items
 import copy
+from raw_ngram import RawNgram
 
 DATA_DIR = './data'
 MML_VCT = os.path.join(DATA_DIR, 'mml.vct')
@@ -78,7 +79,7 @@ if __name__ == '__main__':
         
         for line in tokenized_lines:
             # 正規表現が完全ではないため，シンボルなどが置き換えられて文字数が少なくなっていたかも
-            line = re.sub('__\w+_', '', line)
+            line = re.sub('__\w\d*_', '', line)
             token_list = line.split(" ")
             original_line_cost = 0
             for token in token_list:
