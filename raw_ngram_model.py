@@ -11,13 +11,13 @@ json_load3 = json.load(json_open3)
 keywords2 = json_load2["completions"]
 keywords3 = json_load3["completions"]
 
-class RawNgramComplete:
+class RawNgramModel:
     def __init__(self):
         self.N = 2
     
     # user_inputは適切に切り取られたユーザの入力
     # 例：["x", "be"]
-    def predict(self, user_input_list, parsed_input_list=None):
+    def predict(self, user_input_list, parsed_input_list=None, variables=None, labels=None):
         # {キーワード:優先度}の形式で保存する
         # 例：{"be":1, "being":2}
         suggest_keywords = {}
@@ -41,6 +41,6 @@ class RawNgramComplete:
         return suggest_keywords
 
 if __name__ == '__main__':
-    raw_ngram = RawNgramComplete()
+    raw_ngram = RawNgramModel()
     original_cost, cost, saving_cost = assess_file_keystroke('diophan2.json', raw_ngram)
     print(original_cost, cost, saving_cost)
