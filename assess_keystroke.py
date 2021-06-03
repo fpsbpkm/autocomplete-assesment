@@ -1,5 +1,7 @@
 import json
 
+
+
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
         user_input_list = line_tokens[i-N+1:i]
@@ -65,12 +67,12 @@ def assess_file_keystroke(file_name, model):
                 while remaining_cost >= 2:
                     select_cost = suggest_keywords[answer]
                     if select_cost < remaining_cost:
-                        print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggest_keywords[answer]}')
-                        print(f'本来のコスト:{len(answer)}')
-                        print(f'節約コスト：{remaining_cost - select_cost}')
+                        # print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggest_keywords[answer]}')
+                        # print(f'本来のコスト:{len(answer)}')
+                        # print(f'節約コスト：{remaining_cost - select_cost}')
                         saving_cost += (remaining_cost - select_cost)
-                        print(f'節約数の合計：{saving_cost}')
-                        print()
+                        # print(f'節約数の合計：{saving_cost}')
+                        # print()
                         cost += select_cost
                         break
                     # 1文字入力して，提案キーワードを更新する処理
