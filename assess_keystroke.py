@@ -25,6 +25,8 @@ def assess_file_keystroke(file_name, model):
         json_loaded = json.load(f)
     type_to_symbols = json_loaded['symbols']
     article = json_loaded['contents']
+    variables = []
+    labels = []
 
     original_cost = 0
     cost = 0
@@ -58,6 +60,9 @@ def assess_file_keystroke(file_name, model):
             suggest_keywords = model.predict(
                 user_input, 
                 parsed_input, 
+                type_to_symbols,
+                variables,
+                labels
             )
 
             if remaining_cost <= 1:
