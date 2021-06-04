@@ -3,7 +3,7 @@ import re
 import os
 import json
 from assess_keystroke import assess_file_keystroke
-from assess_acuracy import assess_file_acuracy
+from assess_accuracy import assess_file_acuracy, assess_mml_accuracy
 
 class TrieNode:
     def __init__(self, name):
@@ -31,7 +31,7 @@ class TrieNode:
 
 class TrieNgramModel():
     def __init__(self):
-        self.N = 3
+        self.N = 5
         self.setup()
 
     def setup(self):
@@ -42,6 +42,7 @@ class TrieNgramModel():
             self.root = TrieNode('root')
             self.learning()
 
+    # トライ木の作成
     def learning(self):
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
@@ -49,13 +50,13 @@ class TrieNgramModel():
             mml.append(os.path.join('./learning_data', i.replace('\n', '.json')))
         mml_lar.close()
         for file_path in mml[0:1100]:
-            with open(file_path, 'r') as f:
-                json_loaded = json.load(f)
-            type_to_symbols = json_loaded['symbols']
-            article = json_loaded['contents']
-
-            print(file_path)
             try:
+                with open(file_path, 'r') as f:
+                    json_loaded = json.load(f)
+                type_to_symbols = json_loaded['symbols']
+                article = json_loaded['contents']
+                N = self.N
+                print(file_path)
                 for line in article:
                     length = len(line)
                     for idx in range(1, length):
@@ -91,6 +92,9 @@ class TrieNgramModel():
             except Exception as e:
                 print(e)
                 continue
+        
+        with open('./trie_root', 'wb') as f:
+            pickle.dump(self.root, f)
 
     
     def predict(self, user_input, parsed_input, type_to_symbols, variables, labels):
@@ -166,6 +170,6 @@ if __name__ == '__main__':
     # right_answer_result, in_suggest_cnt, prediction_cnt = assess_file_acuracy(
     #     'nomin_6.json', trie_model)
     # print(right_answer_result, in_suggest_cnt, prediction_cnt)
-
+    # assess_mml_accuracy(trie_model)
 
 

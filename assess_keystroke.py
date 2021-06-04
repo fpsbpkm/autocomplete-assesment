@@ -1,7 +1,5 @@
 import json
 
-
-
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
         user_input_list = line_tokens[i-N+1:i]
@@ -9,7 +7,7 @@ def get_user_input(N, i, line_tokens, parsed_tokens):
     else:
         user_input_list = line_tokens[:i]
         parsed_input_list = parsed_tokens[:i]
-    
+
     return user_input_list, parsed_input_list
 
 def file_name_to_absolute(file_name):
@@ -18,22 +16,17 @@ def file_name_to_absolute(file_name):
 def assess_file_keystroke(file_name, model):
     # NOTE:modelにNを持たせておく
     N = model.N
-
     file_name = file_name_to_absolute(file_name)
-
     with open(file_name, 'r') as f:
         json_loaded = json.load(f)
     type_to_symbols = json_loaded['symbols']
     article = json_loaded['contents']
     variables = []
     labels = []
-
     original_cost = 0
     cost = 0
     saving_cost = 0
-    # トークン平均文字数に利用するカウンタ
-    token_cnt = 0
-
+    token_counter = 0
     # lineは[[let, let], [x, __variable_], [be, be], [object, __M_]]のような形式
     for line in article:
         line_tokens= []
@@ -48,14 +41,13 @@ def assess_file_keystroke(file_name, model):
         first_token_cost = len(line_tokens[0])
         original_cost += first_token_cost
         cost += first_token_cost
-        token_cnt += 1
+        token_counter += 1
         # print(line, first_token_cost)
         for idx in range(1, length):
-            token_cnt += 1
+            token_counter += 1
             answer = line[idx][0]
             remaining_cost = len(answer)
             original_cost += remaining_cost
-
             user_input, parsed_input = get_user_input(N, idx, line_tokens, parsed_tokens)
             suggest_keywords = model.predict(
                 user_input, 
@@ -64,7 +56,6 @@ def assess_file_keystroke(file_name, model):
                 variables,
                 labels
             )
-
             if remaining_cost <= 1:
                 cost += remaining_cost
             elif answer in suggest_keywords:
@@ -90,7 +81,6 @@ def assess_file_keystroke(file_name, model):
                         if remaining_cost < 2:
                             cost += remaining_cost
                             break
-
                         # 提案キーワード群の更新
                         tmp = []
                         for keyword in suggest_keywords:
@@ -102,8 +92,7 @@ def assess_file_keystroke(file_name, model):
                         for keyword in tmp:
                             suggest_keywords[keyword] = len(suggest_keywords)+1
                             cnt += 1
-                        print(suggest_keywords)
             else:
                 cost += remaining_cost
-    print(f'トークン平均文字数：{original_cost/token_cnt}')
+    print(f'トークン平均文字数：{original_cost/token_counter}')
     return original_cost, cost, saving_cost

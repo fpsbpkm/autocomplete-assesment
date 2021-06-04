@@ -6,12 +6,11 @@ from assess_keystroke import get_user_input, file_name_to_absolute
 
 Ranking_Number = 500
 
-
 def assess_file_acuracy(file_name, model):
     N = model.N
-    right_answer_result = [0 for _ in range(Ranking_Number)]
-    prediction_cnt = 0
-    in_suggest_cnt = 0
+    file_prediction_result = [0 for _ in range(Ranking_Number)]
+    file_predictable_num = 0
+    file_prediction_times = 0
 
     file_name = file_name_to_absolute(file_name)
     with open(file_name, 'r') as f:
@@ -40,46 +39,43 @@ def assess_file_acuracy(file_name, model):
             # 例：{'be':1, 'being':2}
             suggest_keywords = model.predict(
                 user_input, parsed_input, type_to_symbols, variables, labels)
-            prediction_cnt += 1
+            file_prediction_times += 1
 
             # 答えが提案候補に入っている数をカウント
             if answer in suggest_keywords:
-                in_suggest_cnt += 1
+                file_predictable_num += 1
                 rank = suggest_keywords[answer]
 
             if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
                 rank = suggest_keywords[answer]
-                right_answer_result[rank-1] += 1
+                file_prediction_result[rank-1] += 1
 
-    return right_answer_result, in_suggest_cnt, prediction_cnt
+    return file_prediction_result, file_predictable_num, file_prediction_times
 
-
-def assess_mml_acuracy(file_name, model):
-    accuracy = np.array([0 for _ in range(Ranking_Number)])
-    right_answer_nums = 0
+def assess_mml_accuracy(model):
+    prediction_result = np.array([0 for _ in range(Ranking_Number)])
+    predictable_num = 0
     prediction_times = 0
 
     mml_lar = open("/mnt/c/mizar/mml.lar", "r")
     mml = []
     for i in mml_lar.readlines():
-        mml.append(os.path.join('./learning_data', i.replace('\n', '.json')))
+        mml.append(i.replace('\n', '.json'))
     mml_lar.close()
-    for file_path in mml[:1100]:
+    for file_path in mml[1100:1356]:
         print(file_path)
         try:
-            file_accuracy, file_right_answer_nums, file_prediction_times = assess_file_acuracy(
-                file_name, model)
-            accuracy += file_accuracy
-            right_answer_nums += file_right_answer_nums
+            file_prediction_result, file_predictable_num, file_prediction_times = assess_file_acuracy(
+                file_path, model)
+            prediction_result += file_prediction_result
+            predictable_num += file_predictable_num
             prediction_times += file_prediction_times
         except Exception as e:
             print(e)
             continue
-    print(accuracy)
-    # draw(model.N, accuracy, prediction_times)
-    return None
+    draw(model.N, prediction_result, prediction_times)
 
-def draw(N, accuracy, prediction_times):
+def draw(N, prediction_result, prediction_times):
     title = str(N)+'-gram(trie)'
     plt.title(title)
     plt.xlabel('Ranking')
@@ -87,8 +83,7 @@ def draw(N, accuracy, prediction_times):
     plt.ylim(0, 100)
     plt.grid(True)
 
-    # 精度測定後に自動で
-    result = accuracy
+    result = prediction_result
     total = prediction_times
 
     left = np.array([i+1 for i in range(len(result))])
@@ -96,7 +91,6 @@ def draw(N, accuracy, prediction_times):
     plt.bar(left, height)
     count = 0
     for x, y in zip(left, height):
-        # plt.text(x, y, str(int(round(height[count], 0))), ha='center', va='bottom', fontsize=7)
         plt.text(x, y, '', ha='center', va='bottom', fontsize=7)
         count += 1
     plt.savefig(f'graphs/{title}.jpg')
