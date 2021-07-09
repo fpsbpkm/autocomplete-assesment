@@ -2,8 +2,11 @@ import pickle
 import re
 import os
 import json
+import numpy as np
 from assess_keystroke import assess_file_keystroke
-from assess_accuracy import assess_file_acuracy, assess_mml_accuracy
+from assess_accuracy import assess_file_accuracy, assess_mml_accuracy
+from collections import OrderedDict
+from pprint import pprint
 
 class TrieNode:
     def __init__(self, name):
@@ -125,17 +128,19 @@ class TrieNgramModel():
 
         # {キーワード:優先度}の形式で保存する
         # 例：{"be":1, "being":2}
-        suggest_keywords = {}
+        suggest_keywords = OrderedDict({})
         rank = len(suggest_keywords) + 1
         # 「__variable_」「__M_」などを展開する処理
         for keyword in sorted_keywords:
             matched = re.match(r'__(\w\d*)_', keyword[0])
             if matched:
                 symbol_type = matched.groups()[0]
+
+                # 本来はあり得ない条件
                 if symbol_type is None:
-                    return {}
+                    continue
                 
-                # importしていない種類が提案された場合は考えない
+                # 環境部でimportしていない種類が提案された場合は考えない
                 if not symbol_type in type_to_symbols:
                     continue
             
@@ -143,33 +148,49 @@ class TrieNgramModel():
                 for word in type_to_symbols[symbol_type[0]]:
                     suggest_keywords[word] = rank
                     # REVIEW:+1すべきか要確認
-                    rank = len(suggest_keywords)
+                    rank = len(suggest_keywords) + 1
             
             # ユーザが利用した変数を提案
             elif keyword[0] == '__variable_':
                 for v in list(variables)[::-1]:
                     suggest_keywords[v] = rank
-                    rank = len(suggest_keywords)
+                    rank = len(suggest_keywords) + 1
             elif keyword[0] == '__label_':
                 for l in list(labels)[::-1]:
                     suggest_keywords[l] = rank
-                    rank = len(suggest_keywords)
+                    rank = len(suggest_keywords) + 1
             elif keyword[0] == '__number_':
                 pass
             else:
                 suggest_keywords[keyword[0]] = rank
-                rank = len(suggest_keywords)
+                rank = len(suggest_keywords) + 1
         
         return suggest_keywords
 
 
 if __name__ == '__main__':
     trie_model = TrieNgramModel()
-    original_cost, cost, saving_cost = assess_file_keystroke('nomin_6.json', trie_model)
-    print(original_cost, cost, saving_cost)
-    # right_answer_result, in_suggest_cnt, prediction_cnt = assess_file_acuracy(
-    #     'nomin_6.json', trie_model)
-    # print(right_answer_result, in_suggest_cnt, prediction_cnt)
-    # assess_mml_accuracy(trie_model)
+    # original_cost, cost, saving_cost = assess_file_keystroke('nomin_6.json', trie_model)
+    # print(original_cost, cost, saving_cost)
+    all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
+        'glib_008.json', trie_model)
 
-
+    all_token_cnt = sum(all_token_nums.values())
+    token_cnt = all_token_cnt
+    np.set_printoptions(precision=1)
+    # 各文字入力の段階での正答率を表示したい
+    for i in range(len(all_result)):
+        tmp = np.array(all_result[i])
+        # pprint(f'{i}文字入力の場合：{tmp}')
+        pprint(f'{i}文字入力の場合：{(tmp/token_cnt*100)}, {sum(tmp/token_cnt*100):.1f}%')
+        # pprint(f'{i+1}文字以上のトークンの存在率：{(token_cnt/all_token_cnt*100):.1f}%, トークン数：{token_cnt}')
+        # print()
+        # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
+        all_token_nums.setdefault(i+1, 0)
+        # i+1文字以下のトークン数は分母から除外する
+        # 例：ユーザが1文字の入力を終えたなら，分母は全トークンの内2文字以上のものになる
+        token_cnt -= all_token_nums[i+1]
+    
+    # pprint(all_result)
+    # print(f'予測はできてたキーワード数：{in_suggest_cnt}')
+    print(f'全予測数：{all_token_cnt}')

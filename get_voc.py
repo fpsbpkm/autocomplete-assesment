@@ -1,7 +1,7 @@
 import os
 import preprocess
 
-DATA_DIR = '/home/fpsbpkm/emparser/build/lib.linux-x86_64-3.7/emparser/data/'
+DATA_DIR = './data/'
 MML_VCT = os.path.join(DATA_DIR, 'mml.vct')
 MML_DIR = '/mnt/c/mizar/mml'
 

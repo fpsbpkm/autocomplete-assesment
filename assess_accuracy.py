@@ -3,10 +3,15 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 from assess_keystroke import get_user_input, file_name_to_absolute
+from collections import OrderedDict, deque
+from pprint import pprint 
 
-Ranking_Number = 500
+Ranking_Number = 5
 
-def assess_file_acuracy(file_name, model):
+all_token_nums = OrderedDict({})
+all_result = OrderedDict({})
+
+def assess_file_accuracy(file_name, model):
     N = model.N
     file_prediction_result = [0 for _ in range(Ranking_Number)]
     file_predictable_num = 0
@@ -30,8 +35,12 @@ def assess_file_acuracy(file_name, model):
             line_tokens.append(token[0])
             parsed_tokens.append(token[1])
 
-        for i in range(1, len(line_tokens)):
+        for i in range(1, len(line_tokens)-1):
             answer = line[i][0]
+            # 文字数ごとに全トークンの数をカウント
+            # （精度評価でユーザがn文字入力したときの分母として利用するため）
+            all_token_nums.setdefault(len(answer), 0)
+            all_token_nums[len(answer)] += 1
             user_input, parsed_input = get_user_input(
                 N, i, line_tokens, parsed_tokens)
 
@@ -46,11 +55,45 @@ def assess_file_acuracy(file_name, model):
                 file_predictable_num += 1
                 rank = suggest_keywords[answer]
 
-            if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
-                rank = suggest_keywords[answer]
-                file_prediction_result[rank-1] += 1
+            # if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
+            #     rank = suggest_keywords[answer]
+            #     file_prediction_result[rank-1] += 1
 
-    return file_prediction_result, file_predictable_num, file_prediction_times
+            # ユーザが入力をして，候補が更新された場合の各精度
+            for input_idx in range(0, len(answer)):
+                # input_idx文字以上の文字数のトークンをカウントする変数
+                denominator_cnt = 0
+                tmp = deque([])
+                for keyword in suggest_keywords:
+                    if keyword.startswith(answer[:input_idx]):
+                        tmp.append(keyword)
+                    if len(keyword) >= input_idx:
+                        denominator_cnt = 0
+                suggest_keywords = OrderedDict({})
+                prediction_result = [0 for _ in range(Ranking_Number)]
+                for keyword in tmp:
+                    # 入力済みのものは候補に含めない
+                    # 例：
+                    # ユーザが「suppose」と入力が完了した場合，
+                    # 候補内に「supopse」が存在しても正解としてカウントしない
+                    if answer[:input_idx] == keyword:
+                        continue
+                    suggest_keywords[keyword] = len(suggest_keywords) + 1
+                
+                # n文字入力した場合，n文字のキーワードは考えない
+                if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
+                    rank = suggest_keywords[answer]
+                    all_result.setdefault(input_idx, [0 for _ in range(Ranking_Number)])
+                    all_result[input_idx][rank-1] += 1
+                    
+                
+                # pprint(f'答え:{answer}')
+                # pprint(f'{input_idx}回目の入力')
+                # pprint(f'ユーザが入力した文字列：{answer[:input_idx]}')
+                # pprint(f'{suggest_keywords}')
+                # print()
+
+    return all_result, file_predictable_num, all_token_nums
 
 def assess_mml_accuracy(model):
     prediction_result = np.array([0 for _ in range(Ranking_Number)])

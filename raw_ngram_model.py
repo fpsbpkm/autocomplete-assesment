@@ -1,6 +1,9 @@
 import json
 from assess_keystroke import assess_file_keystroke
-from assess_acuracy import assess_file_acuracy
+from assess_accuracy import assess_file_accuracy
+import numpy as np
+from pprint import pprint 
+from collections import OrderedDict
 
 # N-gramの学習（カウント）ファイルを取得
 json_open2 = open("jsons/output2.json", 'r')
@@ -45,6 +48,16 @@ if __name__ == '__main__':
     raw_ngram = RawNgramModel()
     # original_cost, cost, saving_cost = assess_file_keystroke('diophan2.json', raw_ngram)
     # print(original_cost, cost, saving_cost)
-    right_answer_result, in_suggest_cnt, prediction_cnt = assess_file_acuracy(
-        'diophan2.json', raw_ngram)
-    print(right_answer_result, in_suggest_cnt, prediction_cnt)
+    all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
+        'nomin_5.json', raw_ngram)
+
+    all_token_cnt = sum(all_token_nums.values())
+    # pprint(all_result)
+    np.set_printoptions(precision=1)
+    # 各文字入力の段階での正答率を表示したい
+    for i in range(len(all_result)):
+        tmp = np.array(all_result[i])
+        pprint(f'{i}文字入力の場合：{(tmp/all_token_cnt*100)}, {sum(tmp/all_token_cnt*100):.1f}%')
+        # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
+        all_token_nums.setdefault(i+1, 0)
+        all_token_cnt -= all_token_nums[i+1]

@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
@@ -86,7 +87,7 @@ def assess_file_keystroke(file_name, model):
                         for keyword in suggest_keywords:
                             if keyword.startswith(answer[:input_idx]):
                                 tmp.append(keyword)
-                        suggest_keywords = {}
+                        suggest_keywords = OrderedDict({})
                         # 提案キーワードの順位を保持する変数
                         cnt = 1
                         for keyword in tmp:

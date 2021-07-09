@@ -5,7 +5,7 @@ import glob, json
 from pprint import pprint
 from get_voc import load_symbol_dict, parse_voc
 
-DATA_DIR = '/home/fpsbpkm/emparser/build/lib.linux-x86_64-3.7/emparser/data/'
+DATA_DIR = './data/'
 MML_VCT = os.path.join(DATA_DIR, 'mml.vct')
 MML_DIR = '/mnt/c/mizar/mml'
 
@@ -169,4 +169,4 @@ if __name__ == '__main__':
             print(filename)
 
     # 「by ~ ;」間で改行された場合にも対応するための後処理
-    post_processing()
+    # post_processing()
