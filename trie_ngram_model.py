@@ -1,4 +1,5 @@
 import pickle
+import time
 import re
 import os
 import json
@@ -169,15 +170,18 @@ class TrieNgramModel():
 
 
 if __name__ == '__main__':
+    start = time.time()
     trie_model = TrieNgramModel()
-    # original_cost, cost, saving_cost = assess_file_keystroke('nomin_6.json', trie_model)
+    # original_cost, cost, saving_cost = assess_file_keystroke('scmfsa_2.json', trie_model)
     # print(original_cost, cost, saving_cost)
+
     all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
-        'glib_008.json', trie_model)
+        'scmfsa_2.json', trie_model)
 
     all_token_cnt = sum(all_token_nums.values())
     token_cnt = all_token_cnt
     np.set_printoptions(precision=1)
+
     # 各文字入力の段階での正答率を表示したい
     for i in range(len(all_result)):
         tmp = np.array(all_result[i])
@@ -194,3 +198,5 @@ if __name__ == '__main__':
     # pprint(all_result)
     # print(f'予測はできてたキーワード数：{in_suggest_cnt}')
     print(f'全予測数：{all_token_cnt}')
+    elapsed_time = time.time() - start
+    print (f"elapsed_time:{elapsed_time}")

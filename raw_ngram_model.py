@@ -1,4 +1,5 @@
 import json
+import time
 from assess_keystroke import assess_file_keystroke
 from assess_accuracy import assess_file_accuracy
 import numpy as np
@@ -45,11 +46,12 @@ class RawNgramModel:
 
 
 if __name__ == '__main__':
+    start = time.time()
     raw_ngram = RawNgramModel()
     # original_cost, cost, saving_cost = assess_file_keystroke('diophan2.json', raw_ngram)
     # print(original_cost, cost, saving_cost)
     all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
-        'nomin_5.json', raw_ngram)
+        'scmfsa_2.json', raw_ngram)
 
     all_token_cnt = sum(all_token_nums.values())
     # pprint(all_result)
@@ -61,3 +63,5 @@ if __name__ == '__main__':
         # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
         all_token_nums.setdefault(i+1, 0)
         all_token_cnt -= all_token_nums[i+1]
+    elapsed_time = time.time() - start
+    print (f"elapsed_time:{elapsed_time}")

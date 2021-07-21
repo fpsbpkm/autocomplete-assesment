@@ -82,6 +82,12 @@ def assess_file_accuracy(file_name, model):
                 
                 # n文字入力した場合，n文字のキーワードは考えない
                 if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
+                    
+                    # print(f'カーソル直前までの入力：{user_input}')
+                    # print(f'{input_idx}文字入力')
+                    # print(f'answer:{answer}, rank:{suggest_keywords[answer]}')
+                    # print(f'suggest:{suggest_keywords}')
+                    # print()
                     rank = suggest_keywords[answer]
                     all_result.setdefault(input_idx, [0 for _ in range(Ranking_Number)])
                     all_result[input_idx][rank-1] += 1
