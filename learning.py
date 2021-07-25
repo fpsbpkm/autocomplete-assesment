@@ -1,3 +1,6 @@
+# raw-ngramモデル用
+# 移植予定
+
 import preprocess
 import os
 import re

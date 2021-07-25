@@ -1,3 +1,5 @@
+# トークンに種類を付与する前処理するプログラム
+# .mizファイルから.jsonファイルを生成
 import preprocess
 import os
 import re
