@@ -179,8 +179,6 @@ if __name__ == '__main__':
     #     'scmfsa_2.json', trie_model)
 
     assess_mml_accuracy(trie_model)
-
     np.set_printoptions(precision=1)
-
     elapsed_time = time.time() - start_time
-    print (f"elapsed_time:{elapsed_time}")
+    print(f"elapsed_time:{elapsed_time}")

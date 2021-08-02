@@ -117,7 +117,7 @@ def assess_mml_accuracy(model):
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', '.json'))
     mml_lar.close()
-    for file_path in mml[1100:1120]:
+    for file_path in mml[1100:1356]:
         print(file_path)
         try:
             file_all_result, file_predictable_num, file_all_token_nums, file_prediction_times = assess_file_accuracy(
@@ -134,18 +134,13 @@ def assess_mml_accuracy(model):
             all_result.setdefault(i, np.array([0 for _ in range(Ranking_Number)]))
             all_token_nums.setdefault(i+1, 0)
             all_result[i] += np.array(file_all_result[i])
-            # print(all_token_nums)
-            # print(file_all_token_nums[i])
             all_token_nums[i+1] += np.array(file_all_token_nums[i+1])
 
     for i in range(3):
         prediction_result = all_result[i]
-        print(prediction_result)
         draw(model.N, prediction_result, prediction_times, i)
         # i(>0)文字以下は予測対象外なので除外
         prediction_times -= all_token_nums[i+1]
-        print(f'prediction_times:{prediction_times}')
-    print('end')
 
 
 
@@ -161,7 +156,6 @@ def draw(N, prediction_result, prediction_times, i):
     total = prediction_times
 
     left = np.array([i+1 for i in range(len(result))])
-    print(f'result:{result}, total:{total}')
     height = np.array(result.cumsum()/total) * 100
     plt.bar(left, height)
     count = 0
