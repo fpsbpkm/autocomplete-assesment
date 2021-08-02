@@ -139,13 +139,13 @@ def assess_mml_accuracy(model):
     for i in range(3):
         prediction_result = all_result[i]
         draw(model.N, prediction_result, prediction_times, i)
-        # i(>0)文字以下は予測対象外なので除外
+        # 入力済みのi+1文字以下は予測対象外なので除外
         prediction_times -= all_token_nums[i+1]
 
 
 
 def draw(N, prediction_result, prediction_times, i):
-    title = f'{N}-gram(trie):typing {i} characters'
+    title = f'{N}-gram(raw):typing {i} characters'
     plt.title(title)
     plt.xlabel('Ranking')
     plt.ylabel('Correct answer rate (cumulated) [%]')
