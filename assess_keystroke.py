@@ -1,5 +1,5 @@
 import json
-from collections import OrderedDict
+from collections import OrderedDict, deque
 
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
@@ -51,8 +51,8 @@ def assess_file_keystroke(file_name, model):
             original_cost += remaining_cost
             user_input, parsed_input = get_user_input(N, idx, line_tokens, parsed_tokens)
             suggest_keywords = model.predict(
-                user_input, 
-                parsed_input, 
+                user_input,
+                parsed_input,
                 type_to_symbols,
                 variables,
                 labels
@@ -83,7 +83,7 @@ def assess_file_keystroke(file_name, model):
                             cost += remaining_cost
                             break
                         # 提案キーワード群の更新
-                        tmp = []
+                        tmp = deque()
                         for keyword in suggest_keywords:
                             if keyword.startswith(answer[:input_idx]):
                                 tmp.append(keyword)
@@ -96,4 +96,27 @@ def assess_file_keystroke(file_name, model):
             else:
                 cost += remaining_cost
     print(f'トークン平均文字数：{original_cost/token_counter}')
-    return original_cost, cost, saving_cost
+    return original_cost, saving_cost, token_counter
+
+def assess_mml_keystroke(model):
+    original_cost, reduced_cost, token_counter = 0, 0, 0 
+
+    mml_lar = open("/mnt/c/mizar/mml.lar", "r")
+    mml = []
+    for i in mml_lar.readlines():
+        mml.append(i.replace('\n', '.json'))
+    mml_lar.close()
+    for file_path in mml[1100:1356]:
+        print(file_path)
+        print(original_cost, reduced_cost, token_counter)
+        try:
+            file_original_cost, file_reduced_cost, file_token_counter = assess_file_keystroke(file_path, model)
+            original_cost += file_original_cost
+            reduced_cost += file_reduced_cost
+            token_counter += file_token_counter
+
+        except Exception as e:
+            print(e)
+            continue
+    
+    return original_cost, reduced_cost, token_counter

@@ -4,7 +4,7 @@ import re
 import os
 import json
 import numpy as np
-from assess_keystroke import assess_file_keystroke
+from assess_keystroke import assess_file_keystroke, assess_mml_keystroke
 from assess_accuracy import assess_file_accuracy, assess_mml_accuracy
 from collections import OrderedDict
 from pprint import pprint
@@ -170,33 +170,17 @@ class TrieNgramModel():
 
 
 if __name__ == '__main__':
-    start = time.time()
+    start_time = time.time()
     trie_model = TrieNgramModel()
     # original_cost, cost, saving_cost = assess_file_keystroke('scmfsa_2.json', trie_model)
     # print(original_cost, cost, saving_cost)
 
-    all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
-        'scmfsa_2.json', trie_model)
+    # all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
+    #     'scmfsa_2.json', trie_model)
 
-    all_token_cnt = sum(all_token_nums.values())
-    token_cnt = all_token_cnt
+    assess_mml_accuracy(trie_model)
+
     np.set_printoptions(precision=1)
 
-    # 各文字入力の段階での正答率を表示したい
-    for i in range(len(all_result)):
-        tmp = np.array(all_result[i])
-        # pprint(f'{i}文字入力の場合：{tmp}')
-        pprint(f'{i}文字入力の場合：{(tmp/token_cnt*100)}, {sum(tmp/token_cnt*100):.1f}%')
-        # pprint(f'{i+1}文字以上のトークンの存在率：{(token_cnt/all_token_cnt*100):.1f}%, トークン数：{token_cnt}')
-        # print()
-        # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
-        all_token_nums.setdefault(i+1, 0)
-        # i+1文字以下のトークン数は分母から除外する
-        # 例：ユーザが1文字の入力を終えたなら，分母は全トークンの内2文字以上のものになる
-        token_cnt -= all_token_nums[i+1]
-    
-    # pprint(all_result)
-    # print(f'予測はできてたキーワード数：{in_suggest_cnt}')
-    print(f'全予測数：{all_token_cnt}')
-    elapsed_time = time.time() - start
+    elapsed_time = time.time() - start_time
     print (f"elapsed_time:{elapsed_time}")

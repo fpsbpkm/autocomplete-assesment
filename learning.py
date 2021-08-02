@@ -6,33 +6,11 @@ import os
 import re
 import glob, json
 
-RESERVED_WORDS = set(['according','aggregate','all','and','antonym','are','as',
-  'associativity','assume','asymmetry','attr','be','begin','being','by',
-  'canceled','case','cases','cluster','coherence','commutativity',
-  'compatibility','connectedness','consider','consistency','constructors',
-  'contradiction','correctness','def','deffunc','define','definition',
-  'definitions','defpred','do','does','end','environ','equals','ex','exactly',
-  'existence','for','from','func','given','hence','hereby','holds',
-  'idempotence','identify','if','iff','implies','involutiveness',
-  'irreflexivity','is','it','let','means','mode','non','not','notation',
-  'notations','now','of','or','otherwise','over','per','pred','prefix',
-  'projectivity','proof','provided','qua','reconsider','reduce','reducibility',
-  'redefine','reflexivity','registration','registrations','requirements',
-  'reserve','sch','scheme','schemes','section','selector','set','sethood','st',
-  'struct','such','suppose','symmetry','synonym','take','that','the','then',
-  'theorem','theorems','thesis','thus','to','transitivity','uniqueness',
-  'vocabularies','when','where','with','wrt'])
-
-SPECIAL_SYMBOLS = set([',', ';', ':', '(', ')', '[', ']', '{', '}', '=', '&',
-    '->', '.=', '$1', '$2', '$3','$4','$5','$6','$7','$8','$9', '(#', '#)',
-    '...', '$10'])
-
 DATA_DIR = 'data'
 MML_VCT = os.path.join('.', DATA_DIR, 'mml.vct')
 MML_DIR = '/mnt/c/mizar/mml'
-data = {}
-
-N = 2
+key_word_sequence_data = {}
+N = 4
 
 def count_ngram(tokens, n):
     # variable_history = create_variable_history()
@@ -41,27 +19,23 @@ def count_ngram(tokens, n):
 
     for line in tokens:
 
-        # 変数を型に置き換える処理
         replaced_line = []
+        # 接頭辞を消す処理
         for i in range(len(line)):
-
-            if is_variable(line, i) and is_replaced_variable:
-                replaced_line.append('___')
+            matched = re.match(r'__(\w\d*)_', line[i])
+            if matched:
+                replaced_line.append(re.sub(r'__(\w\d*)_' ,'', line[i]))
             else:
-                matched = re.match(r'__\w+_', line[i])
-                if matched:
-                    replaced_line.append(re.sub(r'__\w+_' ,'', line[i]))
-                else:
-                    replaced_line.append(line[i])
+                replaced_line.append(line[i])
     
         # N-gramのパターンを保存，カウントする処理
         for i in range(len(line)-n+1):
-            temp = replaced_line[i:i+n]
-            key = ' '.join(temp)
-            if not key in data:
-                data[key] = 1
+            keyword_sequence = replaced_line[i:i+n]
+            key = ' '.join(keyword_sequence)
+            if not key in key_word_sequence_data:
+                key_word_sequence_data[key] = 1
             else:
-                data[key] += 1
+                key_word_sequence_data[key] += 1
 
 if __name__ == '__main__':
 
@@ -102,17 +76,17 @@ if __name__ == '__main__':
             continue
         tokens = []
         for line in tokenized_lines:
-            # i = re.sub('__\w+_', '', i)
+            # i = re.sub('__(\w\d*)_', '', i)
             tokens.append(line.split())
 
         count_ngram(tokens, N)
         
-    result = sorted(data.items(), key=lambda x:x[1], reverse=True)
+    result = sorted(key_word_sequence_data.items(), key=lambda x:x[1], reverse=True)
 
-    result_list = [i[0] for i in result if i[1] >= 10]
+    result_list = [i[0] for i in result if i[1] >= 100]
     completions = {'completions': result_list}
 
-    with open('./jsons/output2_10(replaced=False).json', 'w') as f:
+    with open('./jsons/output4.json', 'w') as f:
         json.dump(completions, f)
 
     mml_lar.close()

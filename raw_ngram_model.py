@@ -1,7 +1,7 @@
 import json
 import time
-from assess_keystroke import assess_file_keystroke
-from assess_accuracy import assess_file_accuracy
+from assess_keystroke import assess_file_keystroke, assess_mml_keystroke
+from assess_accuracy import assess_file_accuracy, assess_mml_accuracy
 import numpy as np
 from pprint import pprint 
 from collections import OrderedDict
@@ -13,8 +13,12 @@ json_load2 = json.load(json_open2)
 json_open3 = open("jsons/output3.json", "r")
 json_load3 = json.load(json_open3)
 
+json_open4 = open('jsons/output4.json', 'r')
+json_load4 = json.load(json_open4)
+
 keywords2 = json_load2["completions"]
 keywords3 = json_load3["completions"]
+keywords4 = json_load4["completions"]
 
 class RawNgramModel:
     def __init__(self):
@@ -28,12 +32,13 @@ class RawNgramModel:
 
         # 入力補完のロジック
         if len(user_input_list) == 1:
-            keywords = keywords2
-            user_input_string = " ".join(user_input_list)
-        else:
+            keywords = keywords2    
+        elif len(user_input_list) == 2:
             keywords = keywords3
-            user_input_string = " ".join(user_input_list)
-
+        else:
+            keywords = keywords4
+            
+        user_input_string = " ".join(user_input_list)
         rank = 0
         for kw in keywords:
             if kw.startswith(user_input_string) == False:
@@ -48,20 +53,28 @@ class RawNgramModel:
 if __name__ == '__main__':
     start = time.time()
     raw_ngram = RawNgramModel()
+    original_cost, reduced_cost, token_counter = assess_mml_keystroke(raw_ngram)
+
+    print()
+    print(f'N={raw_ngram.N}')
+    print(f'元々のストローク数：{original_cost} 削減したストローク数{reduced_cost} 予測した回数：{token_counter}')
+    print(f'削減割合：{(reduced_cost / original_cost)}')
+    print(f'平均トークン長：{original_cost / token_counter}')
+
     # original_cost, cost, saving_cost = assess_file_keystroke('diophan2.json', raw_ngram)
     # print(original_cost, cost, saving_cost)
-    all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
-        'scmfsa_2.json', raw_ngram)
+    # all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
+    #     'scmfsa_2.json', raw_ngram)
 
-    all_token_cnt = sum(all_token_nums.values())
-    # pprint(all_result)
-    np.set_printoptions(precision=1)
-    # 各文字入力の段階での正答率を表示したい
-    for i in range(len(all_result)):
-        tmp = np.array(all_result[i])
-        pprint(f'{i}文字入力の場合：{(tmp/all_token_cnt*100)}, {sum(tmp/all_token_cnt*100):.1f}%')
-        # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
-        all_token_nums.setdefault(i+1, 0)
-        all_token_cnt -= all_token_nums[i+1]
+    # all_token_cnt = sum(all_token_nums.values())
+    # # pprint(all_result)
+    # np.set_printoptions(precision=1)
+    # # 各文字入力の段階での正答率を表示したい
+    # for i in range(len(all_result)):
+    #     tmp = np.array(all_result[i])
+    #     pprint(f'{i}文字入力の場合：{(tmp/all_token_cnt*100)}, {sum(tmp/all_token_cnt*100):.1f}%')
+    #     # 特定の文字数のトークンが必ず存在している保証はないため，その場合は0で初期化
+    #     all_token_nums.setdefault(i+1, 0)
+    #     all_token_cnt -= all_token_nums[i+1]
     elapsed_time = time.time() - start
     print (f"elapsed_time:{elapsed_time}")

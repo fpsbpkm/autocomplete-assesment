@@ -6,16 +6,17 @@ from assess_keystroke import get_user_input, file_name_to_absolute
 from collections import OrderedDict, deque
 from pprint import pprint 
 
-Ranking_Number = 5
-
-all_token_nums = OrderedDict({})
-all_result = OrderedDict({})
+# 何候補目までの精度を計測するか指定
+Ranking_Number = 10
 
 def assess_file_accuracy(file_name, model):
     N = model.N
-    file_prediction_result = [0 for _ in range(Ranking_Number)]
     file_predictable_num = 0
     file_prediction_times = 0
+
+    file_all_result = OrderedDict()
+    file_all_token_nums = OrderedDict({})
+
 
     file_name = file_name_to_absolute(file_name)
     with open(file_name, 'r') as f:
@@ -39,8 +40,8 @@ def assess_file_accuracy(file_name, model):
             answer = line[i][0]
             # 文字数ごとに全トークンの数をカウント
             # （精度評価でユーザがn文字入力したときの分母として利用するため）
-            all_token_nums.setdefault(len(answer), 0)
-            all_token_nums[len(answer)] += 1
+            file_all_token_nums.setdefault(len(answer), 0)
+            file_all_token_nums[len(answer)] += 1
             user_input, parsed_input = get_user_input(
                 N, i, line_tokens, parsed_tokens)
 
@@ -54,10 +55,6 @@ def assess_file_accuracy(file_name, model):
             if answer in suggest_keywords:
                 file_predictable_num += 1
                 rank = suggest_keywords[answer]
-
-            # if answer in suggest_keywords and suggest_keywords[answer] <= Ranking_Number:
-            #     rank = suggest_keywords[answer]
-            #     file_prediction_result[rank-1] += 1
 
             # ユーザが入力をして，候補が更新された場合の各精度
             for input_idx in range(0, len(answer)):
@@ -89,8 +86,8 @@ def assess_file_accuracy(file_name, model):
                     # print(f'suggest:{suggest_keywords}')
                     # print()
                     rank = suggest_keywords[answer]
-                    all_result.setdefault(input_idx, [0 for _ in range(Ranking_Number)])
-                    all_result[input_idx][rank-1] += 1
+                    file_all_result.setdefault(input_idx, [0 for _ in range(Ranking_Number)])
+                    file_all_result[input_idx][rank-1] += 1
                     
                 
                 # pprint(f'答え:{answer}')
@@ -99,10 +96,19 @@ def assess_file_accuracy(file_name, model):
                 # pprint(f'{suggest_keywords}')
                 # print()
 
-    return all_result, file_predictable_num, all_token_nums
+    return file_all_result, file_predictable_num, file_all_token_nums, file_prediction_times
 
 def assess_mml_accuracy(model):
-    prediction_result = np.array([0 for _ in range(Ranking_Number)])
+    # all_token_numsにトークンの文字数ごとの出現数
+    # （i文字入力した場合，i文字以下のトークンは対象外のため保存する必要がある）
+    all_token_nums = OrderedDict({})
+
+    # all_resultにi文字入力した場合の正解率をそれぞれ保存しておく
+    # 例：OrderedDict([(0, [0.2, 0.1, 0.05 ...]), (1, [0.5, 0.2, 0.1 ...])])
+    all_result = OrderedDict({})
+
+    # prediction_result = np.array([0 for _ in range(Ranking_Number)])
+    # prediction_result = OrderedDict({})
     predictable_num = 0
     prediction_times = 0
 
@@ -111,21 +117,40 @@ def assess_mml_accuracy(model):
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', '.json'))
     mml_lar.close()
-    for file_path in mml[1100:1356]:
+    for file_path in mml[1100:1120]:
         print(file_path)
         try:
-            file_prediction_result, file_predictable_num, file_prediction_times = assess_file_acuracy(
+            file_all_result, file_predictable_num, file_all_token_nums, file_prediction_times = assess_file_accuracy(
                 file_path, model)
-            prediction_result += file_prediction_result
-            predictable_num += file_predictable_num
-            prediction_times += file_prediction_times
         except Exception as e:
             print(e)
             continue
-    draw(model.N, prediction_result, prediction_times)
+    
+        predictable_num += file_predictable_num
+        prediction_times += file_prediction_times
+        # ユーザの2文字の入力まで保存
+        # file_all_resultから，all_resultに結果を加える
+        for i in range(3):
+            all_result.setdefault(i, np.array([0 for _ in range(Ranking_Number)]))
+            all_token_nums.setdefault(i+1, 0)
+            all_result[i] += np.array(file_all_result[i])
+            # print(all_token_nums)
+            # print(file_all_token_nums[i])
+            all_token_nums[i+1] += np.array(file_all_token_nums[i+1])
 
-def draw(N, prediction_result, prediction_times):
-    title = str(N)+'-gram(trie)'
+    for i in range(3):
+        prediction_result = all_result[i]
+        print(prediction_result)
+        draw(model.N, prediction_result, prediction_times, i)
+        # i(>0)文字以下は予測対象外なので除外
+        prediction_times -= all_token_nums[i+1]
+        print(f'prediction_times:{prediction_times}')
+    print('end')
+
+
+
+def draw(N, prediction_result, prediction_times, i):
+    title = f'{N}-gram(trie):typing {i} characters'
     plt.title(title)
     plt.xlabel('Ranking')
     plt.ylabel('Correct answer rate (cumulated) [%]')
@@ -136,6 +161,7 @@ def draw(N, prediction_result, prediction_times):
     total = prediction_times
 
     left = np.array([i+1 for i in range(len(result))])
+    print(f'result:{result}, total:{total}')
     height = np.array(result.cumsum()/total) * 100
     plt.bar(left, height)
     count = 0
