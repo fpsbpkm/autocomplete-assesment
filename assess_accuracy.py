@@ -8,6 +8,8 @@ from pprint import pprint
 
 # 何候補目までの精度を計測するか指定
 Ranking_Number = 10
+# 何文字目までの入力文字数の精度を計測するか指定
+Input_Length = 6
 
 def assess_file_accuracy(file_name, model):
     N = model.N
@@ -130,24 +132,31 @@ def assess_mml_accuracy(model):
         prediction_times += file_prediction_times
         # ユーザの2文字の入力まで保存
         # file_all_resultから，all_resultに結果を加える
-        for i in range(3):
+        for i in range(Input_Length):
             all_result.setdefault(i, np.array([0 for _ in range(Ranking_Number)]))
             all_token_nums.setdefault(i+1, 0)
             all_result[i] += np.array(file_all_result[i])
             all_token_nums[i+1] += np.array(file_all_token_nums[i+1])
 
-    for i in range(3):
+    print()
+    print(model.N)
+    print(all_result)
+    print(prediction_times)
+
+    for i in range(Input_Length):
         prediction_result = all_result[i]
         draw(model.N, prediction_result, prediction_times, i)
         # 入力済みのi+1文字以下は予測対象外なので除外
         prediction_times -= all_token_nums[i+1]
+    
+
 
 
 
 def draw(N, prediction_result, prediction_times, i):
-    title = f'{N}-gram(raw):typing {i} characters'
+    title = f'{N}-gram(trie)):typing {i} characters'
     plt.title(title)
-    plt.xlabel('Ranking')
+    plt.xlabel('Suggested number')
     plt.ylabel('Correct answer rate (cumulated) [%]')
     plt.ylim(0, 100)
     plt.grid(True)
@@ -163,3 +172,4 @@ def draw(N, prediction_result, prediction_times, i):
         plt.text(x, y, '', ha='center', va='bottom', fontsize=7)
         count += 1
     plt.savefig(f'graphs/{title}.jpg')
+    plt.clf()
