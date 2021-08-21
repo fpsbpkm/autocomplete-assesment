@@ -6,7 +6,7 @@ import json
 import numpy as np
 from assess_keystroke import assess_file_keystroke, assess_mml_keystroke
 from assess_accuracy import assess_file_accuracy, assess_mml_accuracy
-from collections import OrderedDict
+from collections import OrderedDict,deque
 from pprint import pprint
 
 class TrieNode:
@@ -40,7 +40,7 @@ class TrieNgramModel():
 
     def setup(self):
         try:
-            with open('trie_root', 'rb') as f:
+            with open('trie_root_raw', 'rb') as f:
                 self.root = pickle.load(f)
         except:
             self.root = TrieNode('root')
@@ -48,11 +48,14 @@ class TrieNgramModel():
 
     # トライ木の作成
     def learning(self):
+        excepted_files = deque()
+
         mml_lar = open("/mnt/c/mizar/mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
             mml.append(os.path.join('./learning_data', i.replace('\n', '.json')))
         mml_lar.close()
+        # FIXME:本来は1100
         for file_path in mml[0:1100]:
             try:
                 with open(file_path, 'r') as f:
@@ -64,8 +67,9 @@ class TrieNgramModel():
                 for line in article:
                     length = len(line)
                     for idx in range(1, length):
+                        # FIXME:生のトークンになっているため注意
                         # 予測対象のトークンを取得
-                        token = line[idx][1]
+                        token = line[idx][0]
                         parent_node = None
                         node = None
                         diff = 0
@@ -76,7 +80,8 @@ class TrieNgramModel():
                         for j in reversed(range(idx-N+1+diff, idx)):
                             if j == idx-1:
                                 parent_node = self.root
-                            node_name = line[j][1]
+                            # FIXME: 生のトークンになっているため，クラスにしたければline[j][1]にする必要がある
+                            node_name = line[j][0]
                             # 既に同名のノードが存在すれば取得
                             if node_name in parent_node.children:
                                 node = parent_node.children[node_name]
@@ -95,10 +100,14 @@ class TrieNgramModel():
                             parent_node = node
             except Exception as e:
                 print(e)
+                excepted_files.append(file_path)
                 continue
         
-        with open('./trie_root', 'wb') as f:
+        # FIXME:生のトークン木と間違えないようにコメントアウト
+        with open('./trie_root_raw', 'wb') as f:
             pickle.dump(self.root, f)
+        
+        print(excepted_files)
 
     
     def predict(self, user_input, parsed_input, type_to_symbols, variables, labels):
@@ -110,7 +119,8 @@ class TrieNgramModel():
         for i in range(len(parsed_input_reversed)):
             # 入力は型トークン
             # 例：「__M_」「__variable_」など
-            token = parsed_input_reversed[i]
+            # FIXME:評価のためuser_input_reversed[i]としているが，本来はparsed_input_reversed[i]
+            token = user_input_reversed[i]
             # ユーザが利用していて，登録されていない変数を保存
             if token == '__variable_' and user_input_reversed[i] not in set(variables):
                 variables.append(user_input_reversed[i])
@@ -178,7 +188,7 @@ if __name__ == '__main__':
     # all_result, in_suggest_cnt, all_token_nums = assess_file_accuracy(
     #     'scmfsa_2.json', trie_model)
 
-    assess_mml_accuracy(trie_model)
-    np.set_printoptions(precision=1)
+    # assess_mml_accuracy(trie_model)
+    # np.set_printoptions(precision=1)
     elapsed_time = time.time() - start_time
-    print(f"elapsed_time:{elapsed_time}")
+    print(f"N:{trie_model.N}, elapsed_time:{elapsed_time}")

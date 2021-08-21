@@ -119,6 +119,8 @@ def assess_mml_accuracy(model):
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', '.json'))
     mml_lar.close()
+
+    excepted_files = deque()
     for file_path in mml[1100:1356]:
         print(file_path)
         try:
@@ -126,6 +128,7 @@ def assess_mml_accuracy(model):
                 file_path, model)
         except Exception as e:
             print(e)
+            excepted_files.append(file_path)
             continue
     
         predictable_num += file_predictable_num
@@ -140,21 +143,19 @@ def assess_mml_accuracy(model):
 
     print()
     print(model.N)
-    print(all_result)
+    pprint(all_result)
     print(prediction_times)
+    pprint(excepted_files)
 
     for i in range(Input_Length):
         prediction_result = all_result[i]
         draw(model.N, prediction_result, prediction_times, i)
         # 入力済みのi+1文字以下は予測対象外なので除外
         prediction_times -= all_token_nums[i+1]
-    
-
-
 
 
 def draw(N, prediction_result, prediction_times, i):
-    title = f'{N}-gram(trie)):typing {i} characters'
+    title = f'{N}-gram(raw)-typing {i} characters'
     plt.title(title)
     plt.xlabel('Suggested number')
     plt.ylabel('Correct answer rate (cumulated) [%]')
@@ -166,7 +167,7 @@ def draw(N, prediction_result, prediction_times, i):
 
     left = np.array([i+1 for i in range(len(result))])
     height = np.array(result.cumsum()/total) * 100
-    plt.bar(left, height)
+    plt.bar(left, height, color="blue")
     count = 0
     for x, y in zip(left, height):
         plt.text(x, y, '', ha='center', va='bottom', fontsize=7)
