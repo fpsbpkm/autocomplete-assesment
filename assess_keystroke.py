@@ -57,12 +57,15 @@ def assess_file_keystroke(file_name, model):
                 variables,
                 labels
             )
-            if remaining_cost <= 1:
+            # FIXME:コストが特殊キーのコストを0.5とした場合，1以上なら節約の可能性がある
+            if remaining_cost <= 0.5:
                 cost += remaining_cost
             elif answer in suggest_keywords:
                 input_idx = 0
-                while remaining_cost >= 2:
-                    select_cost = suggest_keywords[answer]
+                # FIXME:コストが特殊キーのコストを0.5とした場合，1以上なら節約の可能性がある
+                while remaining_cost >= 1:
+                    # Tabキー，矢印キーなどのコストを0.5にする
+                    select_cost = 0.5 * suggest_keywords[answer]
                     if select_cost < remaining_cost:
                         # print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggest_keywords[answer]}')
                         # print(f'本来のコスト:{len(answer)}')
@@ -79,7 +82,8 @@ def assess_file_keystroke(file_name, model):
                         # 1文字入力したため，トークンを入力するコストが「1」減少する
                         remaining_cost -= 1
                         # 残りのコストが2未満の場合は，節約にならないため，残りのコストを加えて終了
-                        if remaining_cost < 2:
+                        # FIXME:特殊キーのコストを0.5とする場合は，残りのコストが2でも節約できる可能性がある
+                        if remaining_cost < 1:
                             cost += remaining_cost
                             break
                         # 提案キーワード群の更新
@@ -101,14 +105,16 @@ def assess_file_keystroke(file_name, model):
 def assess_mml_keystroke(model):
     original_cost, reduced_cost, token_counter = 0, 0, 0 
 
-    mml_lar = open("/mnt/c/mizar/mml.lar", "r")
+    mml_lar = open("./mml.lar", "r")
     mml = []
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', '.json'))
     mml_lar.close()
     for file_path in mml[1100:1356]:
         print(file_path)
-        print(original_cost, reduced_cost, token_counter)
+        if original_cost != 0:
+            # print(original_cost, reduced_cost, reduced_cost/original_cost, token_counter)
+            pass
         try:
             file_original_cost, file_reduced_cost, file_token_counter = assess_file_keystroke(file_path, model)
             original_cost += file_original_cost
@@ -119,4 +125,5 @@ def assess_mml_keystroke(model):
             print(e)
             continue
     
+        print(original_cost, reduced_cost, reduced_cost/original_cost, token_counter)
     return original_cost, reduced_cost, token_counter

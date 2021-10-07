@@ -35,12 +35,13 @@ class TrieNode:
 
 class TrieNgramModel():
     def __init__(self):
-        self.N = 5
+        self.N = 2
         self.setup()
 
     def setup(self):
         try:
-            with open('trie_root_raw', 'rb') as f:
+            # FIXME:利用するトライ木に注意
+            with open('trie_root_raw_N_2', 'rb') as f:
                 self.root = pickle.load(f)
         except:
             self.root = TrieNode('root')
@@ -49,8 +50,7 @@ class TrieNgramModel():
     # トライ木の作成
     def learning(self):
         excepted_files = deque()
-
-        mml_lar = open("/mnt/c/mizar/mml.lar", "r")
+        mml_lar = open("./mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
             mml.append(os.path.join('./learning_data', i.replace('\n', '.json')))
@@ -104,7 +104,7 @@ class TrieNgramModel():
                 continue
         
         # FIXME:生のトークン木と間違えないようにコメントアウト
-        with open('./trie_root_raw', 'wb') as f:
+        with open('./trie_root_raw_N_2', 'wb') as f:
             pickle.dump(self.root, f)
         
         print(excepted_files)
@@ -189,6 +189,8 @@ if __name__ == '__main__':
     #     'scmfsa_2.json', trie_model)
 
     # assess_mml_accuracy(trie_model)
+    original_cost, reduced_cost, prediction_times = assess_mml_keystroke(trie_model)
+    # print(original_cost, reduced_cost, prediction_times)
     # np.set_printoptions(precision=1)
     elapsed_time = time.time() - start_time
     print(f"N:{trie_model.N}, elapsed_time:{elapsed_time}")

@@ -114,7 +114,7 @@ def assess_mml_accuracy(model):
     predictable_num = 0
     prediction_times = 0
 
-    mml_lar = open("/mnt/c/mizar/mml.lar", "r")
+    mml_lar = open("./mml.lar", "r")
     mml = []
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', '.json'))

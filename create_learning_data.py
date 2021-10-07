@@ -94,22 +94,18 @@ def post_processing():
         replace_json['contents'] = json_contents
 
 
-        with open(file_name, 'w') as f:
-            json.dump(replace_json, f)
-            print(file_name)
+        # with open(file_name, 'w') as f:
+        #     json.dump(replace_json, f)
+        #     print(file_name)
     
-
-
-
-
 if __name__ == '__main__':
     mml_lar = open("/mnt/c/mizar/mml.lar", "r")
     mml = []
+    error_file_to_msg = {}
     for i in mml_lar.readlines():
         mml.append(i.replace('\n', ''))
     
     for filename in mml:
-
         f = os.path.join(MML_DIR, filename)+'.miz'
         lexer = preprocess.Lexer()
         lexer.load_symbol_dict(MML_VCT)
@@ -120,14 +116,15 @@ if __name__ == '__main__':
             try:
                 lines = f.readlines()
                 assert len(lines) > 0
-            except:
+            except Exception as e:
                 continue
             env_lines, text_proper_lines = lexer.separate_env_and_text_proper(lines)
             text_proper_lines = lexer.remove_comment(text_proper_lines)
             # トークンの取得
             try:
                 tokenized_lines, position_map = lexer.lex(text_proper_lines)
-            except Exception:
+            except Exception as e:
+                error_file_to_msg[file_name] = str(e)
                 continue
             tokens = []
             for line in tokenized_lines:
@@ -157,7 +154,6 @@ if __name__ == '__main__':
         type_to_symbols = {}
         for key in symbol_dict:
             symbol_type = symbol_dict[key]['type']
-            
             if not symbol_type in type_to_symbols:
                 type_to_symbols[symbol_type] = [key]
             else:
@@ -166,9 +162,11 @@ if __name__ == '__main__':
         for symbol_type in type_to_symbols:
             file_dict['symbols'][symbol_type] = type_to_symbols[symbol_type]
 
-        with open(output_file, 'w') as f:
-            json.dump(file_dict, f)
-            print(filename)
+        # with open(output_file, 'w') as f:
+        #     json.dump(file_dict, f)
+        #     print(filename)
 
     # 「by ~ ;」間で改行された場合にも対応するための後処理
     # post_processing()
+    pprint(error_file_to_msg)
+    
