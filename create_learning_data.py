@@ -55,48 +55,13 @@ def check_token_type(line,idx):
         return "__number_"
     elif idx+1 <= len(line)-1 and line[idx+1] == ':':
         return "__label_"
-    # FIXME:byが手前にあるだけでは変数の可能性がある
+    # NOTE: ラベルと変数の区別が完璧ではないが，ほとんどの場合で正しく分類できていると思われる
     elif 'by' in set(line[:idx]):
         return "__label_"
     elif 'from' in set(line[:idx]):
         return "__label_"
     else:
         return "__variable_"
-
-# byと;の間の識別子をラベルに修正する関数
-def post_processing():
-    is_between_by_and_semicolon = False
-    JSONS_FILES = "./learning_data/*.json"
-    json_files = glob.glob(JSONS_FILES)
-
-    for file_name in json_files:
-        replace_json = {}
-        with open(file_name, 'r') as f:
-            json_loaded = json.load(f)
-        json_contents = json_loaded['contents']
-
-        replace_json['symbols'] = json_loaded['symbols']
-
-        for line in json_contents:
-            # lineは[[let, let], [x, __variable_], [be, be], ...]のような形式
-            for idx in range(len(line)):
-                # line[idx][0]で生のトークンが取得できる
-                # 「let」「x」「be」など
-                token = line[idx][0]
-                if token == 'by':
-                    is_between_by_and_semicolon = True
-                elif is_between_by_and_semicolon and token == ';':
-                    is_between_by_and_semicolon = False
-                
-                if is_between_by_and_semicolon and line[idx][1] == '__variable_':
-                    line[idx][1] = '__label_'
-
-        replace_json['contents'] = json_contents
-
-
-        # with open(file_name, 'w') as f:
-        #     json.dump(replace_json, f)
-        #     print(file_name)
     
 if __name__ == '__main__':
     mml_lar = open("/mnt/c/mizar/mml.lar", "r")
@@ -124,7 +89,7 @@ if __name__ == '__main__':
             try:
                 tokenized_lines, position_map = lexer.lex(text_proper_lines)
             except Exception as e:
-                error_file_to_msg[file_name] = str(e)
+                error_file_to_msg[filename] = str(e)
                 continue
             tokens = []
             for line in tokenized_lines:
@@ -137,7 +102,7 @@ if __name__ == '__main__':
             "contents":[]
         }
         # 「let x be Nat」の場合，
-        # [(let, let), (x, variable), (Nat, M)]の形式にしたjsonファイルを作成
+        # [[let, let], [x, __variable_], [be, be], [Nat, __M_]]の形式にしたjsonファイルを作成
         for line in tokens:
             line_data = []
             for i in range(len(line)):
@@ -162,11 +127,7 @@ if __name__ == '__main__':
         for symbol_type in type_to_symbols:
             file_dict['symbols'][symbol_type] = type_to_symbols[symbol_type]
 
-        # with open(output_file, 'w') as f:
-        #     json.dump(file_dict, f)
-        #     print(filename)
-
-    # 「by ~ ;」間で改行された場合にも対応するための後処理
-    # post_processing()
-    pprint(error_file_to_msg)
+        with open(output_file, 'w') as f:
+            json.dump(file_dict, f)
+            print(filename)
     

@@ -1,6 +1,9 @@
 import json
 from collections import OrderedDict, deque
 
+# Tab,矢印キーなどのコストを設定する変数
+SPECIAL_KEY_COST = 1
+
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
         user_input_list = line_tokens[i-N+1:i]
@@ -50,24 +53,25 @@ def assess_file_keystroke(file_name, model):
             remaining_cost = len(answer)
             original_cost += remaining_cost
             user_input, parsed_input = get_user_input(N, idx, line_tokens, parsed_tokens)
-            suggest_keywords = model.predict(
+            # suggested_keywordsは{キーワード:提案順位}の形式
+            # 例：{"be":1, "being":2}
+            suggested_keywords = model.predict(
                 user_input,
                 parsed_input,
                 type_to_symbols,
                 variables,
                 labels
             )
-            # FIXME:コストが特殊キーのコストを0.5とした場合，1以上なら節約の可能性がある
-            if remaining_cost <= 0.5:
+            # 残りの入力に必要なコストが特殊キーのコスト以下ならコスト削減の可能性はない
+            if remaining_cost <= SPECIAL_KEY_COST:
                 cost += remaining_cost
-            elif answer in suggest_keywords:
+            elif answer in suggested_keywords:
                 input_idx = 0
-                # FIXME:コストが特殊キーのコストを0.5とした場合，1以上なら節約の可能性がある
-                while remaining_cost >= 1:
-                    # Tabキー，矢印キーなどのコストを0.5にする
-                    select_cost = 0.5 * suggest_keywords[answer]
+                # 残りの入力コストが特殊キーのコストより大きい場合，コスト削減の可能性がある
+                while remaining_cost > SPECIAL_KEY_COST:
+                    select_cost = SPECIAL_KEY_COST * suggested_keywords[answer]
                     if select_cost < remaining_cost:
-                        # print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggest_keywords[answer]}')
+                        # print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggested_keywords[answer]}')
                         # print(f'本来のコスト:{len(answer)}')
                         # print(f'節約コスト：{remaining_cost - select_cost}')
                         saving_cost += (remaining_cost - select_cost)
@@ -88,14 +92,14 @@ def assess_file_keystroke(file_name, model):
                             break
                         # 提案キーワード群の更新
                         tmp = deque()
-                        for keyword in suggest_keywords:
+                        for keyword in suggested_keywords:
                             if keyword.startswith(answer[:input_idx]):
                                 tmp.append(keyword)
-                        suggest_keywords = OrderedDict({})
+                        suggested_keywords = OrderedDict({})
                         # 提案キーワードの順位を保持する変数
                         cnt = 1
                         for keyword in tmp:
-                            suggest_keywords[keyword] = len(suggest_keywords)+1
+                            suggested_keywords[keyword] = len(suggested_keywords)+1
                             cnt += 1
             else:
                 cost += remaining_cost

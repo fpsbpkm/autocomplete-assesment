@@ -6,8 +6,11 @@ import json
 import numpy as np
 from assess_keystroke import assess_file_keystroke, assess_mml_keystroke
 from assess_accuracy import assess_file_accuracy, assess_mml_accuracy
-from collections import OrderedDict,deque
+from collections import OrderedDict, deque
 from pprint import pprint
+
+# 予測にクラストークンを使うか
+IS_USING_CLASS_NAME = int(True)
 
 class TrieNode:
     def __init__(self, name):
@@ -35,13 +38,13 @@ class TrieNode:
 
 class TrieNgramModel():
     def __init__(self):
-        self.N = 2
+        self.N = 5
         self.setup()
 
     def setup(self):
         try:
-            # FIXME:利用するトライ木に注意
-            with open('trie_root_raw_N_2', 'rb') as f:
+            # WARNING:利用するトライ木に注意
+            with open('trie_root', 'rb') as f:
                 self.root = pickle.load(f)
         except:
             self.root = TrieNode('root')
@@ -67,9 +70,8 @@ class TrieNgramModel():
                 for line in article:
                     length = len(line)
                     for idx in range(1, length):
-                        # FIXME:生のトークンになっているため注意
-                        # 予測対象のトークンを取得
-                        token = line[idx][0]
+                        # WARNING: IS_USING_CLASS_NAMEが意図通りに設定されているか注意
+                        token = line[idx][IS_USING_CLASS_NAME]
                         parent_node = None
                         node = None
                         diff = 0
@@ -80,8 +82,8 @@ class TrieNgramModel():
                         for j in reversed(range(idx-N+1+diff, idx)):
                             if j == idx-1:
                                 parent_node = self.root
-                            # FIXME: 生のトークンになっているため，クラスにしたければline[j][1]にする必要がある
-                            node_name = line[j][0]
+                            # WARNING: IS_USING_CLASS_NAMEが意図通りに設定されているか注意
+                            node_name = line[j][IS_USING_CLASS_NAME]
                             # 既に同名のノードが存在すれば取得
                             if node_name in parent_node.children:
                                 node = parent_node.children[node_name]
@@ -94,21 +96,15 @@ class TrieNgramModel():
                             if token in node.keywords:
                                 node.keywords[token] += 1
                             else:
-                                node.keywords[token] = 1
-                            
+                                node.keywords[token] = 1 
                             node.set_parent(parent_node)
                             parent_node = node
             except Exception as e:
-                print(e)
-                excepted_files.append(file_path)
                 continue
         
-        # FIXME:生のトークン木と間違えないようにコメントアウト
-        with open('./trie_root_raw_N_2', 'wb') as f:
-            pickle.dump(self.root, f)
-        
-        print(excepted_files)
-
+        # WARNING: 新しくトライ木を作りたい場合はコメントアウトを解除
+        # with open('./trie_root', 'wb') as f:
+        #     pickle.dump(self.root, f)
     
     def predict(self, user_input, parsed_input, type_to_symbols, variables, labels):
         node = self.root
@@ -132,40 +128,35 @@ class TrieNgramModel():
                 node = node.children[token]
             else:
                 return {}
-            
         # sorted_keywordsは[[トークン, 出現回数]]の形式
         # 例：[['__variable_', 100], ['be', 60] ... ]
         sorted_keywords = sorted(node.keywords.items(), key=lambda x:x[1], reverse=True)
-
-        # {キーワード:優先度}の形式で保存する
+        # {キーワード:順位}の形式で保存する
         # 例：{"be":1, "being":2}
         suggest_keywords = OrderedDict({})
-        rank = len(suggest_keywords) + 1
-        # 「__variable_」「__M_」などを展開する処理
+        # 提案候補の順位を記録する変数
+        rank = 1
+        # 「__variable_」「__M_」などを具体的なトークンに置き換える処理
         for keyword in sorted_keywords:
             matched = re.match(r'__(\w\d*)_', keyword[0])
             if matched:
                 symbol_type = matched.groups()[0]
-
                 # 本来はあり得ない条件
                 if symbol_type is None:
                     continue
-                
-                # 環境部でimportしていない種類が提案された場合は考えない
+                # 環境部でimportしていないシンボルクラスが提案された場合は何もしない
                 if not symbol_type in type_to_symbols:
                     continue
-            
-                
                 for word in type_to_symbols[symbol_type[0]]:
                     suggest_keywords[word] = rank
                     # REVIEW:+1すべきか要確認
                     rank = len(suggest_keywords) + 1
-            
             # ユーザが利用した変数を提案
             elif keyword[0] == '__variable_':
                 for v in list(variables)[::-1]:
                     suggest_keywords[v] = rank
                     rank = len(suggest_keywords) + 1
+            # ユーザが利用したラベルを提案
             elif keyword[0] == '__label_':
                 for l in list(labels)[::-1]:
                     suggest_keywords[l] = rank
