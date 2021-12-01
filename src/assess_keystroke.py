@@ -33,9 +33,9 @@ def assess_file_keystroke(file_name, model):
     variables = []
     labels = []
     original_cost = 0
-    cost = 0
-    saving_cost = 0
-    token_counter = 0
+    cost_with_completion = 0
+    reduced_cost = 0
+    prediction_times = 0
     # lineは[[let, let], [x, __variable_], [be, be], [object, __M_]]のような形式
     for line in article:
         line_tokens = []
@@ -49,11 +49,11 @@ def assess_file_keystroke(file_name, model):
         # 文頭のトークンは予測できないため，コストとして追加
         first_token_cost = len(line_tokens[0])
         original_cost += first_token_cost
-        cost += first_token_cost
-        token_counter += 1
+        cost_with_completion += first_token_cost
+        prediction_times += 1
         # print(line, first_token_cost)
         for idx in range(1, length):
-            token_counter += 1
+            prediction_times += 1
             answer = line[idx][0]
             remaining_cost = len(answer)
             original_cost += remaining_cost
@@ -67,7 +67,7 @@ def assess_file_keystroke(file_name, model):
             )
             # 残りの入力に必要なコストが特殊キーのコスト以下ならコスト削減の可能性はない
             if remaining_cost <= SPECIAL_KEY_COST:
-                cost += remaining_cost
+                cost_with_completion += remaining_cost
             elif answer in suggested_keywords:
                 input_idx = 0
                 # 残りの入力コストが特殊キーのコストより大きい場合，コスト削減の可能性がある
@@ -78,21 +78,20 @@ def assess_file_keystroke(file_name, model):
                         #       予測順位:{suggested_keywords[answer]}')
                         # print(f'本来のコスト:{len(answer)}')
                         # print(f'節約コスト：{remaining_cost - select_cost}')
-                        saving_cost += remaining_cost - select_cost
-                        # print(f'節約数の合計：{saving_cost}')
+                        reduced_cost += remaining_cost - select_cost
                         # print()
-                        cost += select_cost
+                        cost_with_completion += select_cost
                         break
                     # 1文字入力して，提案キーワードを更新する処理
                     else:
                         input_idx += 1
-                        cost += 1
+                        cost_with_completion += 1
                         # 1文字入力したため，トークンを入力するコストが「1」減少する
                         remaining_cost -= 1
                         # 残りのコストが2未満の場合は，節約にならないため，残りのコストを加えて終了
                         # FIXME:特殊キーのコストを0.5とする場合は，残りのコストが2でも節約できる可能性がある
                         if remaining_cost <= SPECIAL_KEY_COST:
-                            cost += remaining_cost
+                            cost_with_completion += remaining_cost
                             break
                         # 提案キーワード群の更新
                         tmp = deque()
@@ -107,12 +106,12 @@ def assess_file_keystroke(file_name, model):
                                 len(suggested_keywords) + 1
                             cnt += 1
             else:
-                cost += remaining_cost
-    return original_cost, saving_cost, token_counter
+                cost_with_completion += remaining_cost
+    return original_cost, reduced_cost, prediction_times
 
 
 def assess_mml_keystroke(model):
-    original_cost, reduced_cost, token_counter = 0, 0, 0
+    original_cost, reduced_cost, prediction_times = 0, 0, 0
 
     mml_lar = open(f"{PROJECT_DIR}/about_mml/mml.lar", "r")
     mml = []
@@ -129,15 +128,15 @@ def assess_mml_keystroke(model):
             (
                 file_original_cost,
                 file_reduced_cost,
-                file_token_counter,
+                file_prediction_times,
             ) = assess_file_keystroke(file_path, model)
             original_cost += file_original_cost
             reduced_cost += file_reduced_cost
-            token_counter += file_token_counter
+            prediction_times += file_prediction_times
 
         except Exception as e:
             print(e)
             continue
         print(original_cost, reduced_cost,
-              reduced_cost / original_cost * 100, token_counter)
-    return original_cost, reduced_cost, token_counter
+              reduced_cost / original_cost * 100, prediction_times)
+    return original_cost, reduced_cost, prediction_times

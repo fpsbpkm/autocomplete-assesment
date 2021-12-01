@@ -4,10 +4,10 @@ import re
 import os
 import json
 from collections import OrderedDict
-os.environ['PROJECT_DIR'] = os.path.dirname(os.path.dirname(f'{__file__}'))
-PROJECT_DIR = os.environ['PROJECT_DIR']
-from assess_keystroke import assess_mml_keystroke
-from assess_accuracy import assess_mml_accuracy
+
+os.environ["PROJECT_DIR"] = os.path.dirname(os.path.dirname(f"{__file__}"))
+PROJECT_DIR = os.environ["PROJECT_DIR"]
+
 
 # 予測にクラストークンを使うか
 IS_USING_CLASS_NAME = int(True)
@@ -57,7 +57,8 @@ class TrieNgramModel:
         mml = []
         for i in mml_lar.readlines():
             mml.append(
-                os.path.join(f"{PROJECT_DIR}/learning_data", i.replace("\n", ".json")))
+                os.path.join(f"{PROJECT_DIR}/learning_data", i.replace("\n", ".json"))
+            )
         mml_lar.close()
         # FIXME:本来は1100
         for file_path in mml[0:1100]:
@@ -103,11 +104,10 @@ class TrieNgramModel:
                 continue
 
         # WARNING: 新しくトライ木を作りたい場合はコメントアウトを解除
-        with open(f'{PROJECT_DIR}/trie_root', 'wb') as f:
+        with open(f"{PROJECT_DIR}/trie_root", "wb") as f:
             pickle.dump(self.root, f)
 
-    def predict(self, user_input, parsed_input,
-                type_to_symbols, variables, labels):
+    def predict(self, user_input, parsed_input, type_to_symbols, variables, labels):
         node = self.root
         parsed_input_reversed = parsed_input[::-1]
         user_input_reversed = user_input[::-1]
@@ -118,12 +118,10 @@ class TrieNgramModel:
             # 例：「__M_」「__variable_」など
             token = parsed_input_reversed[i]
             # ユーザが利用していて，登録されていない変数を保存
-            if (token == "__variable_" and
-                    user_input_reversed[i] not in set(variables)):
+            if token == "__variable_" and user_input_reversed[i] not in set(variables):
                 variables.append(user_input_reversed[i])
             # ユーザが利用していて，登録されていないラベルを保存
-            elif (token == "__label_" and
-                    user_input_reversed[i] not in set(labels)):
+            elif token == "__label_" and user_input_reversed[i] not in set(labels):
                 labels.append(user_input_reversed[i])
             # トライ木の検索
             if token in node.children:
@@ -175,14 +173,16 @@ class TrieNgramModel:
 
 
 if __name__ == "__main__":
+    from assess_keystroke import assess_mml_keystroke
+    from assess_accuracy import assess_mml_accuracy
+
     print(PROJECT_DIR)
-    del os.environ['PROJECT_DIR']
+    del os.environ["PROJECT_DIR"]
     start_time = time.time()
     trie_model = TrieNgramModel()
     # np.set_printoptions(precision=1)
     # assess_mml_accuracy(trie_model)
-    original_cost, reduced_cost, prediction_times = \
-        assess_mml_keystroke(trie_model)
+    original_cost, reduced_cost, prediction_times = assess_mml_keystroke(trie_model)
     print(original_cost, reduced_cost, prediction_times)
     elapsed_time = time.time() - start_time
     print(f"N:{trie_model.N}, elapsed_time:{elapsed_time}")

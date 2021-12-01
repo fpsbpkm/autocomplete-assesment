@@ -4,13 +4,12 @@ import matplotlib.pyplot as plt
 import os
 from assess_keystroke import get_user_input, file_name_to_absolute
 from collections import OrderedDict, deque
-from pprint import pprint
 
 # 何候補目までの精度を計測するか指定
 Ranking_Number = 10
 # 何文字目までの入力文字数の精度を計測するか指定
 Input_Length = 6
-PROJECT_DIR = os.environ['PROJECT_DIR']
+PROJECT_DIR = os.environ["PROJECT_DIR"]
 
 
 def assess_file_accuracy(file_name, model):
@@ -45,8 +44,8 @@ def assess_file_accuracy(file_name, model):
             # （精度評価でユーザがn文字入力したときの分母として利用するため）
             file_all_token_nums.setdefault(len(answer), 0)
             file_all_token_nums[len(answer)] += 1
-            user_input, parsed_input = \
-                get_user_input(N, i, line_tokens, parsed_tokens)
+            user_input, parsed_input = get_user_input(N, i, line_tokens,
+                                                      parsed_tokens)
 
             # suggest_keywords{'キーワード':優先順位}の辞書
             # 例：{'be':1, 'being':2}
@@ -82,22 +81,11 @@ def assess_file_accuracy(file_name, model):
                     and suggest_keywords[answer] <= Ranking_Number
                 ):
 
-                    # print(f'カーソル直前までの入力：{user_input}')
-                    # print(f'{input_idx}文字入力')
-                    # print(f'answer:{answer}, rank:{suggest_keywords[answer]}')
-                    # print(f'suggest:{suggest_keywords}')
-                    # print()
                     rank = suggest_keywords[answer]
                     file_all_result.setdefault(
                         input_idx, [0 for _ in range(Ranking_Number)]
                     )
                     file_all_result[input_idx][rank - 1] += 1
-
-                # pprint(f'答え:{answer}')
-                # pprint(f'{input_idx}回目の入力')
-                # pprint(f'ユーザが入力した文字列：{answer[:input_idx]}')
-                # pprint(f'{suggest_keywords}')
-                # print()
 
     return (
         file_all_result,
@@ -153,15 +141,11 @@ def assess_mml_accuracy(model):
             all_result[i] += np.array(file_all_result[i])
             all_token_nums[i + 1] += np.array(file_all_token_nums[i + 1])
 
-    print()
-    print(model.N)
-    pprint(all_result)
-    print(prediction_times)
-    pprint(excepted_files)
-
     for i in range(Input_Length):
         prediction_result = all_result[i]
-        draw(model.N, prediction_result, prediction_times, i)
+        print(model.N, prediction_result, prediction_times, i)
+        # WARNING:グラフを出力した場合は以下のコメントアウトを解除
+        # draw(model.N, prediction_result, prediction_times, i)
         # 入力済みのi+1文字以下は予測対象外なので除外
         prediction_times -= all_token_nums[i + 1]
 
