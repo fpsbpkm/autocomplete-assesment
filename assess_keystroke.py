@@ -4,27 +4,30 @@ from collections import OrderedDict, deque
 # Tab,矢印キーなどのコストを設定する変数
 SPECIAL_KEY_COST = 1
 
+
 def get_user_input(N, i, line_tokens, parsed_tokens):
     if i >= N:
-        user_input_list = line_tokens[i-N+1:i]
-        parsed_input_list = parsed_tokens[i-N+1:i]
+        user_input_list = line_tokens[i - N + 1: i]
+        parsed_input_list = parsed_tokens[i - N + 1: i]
     else:
         user_input_list = line_tokens[:i]
         parsed_input_list = parsed_tokens[:i]
 
     return user_input_list, parsed_input_list
 
+
 def file_name_to_absolute(file_name):
-    return './learning_data/' + file_name
+    return "./learning_data/" + file_name
+
 
 def assess_file_keystroke(file_name, model):
     # NOTE:modelにNを持たせておく
     N = model.N
     file_name = file_name_to_absolute(file_name)
-    with open(file_name, 'r') as f:
+    with open(file_name, "r") as f:
         json_loaded = json.load(f)
-    type_to_symbols = json_loaded['symbols']
-    article = json_loaded['contents']
+    type_to_symbols = json_loaded["symbols"]
+    article = json_loaded["contents"]
     variables = []
     labels = []
     original_cost = 0
@@ -33,7 +36,7 @@ def assess_file_keystroke(file_name, model):
     token_counter = 0
     # lineは[[let, let], [x, __variable_], [be, be], [object, __M_]]のような形式
     for line in article:
-        line_tokens= []
+        line_tokens = []
         parsed_tokens = []
         # print(f'original_cost:{original_cost}, cost:{cost}')
         for token in line:
@@ -52,15 +55,13 @@ def assess_file_keystroke(file_name, model):
             answer = line[idx][0]
             remaining_cost = len(answer)
             original_cost += remaining_cost
-            user_input, parsed_input = get_user_input(N, idx, line_tokens, parsed_tokens)
+            user_input, parsed_input = get_user_input(
+                N, idx, line_tokens, parsed_tokens
+            )
             # suggested_keywordsは{キーワード:提案順位}の形式
             # 例：{"be":1, "being":2}
             suggested_keywords = model.predict(
-                user_input,
-                parsed_input,
-                type_to_symbols,
-                variables,
-                labels
+                user_input, parsed_input, type_to_symbols, variables, labels
             )
             # 残りの入力に必要なコストが特殊キーのコスト以下ならコスト削減の可能性はない
             if remaining_cost <= SPECIAL_KEY_COST:
@@ -71,10 +72,11 @@ def assess_file_keystroke(file_name, model):
                 while remaining_cost > SPECIAL_KEY_COST:
                     select_cost = SPECIAL_KEY_COST * suggested_keywords[answer]
                     if select_cost < remaining_cost:
-                        # print(f'正解:{answer}, 文字入力数:{input_idx}, 予測順位:{suggested_keywords[answer]}')
+                        # print(f'正解:{answer}, 文字入力数:{input_idx},
+                        #       予測順位:{suggested_keywords[answer]}')
                         # print(f'本来のコスト:{len(answer)}')
                         # print(f'節約コスト：{remaining_cost - select_cost}')
-                        saving_cost += (remaining_cost - select_cost)
+                        saving_cost += remaining_cost - select_cost
                         # print(f'節約数の合計：{saving_cost}')
                         # print()
                         cost += select_cost
@@ -99,28 +101,35 @@ def assess_file_keystroke(file_name, model):
                         # 提案キーワードの順位を保持する変数
                         cnt = 1
                         for keyword in tmp:
-                            suggested_keywords[keyword] = len(suggested_keywords)+1
+                            suggested_keywords[keyword] = \
+                                len(suggested_keywords) + 1
                             cnt += 1
             else:
                 cost += remaining_cost
-    print(f'トークン平均文字数：{original_cost/token_counter}')
+    print(f"トークン平均文字数：{original_cost/token_counter}")
     return original_cost, saving_cost, token_counter
 
+
 def assess_mml_keystroke(model):
-    original_cost, reduced_cost, token_counter = 0, 0, 0 
+    original_cost, reduced_cost, token_counter = 0, 0, 0
 
     mml_lar = open("./mml.lar", "r")
     mml = []
     for i in mml_lar.readlines():
-        mml.append(i.replace('\n', '.json'))
+        mml.append(i.replace("\n", ".json"))
     mml_lar.close()
     for file_path in mml[1100:1356]:
         print(file_path)
         if original_cost != 0:
-            # print(original_cost, reduced_cost, reduced_cost/original_cost, token_counter)
+            # print(original_cost, reduced_cost,
+            #       reduced_cost/original_cost, token_counter)
             pass
         try:
-            file_original_cost, file_reduced_cost, file_token_counter = assess_file_keystroke(file_path, model)
+            (
+                file_original_cost,
+                file_reduced_cost,
+                file_token_counter,
+            ) = assess_file_keystroke(file_path, model)
             original_cost += file_original_cost
             reduced_cost += file_reduced_cost
             token_counter += file_token_counter
@@ -128,6 +137,6 @@ def assess_mml_keystroke(model):
         except Exception as e:
             print(e)
             continue
-    
-        print(original_cost, reduced_cost, reduced_cost/original_cost, token_counter)
+        print(original_cost, reduced_cost,
+              reduced_cost / original_cost, token_counter)
     return original_cost, reduced_cost, token_counter
