@@ -7,8 +7,7 @@ import json
 from get_voc import load_symbol_dict, parse_voc
 
 PROJECT_DIR = os.environ['PROJECT_DIR']
-DATA_DIR = f"{PROJECT_DIR}/data/"
-MML_VCT = os.path.join(DATA_DIR, "mml.vct")
+MML_VCT = os.path.join(f"{PROJECT_DIR}/about_mml/", "mml.vct")
 MML_DIR = "/mnt/c/mizar/mml"
 
 RESERVED_WORDS = set(

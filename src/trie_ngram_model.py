@@ -53,7 +53,7 @@ class TrieNgramModel:
 
     # トライ木の作成
     def learning(self):
-        mml_lar = open(f"{PROJECT_DIR}/data/mml.lar", "r")
+        mml_lar = open(f"{PROJECT_DIR}/about_mml/mml.lar", "r")
         mml = []
         for i in mml_lar.readlines():
             mml.append(
@@ -116,8 +116,7 @@ class TrieNgramModel:
         for i in range(len(parsed_input_reversed)):
             # 入力は型トークン
             # 例：「__M_」「__variable_」など
-            # FIXME:評価のためuser_input_reversed[i]としているが，本来はparsed_input_reversed[i]
-            token = user_input_reversed[i]
+            token = parsed_input_reversed[i]
             # ユーザが利用していて，登録されていない変数を保存
             if (token == "__variable_" and
                     user_input_reversed[i] not in set(variables)):

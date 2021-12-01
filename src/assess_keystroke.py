@@ -91,7 +91,7 @@ def assess_file_keystroke(file_name, model):
                         remaining_cost -= 1
                         # 残りのコストが2未満の場合は，節約にならないため，残りのコストを加えて終了
                         # FIXME:特殊キーのコストを0.5とする場合は，残りのコストが2でも節約できる可能性がある
-                        if remaining_cost < 1:
+                        if remaining_cost <= SPECIAL_KEY_COST:
                             cost += remaining_cost
                             break
                         # 提案キーワード群の更新
@@ -108,14 +108,13 @@ def assess_file_keystroke(file_name, model):
                             cnt += 1
             else:
                 cost += remaining_cost
-    print(f"トークン平均文字数：{original_cost/token_counter}")
     return original_cost, saving_cost, token_counter
 
 
 def assess_mml_keystroke(model):
     original_cost, reduced_cost, token_counter = 0, 0, 0
 
-    mml_lar = open(f"{PROJECT_DIR}/data/mml.lar", "r")
+    mml_lar = open(f"{PROJECT_DIR}/about_mml/mml.lar", "r")
     mml = []
     for i in mml_lar.readlines():
         mml.append(i.replace("\n", ".json"))
