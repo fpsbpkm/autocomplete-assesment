@@ -175,9 +175,6 @@ class TrieNgramModel:
 if __name__ == "__main__":
     from assess_keystroke import assess_mml_keystroke
     from assess_accuracy import assess_mml_accuracy
-
-    print(PROJECT_DIR)
-    del os.environ["PROJECT_DIR"]
     start_time = time.time()
     trie_model = TrieNgramModel()
     # np.set_printoptions(precision=1)
@@ -186,3 +183,4 @@ if __name__ == "__main__":
     print(original_cost, reduced_cost, prediction_times)
     elapsed_time = time.time() - start_time
     print(f"N:{trie_model.N}, elapsed_time:{elapsed_time}")
+    del os.environ["PROJECT_DIR"]

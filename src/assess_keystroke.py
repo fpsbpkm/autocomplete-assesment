@@ -109,7 +109,7 @@ def assess_mml_keystroke(model):
     for i in mml_lar.readlines():
         mml.append(i.replace("\n", ".json"))
     mml_lar.close()
-    # NOTE:mml.larの順番で評価に利用するファイルです
+    # NOTE:mml.larの順番で評価に利用するファイル
     for file_path in mml[1100:1356]:
         print(file_path)
         try:

@@ -5,11 +5,13 @@ import os
 from assess_keystroke import get_user_input, file_name_to_absolute
 from collections import OrderedDict, deque
 
+PROJECT_DIR = os.environ["PROJECT_DIR"]
 # 何候補目までの精度を計測するか指定
 Ranking_Number = 10
 # 何文字目までの入力文字数の精度を計測するか指定
-Input_Length = 6
-PROJECT_DIR = os.environ["PROJECT_DIR"]
+Input_Length = 5
+# 0文字目から計測するため，インクリメント
+Input_Length += 1
 
 
 def assess_file_accuracy(file_name, model):
@@ -151,6 +153,7 @@ def assess_mml_accuracy(model):
 
 
 def draw(N, prediction_result, prediction_times, i):
+    # WARNING: titleがファイル名となるため注意
     title = f"{N}-gram(raw)-typing {i} characters"
     plt.title(title)
     plt.xlabel("Suggested number")

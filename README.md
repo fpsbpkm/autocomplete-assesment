@@ -132,3 +132,22 @@ draw関数のコメントアウトを解除すれば，棒グラフの画像を�
 2文字目以降も同様に分母から対象外のキーワードを除いていきます．
 
 以上が実装されている正答率の計算方法です．
+
+## trie_ngram_modelの評価方法の例
+trie_ngram_model.pyのメイン関数では，以下のような処理を行っています．
+実行方法は上で説明した通りで，assess_mml_accuracy関数やassess_mml_keystroke関数に開発したモデルを渡します．
+これらの関数では，modelの持つpredictメソッドを実行しているため，注意してください．
+
+```python
+if __name__ == "__main__":
+    from assess_keystroke import assess_mml_keystroke
+    from assess_accuracy import assess_mml_accuracy
+    trie_model = TrieNgramModel()
+    # np.set_printoptions(precision=1)
+    # assess_mml_accuracy(trie_model)
+    original_cost, reduced_cost, prediction_times = assess_mml_keystroke(trie_model)
+    print(original_cost, reduced_cost, prediction_times)
+    del os.environ["PROJECT_DIR"]
+```
+
+
